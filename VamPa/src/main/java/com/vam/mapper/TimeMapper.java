@@ -9,4 +9,6 @@ public interface TimeMapper {
 	
 	public String getTime2();
 	
+	@Select("insert into test_tabe values('test1')")
+	public String insertTest();
 }

@@ -25,5 +25,11 @@ public class TimeMapperTests {
 	public void testGetTime2() {
 		System.out.println(timeMapper.getTime2());
 	}
+
+	@Test
+	public void insertTest() {
+		System.out.println(timeMapper.insertTest());
+	}
+	
 	
 }
