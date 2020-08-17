@@ -16,6 +16,8 @@ public class MemberMapperTest {
 	@Autowired
 	private MemberMapper membermapper;
 	
+	// 회원가입 테스트
+	/*
 	@Test
 	public void memberJoin() throws Exception{
 		MemberVO member = new MemberVO();
@@ -30,6 +32,14 @@ public class MemberMapperTest {
 		member.setPoint(100);
 		member.setMoney(100);
 		membermapper.memberJoin(member);
+	}
+	*/
+	
+	// 아이디 중복검사
+	@Test
+	public void memberIdChk() throws Exception{
+		String id = "test6";
+		membermapper.idCheck(id);
 	}
 	
 	
