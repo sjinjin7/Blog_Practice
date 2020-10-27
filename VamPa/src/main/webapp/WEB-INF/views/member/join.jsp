@@ -60,7 +60,7 @@
 						<span>인증번호 전송</span>
 					</div>
 					<div class="clearfix"></div>
-					<sapn class="mail_check_input_box_warn"></sapn>
+					<sapn id="mail_check_input_box_warn"></sapn>
 				</div>
 			</div>
 			<div class="address_wrap">
@@ -168,14 +168,16 @@ $(".mail_check_input").blur(function(){
 	
 	var inputCode = $(".mail_check_input").val();		// 입력코드
 	var checkCode = $(".code").html();					// 이메일로 전송된 코드
-	var checkResult = $(".mail_check_input_box_warn");	// 비교 결과 
+	var checkResult = $("#mail_check_input_box_warn");	// 비교 결과 
 	//alert(checkCode);
 	//alert(inputCode);
 	
 	if(inputCode == checkCode){							// 일치할 경우
-		
+		checkResult.html("인증번호가 일치합니다.");
+		checkResult.attr("class", "correct");		
 	} else {											// 일치하지 않을 경우
-		
+		checkResult.html("인증번호를 다시 확인해주세요.");
+		checkResult.attr("class", "incorrect");
 	}
 	
 });
