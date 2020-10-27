@@ -50,14 +50,16 @@
 				<div class="mail_input_box">
 					<input class="mail_input" name="memberMail">
 				</div>
+				<sapn class="mail_input_box_warn"></sapn>
 				<div class="mail_check_wrap">
-					<div class="mail_check_input_box">
-						<input class="mail_check_input">
+					<div class="mail_check_input_box" id="mail_check_input_box_false">
+						<input class="mail_check_input" disabled="disabled">
 					</div>
 					<div class="mail_check_button">
 						<span>인증번호 전송</span>
 					</div>
 					<div class="clearfix"></div>
+					<sapn class="mail_check_input_box_warn"></sapn>
 				</div>
 			</div>
 			<div class="address_wrap">
@@ -128,12 +130,41 @@ $('.id_input').on("propertychange change keyup paste input", function(){
 				//alert("중복o");
 				$('.id_input_re_2').css("display","inline-block");
 				$('.id_input_re_1').css("display", "none");
-			}
+			}	// if 종료
 			
 		} // success 종료
 	});	// ajax 종료	
 	
 }); // $('.id_input').on 종료
+
+// 이메일 전송 클릭
+$(".mail_check_button").click(function(){
+	
+	var email = $(".mail_input").val();		// 입력한 이메일
+	var warnMsg = $("");
+	var cehckBox = $(".mail_check_input");
+	var boxWrap = $(".mail_check_input_box");
+	
+	$.ajax({
+		type:"GET",
+		url:"mailCheck?email=" + email,
+		success:function(data){
+			console.log("data : " + data);
+			cehckBox.attr("disabled",false);
+			boxWrap.attr("id", "mail_check_input_box_true");
+		}
+				 
+	});
+	
+	
+});
+
+
+
+
+
+
+
 
 </script>
 
