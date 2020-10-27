@@ -54,6 +54,7 @@
 				<div class="mail_check_wrap">
 					<div class="mail_check_input_box" id="mail_check_input_box_false">
 						<input class="mail_check_input" disabled="disabled">
+						<div class="code" style="display:none"></div>
 					</div>
 					<div class="mail_check_button">
 						<span>인증번호 전송</span>
@@ -137,13 +138,14 @@ $('.id_input').on("propertychange change keyup paste input", function(){
 	
 }); // $('.id_input').on 종료
 
-// 이메일 전송 클릭
+/*  이메일 전송 클릭 */
 $(".mail_check_button").click(function(){
 	
 	var email = $(".mail_input").val();		// 입력한 이메일
 	var warnMsg = $("");
 	var cehckBox = $(".mail_check_input");
 	var boxWrap = $(".mail_check_input_box");
+	var code = $(".code");
 	
 	$.ajax({
 		type:"GET",
@@ -152,6 +154,7 @@ $(".mail_check_button").click(function(){
 			console.log("data : " + data);
 			cehckBox.attr("disabled",false);
 			boxWrap.attr("id", "mail_check_input_box_true");
+			code.html(data);
 		}
 				 
 	});
@@ -159,6 +162,21 @@ $(".mail_check_button").click(function(){
 	
 });
 
+
+/* 인증번호 비교 */
+$(".mail_check_input").blur(function(){
+	var inputCode = $(".mail_check_input").val();		// 입력코드
+	var checkCode = $(".code").html();					// 이메일로 전송된 코드
+	//alert(checkCode);
+	//alert(inputCode);
+	
+	if(inputCode == checkCode){							// 일치할 경우
+		
+	} else {											// 일치하지 않을 경우
+		
+	}
+	
+});
 
 
 
