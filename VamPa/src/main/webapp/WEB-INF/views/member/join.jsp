@@ -165,8 +165,10 @@ $(".mail_check_button").click(function(){
 
 /* 인증번호 비교 */
 $(".mail_check_input").blur(function(){
+	
 	var inputCode = $(".mail_check_input").val();		// 입력코드
 	var checkCode = $(".code").html();					// 이메일로 전송된 코드
+	var checkResult = $(".mail_check_input_box_warn");	// 비교 결과 
 	//alert(checkCode);
 	//alert(inputCode);
 	
