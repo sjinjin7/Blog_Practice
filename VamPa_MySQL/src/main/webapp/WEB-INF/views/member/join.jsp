@@ -50,14 +50,17 @@
 				<div class="mail_input_box">
 					<input class="mail_input" name="memberMail">
 				</div>
+				<sapn class="mail_input_box_warn"></sapn>
 				<div class="mail_check_wrap">
-					<div class="mail_check_input_box">
-						<input class="mail_check_input">
+					<div class="mail_check_input_box" id="mail_check_input_box_false">
+						<input class="mail_check_input" disabled="disabled">
+						<div class="code" style="display:none"></div>
 					</div>
 					<div class="mail_check_button">
 						<span>인증번호 전송</span>
 					</div>
 					<div class="clearfix"></div>
+					<sapn id="mail_check_input_box_warn"></sapn>
 				</div>
 			</div>
 			<div class="address_wrap">
@@ -96,35 +99,95 @@
 <script>
 
 $( document ).ready( function() {
+	
+	// 회원가입 버튼 작동
 	$(".join_button").click(function(){
 		$("#join_form").attr("action","/member/join");
 		$("#join_form").submit();
-	});
+	});	// 회원가입 버튼 작동 종료
+	
+
+
 } );
 
 // 아이디 중복검사
 $('.id_input').on("propertychange change keyup paste input", function(){
 	
-	var memberId = $('.id_input').val();			// .id_input에 입력되는 값
-	var data = {memberId : memberId}				// '컨트롤에 넘길 데이터 이름' : '데이터(.id_input에 입력되는 값)'
+	var memberId = $('.id_input').val();
+	var data = {memberId : memberId}
 	
 	$.ajax({
 		type : "post",
 		url : "/member/memberIdChk",
 		data : data,
 		success : function(result){
-			// console.log("성공 여부" + result);
-			if(result != 'fail'){
+			console.log(result);
+			console.log("넘어옴?");
+			if(result != 'fail'){					// 중복 아이디 없는 경우(초록색 글자)
+				//alert("중복x");
 				$('.id_input_re_1').css("display","inline-block");
-				$('.id_input_re_2').css("display", "none");				
-			} else {
+				$('.id_input_re_2').css("display", "none");
+			} else{							// 중복 아이디 존재하는 경우(빨간색 글자)
+				//alert("중복o");
 				$('.id_input_re_2').css("display","inline-block");
-				$('.id_input_re_1').css("display", "none");				
-			}
-		}// success 종료
-	}); // ajax 종료
+				$('.id_input_re_1').css("display", "none");
+			}	// if 종료
+			
+		} // success 종료
+	});	// ajax 종료	
 	
-});// function 종료
+}); // $('.id_input').on 종료
+
+/*  이메일 전송 클릭 */
+$(".mail_check_button").click(function(){
+	
+	var email = $(".mail_input").val();		// 입력한 이메일
+	var warnMsg = $("");
+	var cehckBox = $(".mail_check_input");
+	var boxWrap = $(".mail_check_input_box");
+	var code = $(".code");
+	
+	$.ajax({
+		type:"GET",
+		url:"mailCheck?email=" + email,
+		success:function(data){
+			console.log("data : " + data);
+			cehckBox.attr("disabled",false);
+			boxWrap.attr("id", "mail_check_input_box_true");
+			code.html(data);
+		}
+				 
+	});
+	
+	
+});
+
+
+/* 인증번호 비교 */
+$(".mail_check_input").blur(function(){
+	
+	var inputCode = $(".mail_check_input").val();		// 입력코드
+	var checkCode = $(".code").html();					// 이메일로 전송된 코드
+	var checkResult = $("#mail_check_input_box_warn");	// 비교 결과 
+	//alert(checkCode);
+	//alert(inputCode);
+	
+	if(inputCode == checkCode){							// 일치할 경우
+		checkResult.html("인증번호가 일치합니다.");
+		checkResult.attr("class", "correct");		
+	} else {											// 일치하지 않을 경우
+		checkResult.html("인증번호를 다시 확인해주세요.");
+		checkResult.attr("class", "incorrect");
+	}
+	
+});
+
+
+
+
+
+
+
 </script>
 
 </body>
