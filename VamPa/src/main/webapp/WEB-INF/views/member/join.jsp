@@ -69,7 +69,7 @@
 					<div class="address_input_1_box">
 						<input class="address_input_1" name="memberAddr1" disabled="disabled">
 					</div>
-					<div class="address_button" onclick="excution_daum_address()">
+					<div class="address_button" onclick="execution_daum_address()">
 						<span>주소 찾기</span>
 					</div>
 					<div class="clearfix"></div>
@@ -187,7 +187,7 @@ $(".mail_check_input").blur(function(){
 
 
 /* 다음 주소 연동 */
-function excution_daum_address(){
+function execution_daum_address(){
     new daum.Postcode({
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
