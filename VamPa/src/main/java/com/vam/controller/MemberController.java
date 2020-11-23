@@ -51,6 +51,8 @@ public class MemberController {
 	public String joinPOST(MemberVO member) throws Exception{
 		
 		logger.info("join 진입");
+		logger.info("member 내용");
+		logger.info("" + member);
 		
 		// 회원가입 서비스 실행
 		memberservice.memberJoin(member);
