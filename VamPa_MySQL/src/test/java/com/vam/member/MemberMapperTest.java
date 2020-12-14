@@ -36,11 +36,27 @@ public class MemberMapperTest {
 	*/
 	
 	// 아이디 중복검사
+	/*
 	@Test
 	public void memberIdChk() throws Exception{
 		String id = "test6";
 		membermapper.idCheck(id);
 	}
+	*/
+
+	/* 로그인 쿼리 테스트 */
+	@Test
+	public void memberLogin() throws Exception{
+		
+		MemberVO member = new MemberVO();
+		
+		member.setMemberId("test");
+		member.setMemberPw("1234");
+		
+		membermapper.memberLogin(member);
+				
+		
+	}	
 	
 	
 }
