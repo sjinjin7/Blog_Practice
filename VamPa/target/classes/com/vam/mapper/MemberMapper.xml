@@ -17,4 +17,11 @@
   	
   	</select>
   	
+  	<!-- 로그인 -->
+  	<select id="memberLogin" resultType="com.vam.model.MemberVO">
+  	
+  		select memberid, membername, adminck, money, point from book_member where memberid = #{memberId} and memberpw = #{memberPw}
+  	
+  	</select>
+  	
   </mapper>

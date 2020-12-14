@@ -3,6 +3,8 @@ package com.vam.controller;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vam.model.MemberVO;
 import com.vam.service.MemberService;
@@ -131,6 +134,30 @@ public class MemberController {
 		return num;
 		
 	}
+	
+	/* 로그인 */
+	@RequestMapping(value="login", method=RequestMethod.POST)
+	public String loginPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr)throws Exception{
+		
+		HttpSession session = request.getSession();
+		MemberVO vo = memberservice.memberLogin(member);
+		System.out.println("" + vo);
+		
+		if(vo == null) {		// 잘못된 아이디, 비밀번호 입력 혹은 입력란 공란일 경우
+			
+			int result = 0;
+			rttr.addFlashAttribute("result", result);
+			return "redirect:/member/login";
+			
+			
+		}
+		
+		session.setAttribute("member", vo);	// null이 아니라는 것은 로그인이 정상적으로 진행 됫다는 의미
+		
+		
+		return "redirect:/main";
+	}
+	
 	
 	
 }
