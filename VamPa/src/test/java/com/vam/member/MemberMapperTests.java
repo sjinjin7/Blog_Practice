@@ -28,8 +28,7 @@ public class MemberMapperTests {
 		member.setMemberAddr2("member");
 		member.setMemberAddr3("member");
 		member.setAdminCk(0);
-		member.setPoint(100);
-		member.setMoney(100);
+
 		
 		membermapper.memberJoin(member);
 	}

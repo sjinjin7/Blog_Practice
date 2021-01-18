@@ -17,7 +17,7 @@ public class MemberMapperTest {
 	private MemberMapper membermapper;
 	
 	// 회원가입 테스트
-	/*
+	
 	@Test
 	public void memberJoin() throws Exception{
 		MemberVO member = new MemberVO();
@@ -29,11 +29,10 @@ public class MemberMapperTest {
 		member.setMemberAddr2("member");
 		member.setMemberAddr3("member");
 		member.setAdminCk(0);
-		member.setPoint(100);
-		member.setMoney(100);
+		
 		membermapper.memberJoin(member);
 	}
-	*/
+	
 	
 	// 아이디 중복검사
 	/*
@@ -45,6 +44,7 @@ public class MemberMapperTest {
 	*/
 
 	/* 로그인 쿼리 테스트 */
+	/*
 	@Test
 	public void memberLogin() throws Exception{
 		
@@ -57,6 +57,6 @@ public class MemberMapperTest {
 				
 		
 	}	
-	
+	*/
 	
 }
