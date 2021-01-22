@@ -9,14 +9,35 @@
 <meta charset="UTF-8">
 <title>Welcome BookMall</title>
 <link rel="stylesheet" href="resources/css/main.css">
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 </head>
 <body>
 
 <div class="wrapper">
 	<div class="wrap">
+		<!-- gnv_area -->	
 		<div class="top_gnb_area">
-			<h1>gnb area</h1>
+			<ul class="list">	
+				<c:if test="${member == null }">	<!-- 로그인 x -->
+					<li >
+						<a href="/member/login">로그인</a>
+					</li>
+					<li>
+						<a href="/member/join">회원가입</a>
+					</li>
+				</c:if>
+				<c:if test="${member != null }">	<!-- 로그인 o -->
+					<li><a id="gnb_logout_button">로그아웃</a></li>
+					<li>마이룸</li>
+					<li>장바구니</li>
+				</c:if>
+				<li>고객센터</li>			
+			</ul>
 		</div>
+		<!-- top_area -->
 		<div class="top_area">
 			<div class="logo_area">
 				<h1>logo area</h1>
@@ -52,6 +73,22 @@
 		</div>
 	</div>
 </div>
+<script>
+	/* gnb_area 로그아웃 버튼 */
+	$("#gnb_logout_button").click(function(){
+		/* alert("로그아웃 버튼 작동") */
+		$.ajax({
+			type:"POST",
+			url : "/member/logout.do",
+			success:function(data){
+				alert("로그아운 되었습니다.");
+				document.location.reload();
+			}
+			
+		}); // ajax 종료
+	});// function 종료
+
+</script>
 
 </body>
 </html>
