@@ -30,6 +30,9 @@
 					</li>
 				</c:if>
 				<c:if test="${member != null }">	<!-- 로그인 o -->
+					<c:if test="${member.adminCk == 1 }">
+						<li><a href="/admin/main">관리자 페이지</a></li>
+					</c:if>				
 					<li><a id="gnb_logout_button">로그아웃</a></li>
 					<li>마이룸</li>
 					<li>장바구니</li>
