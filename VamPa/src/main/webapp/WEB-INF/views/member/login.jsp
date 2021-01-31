@@ -54,7 +54,7 @@
 		//alert("테스트");
 		
 		/* 로그인 서버 요청 */
-		$("#login_form").attr("action","/member/login");
+		$("#login_form").attr("action","/member/login.do");
 		$("#login_form").submit();
 		
 	});	
