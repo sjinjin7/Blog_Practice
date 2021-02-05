@@ -59,6 +59,35 @@
                 </div>
                 <div class="admin_content_wrap">
                     <div class="admin_content_subject"><span>작가 등록</span></div>
+                    <div class="admin_content_main">
+                    	<form action="/admin/authorEnroll.do" method="post" id="enrollForm">
+                    		<div>
+                    			<label>작가 이름</label>
+                    			<div>
+                    				<input name="authorName">
+                    			</div>
+                    		</div>
+                    		<div>
+                    			<label>소속 국가</label>
+                    			<div>
+                    				<select name="nationId">
+                    					<option value="none" selected>=== 선택 ===</option>
+                    					<option value="01">국내</option>
+                    					<option value="02">국외</option>
+                    				</select>
+                    			</div>
+                    		</div>
+                    		<div>
+                    			<label>작가소개</label>
+                    			<div>
+                    				<input name="authorIntro" type="text">
+                    			</div>
+                    		</div>
+	                    	<div>
+	                    		<button id="enrollBtn">버튼</button>
+	                    	</div>                    		                    	
+                    	</form>
+                    </div>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -101,6 +130,16 @@
 			</div> <!-- class="footer" -->             
         </div>	<!-- class="wrap" -->
     </div>	<!-- class="warpper" -->
+
+<script>
+/*
+	$("#enrollBtn").click(function(){
+		$("#enrollBtn").attr("disabled",true);
+		$("#enrollForm").submit();
+	});
+*/
+
+</script>
 
 </body>
 </html>
