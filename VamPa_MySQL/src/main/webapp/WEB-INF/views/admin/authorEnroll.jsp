@@ -91,7 +91,7 @@
                     		</div>
                    		</form>
                    			<div class="btn_section">
-                   				<button id="enrollBtn" class="btn">취 소</button>
+                   				<button id="cancelBtn" class="btn">취 소</button>
 	                    		<button id="enrollBtn" class="btn enroll_btn">등 록</button>
 	                    	</div> 
                     </div>
@@ -139,12 +139,19 @@
     </div>	<!-- class="warpper" -->
 
 <script>
-/*
+	/* 유효성검사 통과 유무 변수 */
+	
+	
+	/* 등록 버튼 */
 	$("#enrollBtn").click(function(){
 		$("#enrollBtn").attr("disabled",true);
 		$("#enrollForm").submit();
 	});
-*/
+	
+	/* 취소 버튼 */
+	$("#cancelBtn").click(function(){
+		location.href="/admin/main"
+	});	
 
 </script>
 
