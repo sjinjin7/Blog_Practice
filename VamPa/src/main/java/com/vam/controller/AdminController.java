@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vam.model.AuthorVO;
 import com.vam.service.AuthorService;
@@ -52,13 +53,16 @@ public class AdminController {
 	
 	/* 작가 등록 */
 	@RequestMapping(value="authorEnroll.do", method = RequestMethod.POST)
-	public String authorEnrollPOST(AuthorVO author) throws Exception{
-		logger.info("authorEnroll.do 진입");
-		logger.info("" + author);
+	public String authorEnrollPOST(AuthorVO author, RedirectAttributes rttr) throws Exception{
+
+		logger.info("authorEnroll :" +  author);
 		
-		authorService.authorEnroll(author);
+		authorService.authorEnroll(author);  	// 작가 등록 쿼리 수행
 		
-		return "/admin/main";
+		rttr.addFlashAttribute("enroll_result", author.getAuthorName());	// 등록 성공 메시지(작가이름)
+		
+		return "redirect:/admin/authorManage";
+		
 	}
 	
 	
