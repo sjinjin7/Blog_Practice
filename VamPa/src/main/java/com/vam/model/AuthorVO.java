@@ -1,5 +1,7 @@
 package com.vam.model;
 
+import java.util.Date;
+
 public class AuthorVO {
 
 	/* 작가 아이디 */
@@ -16,6 +18,12 @@ public class AuthorVO {
 	
 	/* 작가 소개 */
 	private String authorIntro;
+	
+	/* 등록 날짜 */
+	private Date regDate;
+	
+	/* 수정 날짜 */
+	private Date updateDate;
 
 	public int getAuthorId() {
 		return authorId;
@@ -57,10 +65,29 @@ public class AuthorVO {
 		this.authorIntro = authorIntro;
 	}
 
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
 	@Override
 	public String toString() {
 		return "AuthorVO [authorId=" + authorId + ", authorName=" + authorName + ", nationId=" + nationId
-				+ ", nationName=" + nationName + ", authorIntro=" + authorIntro + "]";
-	}	
+				+ ", nationName=" + nationName + ", authorIntro=" + authorIntro + ", regDate=" + regDate
+				+ ", updateDate=" + updateDate + "]";
+	}
+
+	
 	
 }
