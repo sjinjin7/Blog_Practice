@@ -10,5 +10,46 @@
   		insert into vam_author(authorName, nationId, authorIntro) values(#{authorName}, #{nationId}, #{authorIntro} )
 
   	</insert>
+  	
+  	
+  	<!-- 작가 목록 -->
+  	<select id="authorGetList" resultType="com.vam.model.AuthorVO">
+  	
+  	<![CDATA[
+	  	select * from (
+	  		select /*+INDEX_DESC(vam_author SYS_C007507) */ 
+	  			rownum as rn, authorid, authorname, nationid, regdate, updatedate
+			from vam_author 
+			where
+			 
+	]]>		 
+			<if test="keyword != null">
+				authorname like '%'||#{keyword}||'%' and
+			</if>
+			
+	<![CDATA[		
+			 rownum <= #{pageNum}*#{amount}
+			)
+		where rn > (#{pageNum} - 1) * #{amount}
+  	]]>
+  	
+  	</select>
+  	
+  	
+  	<!-- 작가 수 -->
+  	<select id="authorGetTotal" resultType="int">
+  	
+	  	
+	  		select count(*) from vam_author 
+	  		
+	  		<if test="keyword != null">
+	  		
+	  			where authorname like '%'||#{keyword}||'%'
+	  			
+	  		</if> 
+	  	
+  	
+  	</select>
+  	
 
   </mapper>
