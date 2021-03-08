@@ -55,6 +55,7 @@
 	              </ul>
                 </div>
                 <div class="admin_content_wrap">
+                	<div class="admin_content_subject"><span>작가 상세</span></div>
                 	<!-- 게시물 표 영역 -->
 					<div class="author_table_wrap">
                 		<!-- 게시물 O -->
@@ -244,7 +245,6 @@ $(document).ready(function(){
 		
 		e.preventDefault();
 		
-
 		moveForm.append("<input type='hidden' name='authorId' value='"+ $(this).attr("href")+"'>");
 		moveForm.attr("action", "/admin/authorDetail");
 		moveForm.submit();
