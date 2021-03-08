@@ -47,7 +47,7 @@ public class AuthorVO {
 
 	public void setNationId(String nationId) {
 		this.nationId = nationId;
-		if(nationId.equals("1")) {
+		if(nationId.equals("01")) {
 			this.nationName = "국내";
 		} else {
 			this.nationName = "국외";
