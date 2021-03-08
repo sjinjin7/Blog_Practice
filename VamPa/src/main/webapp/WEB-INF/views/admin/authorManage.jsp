@@ -244,9 +244,9 @@ $(document).ready(function(){
 		
 		e.preventDefault();
 		
-		moveForm.find("input").remove();
+
 		moveForm.append("<input type='hidden' name='authorId' value='"+ $(this).attr("href")+"'>");
-		moveForm.attr("action", "/admin/authorInfo");
+		moveForm.attr("action", "/admin/authorDetail");
 		moveForm.submit();
 		
 	});
