@@ -73,6 +73,7 @@ public class AuthorMapperTests {
 	
 	
 	/* 작가 상세 페이지 */
+	/*
 	@Test 
 	public void authorGetDetailTest() {
 		
@@ -83,5 +84,26 @@ public class AuthorMapperTests {
 		log.info("author........" + author);
 		
 	}
+	*/
+	
+	/* 작가 정보 수정 */
+	@Test
+	public void authorModifyTest() {
+		
+		AuthorVO author = new AuthorVO();
+		
+		author.setAuthorId(1550);
+		author.setAuthorName("작가이름 수정");
+		author.setNationId("02");
+		author.setAuthorIntro("작가 수개 내용 수정");
+		
+		int result = mapper.authorModify(author);
+		
+		log.info("result : " + result);
+		
+	}
+	
+	
+	
 	
 }
