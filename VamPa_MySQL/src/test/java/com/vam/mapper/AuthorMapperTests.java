@@ -41,6 +41,7 @@ public class AuthorMapperTests {
 	
 	
 	/* 작가 목록 테스트 */
+	/*
 	@Test
 	public void authorGetList() {
 		
@@ -53,9 +54,11 @@ public class AuthorMapperTests {
 		list.forEach(a -> log.info(cri));
 		
 	}
+	*/
 	
 	
 	/* 작가 수 테스트 */
+	/*
 	@Test
 	public void authorGetTotal() {
 		
@@ -64,6 +67,20 @@ public class AuthorMapperTests {
 		cri.setKeyword("엘런");
 		
 		mapper.authorGetTotal(cri);
+		
+	}
+	*/
+	
+	/* 작가 디테일 페이지 */
+	@Test
+	public void authorGetDetailTest() {
+		
+		int authorId = 5;
+		
+		AuthorVO author = mapper.authorGetDetail(authorId);
+		
+		log.info("author..........." + author);
+		
 		
 	}
 	

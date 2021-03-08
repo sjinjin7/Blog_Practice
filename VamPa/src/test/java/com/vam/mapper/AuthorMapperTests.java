@@ -39,6 +39,7 @@ public class AuthorMapperTests {
 	
 	
 	/* 작가 목록 테스트 */
+	/*
 	@Test
 	public void authorGetList() throws Exception{
 		
@@ -51,10 +52,12 @@ public class AuthorMapperTests {
 		list.forEach(a -> log.info(list));
 		
 	}
+	*/
 	
 	
 	
 	/* 전체 작가 수 */
+	/*
 	@Test
 	public void authorGetTotal() throws Exception{
 		
@@ -65,6 +68,20 @@ public class AuthorMapperTests {
 		mapper.authorGetTotal(cri);
 		
 	}
+	*/
 	
+	
+	
+	/* 작가 상세 페이지 */
+	@Test 
+	public void authorGetDetailTest() {
+		
+		int authorId = 30;
+		
+		AuthorVO author = mapper.authorGetDetail(authorId);
+		
+		log.info("author........" + author);
+		
+	}
 	
 }
