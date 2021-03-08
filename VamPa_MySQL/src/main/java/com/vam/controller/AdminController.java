@@ -1,5 +1,7 @@
 package com.vam.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +55,16 @@ public class AdminController {
 	public void authorManageGET(Criteria cri, Model model) throws Exception{
 		
 		logger.info("authorGetList......." + cri);
+		
 		/* 게시물 출력 데이터 */
-		model.addAttribute("list", authorService.authorGetList(cri));
+		List list = authorService.authorGetList(cri);
+		
+		if(!list.isEmpty()) {
+			model.addAttribute("list",list);	// 작가 존재 경우
+		} else {
+			model.addAttribute("listCheck", "empty");	// 작가 존재하지 않을 경우
+		}
+		
 		
 		/* 페이지 이동 인터페이스 데이터 */
 		model.addAttribute("pageMaker", new PageDTO(cri, authorService.authorGetTotal(cri)));

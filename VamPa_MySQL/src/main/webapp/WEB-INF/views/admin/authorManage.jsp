@@ -56,31 +56,41 @@
                 </div>
                 <div class="admin_content_wrap">
                 	<!-- 게시물 표 영역 -->
-                    <div class="author_table_wrap">
-                    	<table class="author_table">
-                    		<thead>
-                    			<tr>
-                    				<td class="th_column_1">작가 번호</td>
-                    				<td class="th_column_2">작가 이름</td>
-                    				<td class="th_column_3">작가 국가</td>
-                    				<td class="th_column_4">등록 날짜</td>
-                    				<td class="th_column_5">수정 날짜</td>
-                    			</tr>
-                    		</thead>
-                    		<c:forEach items="${list}" var="list">
-                    		<tr>
-                    			<td><c:out value="${list.authorId}"></c:out> </td>
-                    			<td>
-                    				<a class="move" href='<c:out value="${list.authorId}"/>'>
-                    					<c:out value="${list.authorName}"></c:out>
-                    				</a> 
-                    			</td>
-                    			<td><c:out value="${list.nationName}"></c:out> </td>
-                    			<td><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd"/></td>
-                    			<td><fmt:formatDate value="${list.updateDate}" pattern="yyyy-MM-dd"/></td>
-                    		</tr>
-                    		</c:forEach>
-                    	</table>
+					<div class="author_table_wrap">
+                		<!-- 게시물 O -->
+                		<c:if test="${listCheck != 'empty'}">
+	                    	<table class="author_table">
+	                    		<thead>
+	                    			<tr>
+	                    				<td class="th_column_1">작가 번호</td>
+	                    				<td class="th_column_2">작가 이름</td>
+	                    				<td class="th_column_3">작가 국가</td>
+	                    				<td class="th_column_4">등록 날짜</td>
+	                    				<td class="th_column_5">수정 날짜</td>
+	                    			</tr>
+	                    		</thead>
+	                    		<c:forEach items="${list}" var="list">
+	                    		<tr>
+	                    			<td><c:out value="${list.authorId}"></c:out> </td>
+	                    			<td>
+	                    				<a class="move" href='<c:out value="${list.authorId}"/>'>
+	                    					<c:out value="${list.authorName}"></c:out>
+	                    				</a> 
+	                    			</td>
+	                    			<td><c:out value="${list.nationName}"></c:out> </td>
+	                    			<td><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd"/></td>
+	                    			<td><fmt:formatDate value="${list.updateDate}" pattern="yyyy-MM-dd"/></td>
+	                    		</tr>
+	                    		</c:forEach>
+	                    	</table>                			
+                		</c:if>
+                		<!-- 게시물 x -->
+                		<c:if test="${listCheck == 'empty'}">
+                			<div class="table_empty">
+                				등록된 작가가 없습니다.
+                			</div>
+                		</c:if>                    
+
                     </div>
                     
                     <!-- 검색 영역 -->
