@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -84,6 +85,18 @@ public class AdminController {
 		
 	}
 
-	
+	/* 작가 상세 페이지 */
+	@GetMapping({"/authorDetail", "/authorModify"})
+	public void authorDetailGET(int authorId, Criteria cri, Model model) throws Exception {
+		
+		logger.info("authorDetail......." + cri);
+		
+		/* 목록 페이지 정보 */
+		model.addAttribute("cri", cri);
+		
+		/* 작가 정보 */
+		model.addAttribute("authorInfo", authorService.authorGetDetail(authorId));
+		
+	}
 	
 }

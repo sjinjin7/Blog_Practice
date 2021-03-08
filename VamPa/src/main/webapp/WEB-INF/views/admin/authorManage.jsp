@@ -17,7 +17,7 @@
 <body>
 				<%@include file="../includes/admin/header.jsp" %>
                 <div class="admin_content_wrap">
-                	<div class="admin_content_subject"><span>작가 상세</span></div>
+                	<div class="admin_content_subject"><span>작가 관리</span></div>
                 	<!-- 게시물 표 영역 -->
 					<div class="author_table_wrap">
                 		<!-- 게시물 O -->
