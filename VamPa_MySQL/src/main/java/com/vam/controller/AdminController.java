@@ -102,7 +102,7 @@ public class AdminController {
 	}	
 	
 	/* 작가 정보 수정 */
-	@PostMapping("authorModify")
+	@PostMapping("/authorModify")
 	public String authorModifyPOST(AuthorVO author, RedirectAttributes rttr) throws Exception{
 		
 		logger.info("authorModifyPOST.........." + author);

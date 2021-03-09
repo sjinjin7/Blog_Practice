@@ -53,9 +53,7 @@
                    				<label>작가소개</label>
                    			</div>
                    			<div class="form_section_content">
-                   				<textarea class="input_block" name="authorIntro" readonly="readonly">
-                   					<c:out value='${authorInfo.authorIntro }'/>
-                   				</textarea>
+                   				<textarea class="input_block" name="authorIntro" readonly="readonly"><c:out value='${authorInfo.authorIntro }'/></textarea>
                    			</div>
                    		</div>
                    		<div class="form_section">
@@ -63,7 +61,7 @@
                    				<label>등록 날짜</label>
                    			</div>
                    			<div class="form_section_content">
-                   				<input class="input_block" name="regDate" type="text" readonly="readonly" value="<fmt:formatDate value="${authorInfo.regDate}" pattern="yyyy-MM-dd"/>">
+                   				<input class="input_block" type="text" readonly="readonly" value="<fmt:formatDate value="${authorInfo.regDate}" pattern="yyyy-MM-dd"/>">
                    			</div>
                    		</div>
                    		                   		                   		<div class="form_section">
@@ -71,7 +69,7 @@
                    				<label>수정 날짜</label>
                    			</div>
                    			<div class="form_section_content">
-                   				<input class="input_block" name="updateDate" type="text" readonly="readonly" value="<fmt:formatDate value="${authorInfo.updateDate}" pattern="yyyy-MM-dd"/>">
+                   				<input class="input_block" type="text" readonly="readonly" value="<fmt:formatDate value="${authorInfo.updateDate}" pattern="yyyy-MM-dd"/>">
                    			</div>
                    		</div>
                    			<div class="btn_section">
