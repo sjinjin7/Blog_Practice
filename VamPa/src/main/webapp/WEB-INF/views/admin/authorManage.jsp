@@ -129,7 +129,7 @@ $(document).ready(function(){
 		
 		if(mresult === '1'){
 			alert("작가 정보 수정을 완료하였습니다.");
-		} else {
+		} else if(mresult === '0') {
 			alert("작가 정부 수정을 하지 못하였습니다.")	
 		}
 		
