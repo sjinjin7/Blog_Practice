@@ -21,7 +21,7 @@
 			where authorname like concat('%',#{keyword}, '%')
 		</if>
 		order by authorid desc 
-		limit 0, 10;	
+		limit #{skip}, #{amount}	
 	
 	</select>
 	

@@ -41,20 +41,23 @@ public class AuthorMapperTests {
 	
 	
 	/* 작가 목록 테스트 */
-	/*
+	
 	@Test
 	public void authorGetList() {
 		
 		Criteria cri = new Criteria();
 		
-		cri.setKeyword("엘런");
+		cri.setAmount(10);
+		cri.setPageNum(3);
+		log.info("cri............." + cri);
 		
 		List<AuthorVO> list = mapper.authorGetList(cri);
+		log.info("list.........." + list);
 		
-		list.forEach(a -> log.info(cri));
+		list.forEach(a -> log.info(list));
 		
 	}
-	*/
+	
 	
 	
 	/* 작가 수 테스트 */
@@ -64,12 +67,15 @@ public class AuthorMapperTests {
 		
 		Criteria cri = new Criteria();
 		
-		cri.setKeyword("엘런");
+		cri.setAmount(10);
+		cri.setPageNum(2);
+		log.info("cri............." + cri);
 		
 		mapper.authorGetTotal(cri);
 		
 	}
 	*/
+	
 	
 	/* 작가 디테일 페이지 */
 	/*
@@ -86,6 +92,7 @@ public class AuthorMapperTests {
 	*/
 	
 	/* 작가 정보 수정 */
+	/*
 	@Test
 	public void authorModifyTest() {
 		
@@ -100,6 +107,7 @@ public class AuthorMapperTests {
 		
 		log.info("result........." + result);
 	}
+	*/
 	
 	
 }
