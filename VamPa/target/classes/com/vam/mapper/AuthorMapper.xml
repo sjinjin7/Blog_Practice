@@ -17,7 +17,7 @@
   	
   	<![CDATA[
 	  	select * from (
-	  		select /*+INDEX_DESC(vam_author SYS_C007507) */ 
+	  		select /*+INDEX_DESC(vam_author SYS_C007447) */ 
 	  			rownum as rn, authorid, authorname, nationid, regdate, updatedate
 			from vam_author 
 			where

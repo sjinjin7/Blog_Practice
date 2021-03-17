@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vam.model.AuthorVO;
+import com.vam.model.BookVO;
 import com.vam.model.Criteria;
 import com.vam.model.PageDTO;
 import com.vam.service.AuthorService;
@@ -111,6 +112,15 @@ public class AdminController {
 		rttr.addFlashAttribute("modify_result", result);
 		
 		return "redirect:/admin/authorManage";
+	}
+	
+	/* 상품 등록 */
+	@PostMapping("/goodsEnroll")
+	public String goodsEnrollPOST(BookVO book) {
+		
+		logger.info("goodsEnrollPOST......" + book);
+		
+		return "redirect:/admin/goodsManage";
 	}
 
 	
