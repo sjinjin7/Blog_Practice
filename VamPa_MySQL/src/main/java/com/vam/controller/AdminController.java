@@ -17,6 +17,7 @@ import com.vam.model.AuthorVO;
 import com.vam.model.BookVO;
 import com.vam.model.Criteria;
 import com.vam.model.PageDTO;
+import com.vam.service.AdminService;
 import com.vam.service.AuthorService;
 
 @Controller
@@ -28,6 +29,9 @@ public class AdminController {
 	/* AuthorService */
 	@Autowired
 	AuthorService authorService;
+	
+	@Autowired
+	AdminService adminService;
 	
 	/* 관리자 메인페이지 이동 */
 	@RequestMapping(value = "main", method = RequestMethod.GET)
@@ -120,6 +124,8 @@ public class AdminController {
 	public String goodsEnrollPOST(BookVO book) {
 		
 		logger.info("goodsEnrollPOST......" + book);
+		
+		adminService.bookEnroll(book);
 		
 		return "redirect:/admin/goodsManage";
 	}	
