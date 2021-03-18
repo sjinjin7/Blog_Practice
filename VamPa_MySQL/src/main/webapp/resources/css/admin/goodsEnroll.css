@@ -138,16 +138,20 @@ ul{
     font-size: 20px;
     text-align-last: center;
 }
-
-/* 입력란 공란 경고 태그 */
-.form_section_content span{	
-	display: none;
-    padding-top: 10px;
-    text-align: center;
-    color: #e05757;
-    font-weight: 300;    
+							
+.ui-datepicker-trigger {						/* 캘린더 css 설정 */
+    margin-left: 25px;
+    width: 14%;
+    height: 38px;
+    font-weight: 600;
+    background-color: #dfe8f5;
+    font-size: 15px;
+    cursor:pointer;
 }
-
+input[name='publeYear'] {
+    width: 80%;
+    text-align: center;
+}
 
 /* 버튼 영역 */
 .btn_section{
