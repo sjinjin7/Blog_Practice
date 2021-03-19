@@ -13,6 +13,7 @@
   crossorigin="anonymous"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
 </head>
 <body>
 				<%@include file="../includes/admin/header.jsp" %>
@@ -91,7 +92,7 @@
                     				<label>책 소개</label>
                     			</div>
                     			<div class="form_section_content">
-                    				<input name="bookIntro">
+                    				<textarea name="bookIntro" id="bookIntro_textarea"></textarea>
                     			</div>
                     		</div>        		
                     		<div class="form_section">
@@ -99,7 +100,7 @@
                     				<label>책 목차</label>
                     			</div>
                     			<div class="form_section_content">
-                    				<input name="bookContents">
+                    				<textarea name="bookContents" id="bookContents_textarea"></textarea>
                     			</div>
                     		</div>
                    		</form>
@@ -157,6 +158,20 @@ $(function() {
 	window.open(popUrl,"작가 찾기",popOption);
 	
  });
+
+/* 위지윅 적용 */
+	/* 책 소개 */
+	ClassicEditor
+		.create(document.querySelector('#bookIntro_textarea'))
+		.catch(error=>{
+			console.error(error);
+		});
+	/* 책 목차 */	
+	ClassicEditor
+	.create(document.querySelector('#bookContents_textarea'))
+	.catch(error=>{
+		console.error(error);
+	});
 
 
 

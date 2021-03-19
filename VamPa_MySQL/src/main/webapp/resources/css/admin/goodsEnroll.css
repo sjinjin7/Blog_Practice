@@ -167,6 +167,9 @@ input[name='publeYear'] {
     text-align: center;
 }
 
+.ck-content {						/* ckeditor 높이 */
+    height: 170px;
+}
 
 /* 버튼 영역 */
 .btn_section{
