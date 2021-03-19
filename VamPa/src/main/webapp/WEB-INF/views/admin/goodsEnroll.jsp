@@ -33,7 +33,8 @@
                     				<label>작가</label>
                     			</div>
                     			<div class="form_section_content">
-                    				<input name="authorId" value="0">
+                    				<input id="authorName_input" readonly="readonly">
+                    				<input id="authorId_input" name="authorId" type="hidden">
                     				<button class="authorId_btn">작가 선택</button>
                     			</div>
                     		</div>            

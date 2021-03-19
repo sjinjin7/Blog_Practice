@@ -135,6 +135,8 @@ public class AdminController {
 		
 		logger.info("authorPopGET......." + cri);
 		
+		cri.setAmount(5);
+		
 		/* 게시물 출력 데이터 */
 		List list = authorService.authorGetList(cri);
 		
@@ -147,7 +149,7 @@ public class AdminController {
 		
 		/* 페이지 이동 인터페이스 데이터 */
 		model.addAttribute("pageMaker", new PageDTO(cri, authorService.authorGetTotal(cri)));		
-	}	
+	}
 	
 	
 }

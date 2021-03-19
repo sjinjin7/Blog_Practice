@@ -136,6 +136,8 @@ public class AdminController {
 		
 		logger.info("authorPopGET......." + cri);
 		
+		cri.setAmount(5);
+		
 		/* 게시물 출력 데이터 */
 		List list = authorService.authorGetList(cri);
 		
