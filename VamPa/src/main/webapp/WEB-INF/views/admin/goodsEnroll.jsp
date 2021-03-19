@@ -34,6 +34,7 @@
                     			</div>
                     			<div class="form_section_content">
                     				<input name="authorId" value="0">
+                    				<button class="authorId_btn">작가 선택</button>
                     			</div>
                     		</div>            
                     		<div class="form_section">
@@ -143,6 +144,19 @@ $(function() {
     buttonText: "날짜 선택"
   });
 });
+
+/* 작가 선택 버튼 */
+ $(".authorId_btn").on("click",function(e){
+	 
+	e.preventDefault();
+		
+	let popUrl = "/admin/authorPop";
+	let popOption = "width = 650px, height=550px, location=no, top=300px, left=300px, scrollbars=yes";
+	
+	window.open(popUrl,"작가 찾기",popOption);
+	
+ });
+
 
 
 </script>
