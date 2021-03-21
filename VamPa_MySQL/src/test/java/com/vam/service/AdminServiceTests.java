@@ -21,6 +21,7 @@ public class AdminServiceTests {
 	private AdminServiceImpl service;
 
 	/* 상품 등록 */
+	/*
 	@Test
 	public void bookEnrollTest() throws Exception{
 		
@@ -41,5 +42,14 @@ public class AdminServiceTests {
 		
 		service.bookEnroll(book);
 	}
+	*/
+	
+	/* 카테고리 리스트 */
+	@Test
+	public void cateListTest() throws Exception{
+		
+		log.info("cateList()..........." + service.cateList());
+		
+	}	
 	
 }

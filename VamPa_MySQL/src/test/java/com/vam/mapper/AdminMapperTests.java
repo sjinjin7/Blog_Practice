@@ -19,6 +19,7 @@ public class AdminMapperTests {
 	private AdminMapper mapper;
 	
 	/* 상품 등록 */
+	/*
 	@Test
 	public void bookEnrollTest() throws Exception{
 		
@@ -38,6 +39,17 @@ public class AdminMapperTests {
 		log.info("book........" + book);
 		
 		mapper.bookEnroll(book);
+	}
+	*/
+	
+	/* 카테고리 리스트 */
+	@Test
+	public void cateListTest() throws Exception{
+		
+		
+		
+		log.info("cateList()..........." + mapper.cateList());
+		
 	}
 	
 }
