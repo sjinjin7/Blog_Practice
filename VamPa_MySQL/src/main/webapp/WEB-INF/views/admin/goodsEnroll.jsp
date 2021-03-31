@@ -110,8 +110,10 @@
                     				<label>상품 할인율</label>
                     			</div>
                     			<div class="form_section_content">
-                    				<input name="bookDiscount" placeholder="0.01~0.99 사이의 숫자를 입력해주세요.">
-                    				<span class="ck_warn bookDiscount_warn">상품 할인율을 입력해주세요.</span>
+                    				<input id="slae_interface" maxlength="2" value="0">
+                    				<input name="bookDiscount" type="hidden" value="0">
+                    				<span class="step_val">할인 가격 : <span class="span_discount"></span></span>
+                    				<span class="ck_warn bookDiscount_warn">1~99 숫자를 입력해주세요.</span>
                     			</div>
                     		</div>          		
                     		<div class="form_section">
@@ -141,6 +143,8 @@
                 </div>
                 <%@include file="../includes/admin/footer.jsp" %>
 <script>
+
+
 
 	let enrollForm = $("#enrollForm")
 
@@ -181,7 +185,7 @@ $("#enrollBtn").on("click",function(e){
 	let cateCode = $("select[name='cateCode']").val();
 	let bookPrice = $("input[name='bookPrice']").val();
 	let bookStock = $("input[name='bookStock']").val();
-	let bookDiscount = $("input[name='bookDiscount']").val();
+	let bookDiscount = $("slae_interface").val();
 	let bookIntro = $(".bit p").html();
 	let bookContents = $(".bct p").html();
 	
@@ -245,7 +249,7 @@ $("#enrollBtn").on("click",function(e){
 		stockCk = false;
 	}		
 	
-	if(bookDiscount < 1 && bookDiscount != ''){
+	if(!isNaN(bookDiscount)){
 		$(".bookDiscount_warn").css('display','none');
 		discountCk = true;
 	} else {
@@ -418,6 +422,38 @@ $(function() {
 		
 	});	
 	
+	$("#slae_interface").on("propertychange change keyup paste input", function(){
+		let interInput = $("#slae_interface");
+		let Input = $("input[name='bookDiscount']");
+		
+		let discountRate = interInput.val();					// 사용자가 입력할 할인값
+		let mDiscountRate = discountRate / 100;					// 서버에 전송할 할인값
+		let price = $("input[name='bookPrice']").val();			// 원가
+		let discountPrice = price * (1 - mDiscountRate);		// 할인가격
+		
+		if(!isNaN(discountRate)){
+			$(".span_discount").html(discountPrice);
+			Input.val(mDiscountRate);	
+		}
+		
+	});
+
+	$("input[name='bookPrice']").on("change", function(){
+		
+		let interInput = $("#slae_interface");
+		let Input = $("input[name='bookDiscount']");
+		
+		let discountRate = interInput.val();					// 사용자가 입력할 할인값
+		let mDiscountRate = discountRate / 100;					// 서버에 전송할 할인값
+		let price = $("input[name='bookPrice']").val();			// 원가
+		let discountPrice = price * (1 - mDiscountRate);		// 할인가격
+		
+		
+		$(".span_discount").html(discountPrice);
+		
+		Input.val(mDiscountRate);
+		
+	});
 	
 	
 	
