@@ -1,12 +1,14 @@
 package com.vam.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.vam.model.BookVO;
+import com.vam.model.Criteria;
 
 import lombok.extern.log4j.Log4j;
 
@@ -43,6 +45,7 @@ public class AdminMapperTests {
 	*/
 	
 	/* 카테고리 리스트 */
+	/*
 	@Test
 	public void cateListTest() throws Exception{
 		
@@ -51,5 +54,43 @@ public class AdminMapperTests {
 		log.info("cateList()..........." + mapper.cateList());
 		
 	}
+	*/
+	
+	/* 상품 리스트 */
+	
+	@Test
+	public void bookListTest() throws Exception{
+		
+		Criteria cri = new Criteria();
+		cri.setKeyword("웹에서");
+		cri.setType("G");
+		
+		List list = mapper.bookList(cri);
+		
+		System.out.println(list);
+		
+	}
+	
+	
+	
+	/* 상품 총 개수 */
+	@Test
+	public void bookGetTotalTest() throws Exception{
+	
+		Criteria cri = new Criteria();
+		cri.setType("A");
+		cri.setKeyword("708");
+		int result = mapper.bookGetTotal(cri);
+		
+		
+		
+		System.out.println("상품 총 개수 결과 : " + result);
+		
+		
+	}
+	
+	
+	
+	
 	
 }

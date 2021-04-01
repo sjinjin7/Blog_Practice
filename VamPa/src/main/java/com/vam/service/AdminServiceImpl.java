@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.vam.mapper.AdminMapper;
 import com.vam.model.BookVO;
 import com.vam.model.CateVO;
+import com.vam.model.Criteria;
 
 import lombok.extern.log4j.Log4j;
 
@@ -35,6 +36,24 @@ public class AdminServiceImpl implements AdminService {
 		log.info("(service)cateList........");
 		
 		return adminMapper.cateList();
+	}
+
+	/* 상품 리스트 */
+	@Override
+	public List<BookVO> bookList(Criteria cri) {
+		
+		log.info("(service)bookList......." + cri);
+		
+		return adminMapper.bookList(cri);
+	}
+
+	/* 상품 총 개수 */
+	@Override
+	public int bookGetTotal(Criteria cri) {
+		
+		log.info("(service)bookGetTotal......" + cri);
+		
+		return adminMapper.bookGetTotal(cri);
 	}
 
 	

@@ -3,6 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.vam.mapper.AdminMapper">
+  
+  <!-- 검색조건 -->
+  <sql id="criteria">
+  	<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+  		<foreach item="type" collection="typeArr">
+  			<trim prefix="OR">
+  				<choose>
+  					<when test="type == 'A'.toString()">
+  						authorId like '%' || #{keyword} || '%'
+  					</when>
+  					<when test="type == 'C'.toString()">
+  						cateCode like '%' || #{keyword} || '%'
+  					</when>  					
+  					<when test="type == 'G'.toString()">
+  						bookName like '%' || #{keyword} || '%'
+  					</when>  					
+  				</choose>
+  			</trim>
+  		</foreach>
+  	</trim>
+  </sql>
 
   	<!-- 작가 등록 -->
   	<insert id="bookEnroll">
@@ -18,6 +39,33 @@
   		select * from vam_bcate order by catecode
   	
   	</select>
+
+	<select id="bookList" resultType="com.vam.model.BookVO">
+	
+		<![CDATA[
+		    select * from(
+		        select /*+INDEX_DESC(vam_book SYS_C007496)*/ rownum as rn, bookId, bookName,
+		            (select authorName from vam_author where vam_book.authorId = vam_author.authorId) authorName,
+		            (select cateName from vam_bcate where vam_book.cateCode = vam_bcate.cateCode) cateName,bookStock,regDate
+		        from vam_book
+		        where
+	    ]]>    	
+	        	<include refid="criteria"></include> 
+		<![CDATA[	        	
+	        		rownum <= #{pageNum} * #{amount} 
+	        	)
+	        where rn > (#{pageNum} -1) * #{amount}
+		]]>	        
+	        
+	</select>
+
+	<select id="bookGetTotal" resultType="int">
+		select count(*) from vam_book
+		where
+		<include refid="criteria"></include> 
+		bookId >0
+	</select>
+
 
 
   </mapper>
