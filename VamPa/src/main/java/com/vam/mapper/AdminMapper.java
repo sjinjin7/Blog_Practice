@@ -15,9 +15,12 @@ public interface AdminMapper {
 	public List<CateVO> cateList();
 	
 	/* 상품 리스트 */
-	public List<BookVO> bookList(Criteria cri);
+	public List<BookVO> goodsGetList(Criteria cri);
 	
 	/* 검색 상품 총 갯수 */
-	public int bookGetTotal(Criteria cri);
+	public int goodsGetTotal(Criteria cri);
+	
+	/* 상품 상세 페이지 */
+	public BookVO goodsGetDetail(int bookId);
 	
 }

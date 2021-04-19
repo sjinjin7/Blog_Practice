@@ -20,5 +20,7 @@ public interface AdminService {
 	/* 상품 총 개수 */
 	public int bookGetTotal(Criteria cri);
 	
+	/* 상품 상세 정보 */
+	public BookVO goodsGetDetail(int bookId);	
 	
 }

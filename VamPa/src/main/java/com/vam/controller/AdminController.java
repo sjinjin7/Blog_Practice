@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vam.model.AuthorVO;
 import com.vam.model.BookVO;
@@ -48,7 +49,7 @@ public class AdminController {
 		logger.info("상품 등록 페이지 접속");
 		
 		/* 상품 리스트 데이터 */	
-		List list = adminService.bookList(cri);
+		List list = adminService.goodsGetList(cri);
 		
 		
 		if(!list.isEmpty()) {
@@ -58,7 +59,7 @@ public class AdminController {
 			return;
 		}
 		/* 페이지 인터페이스 데이터 */
-		model.addAttribute("pageMaker", new PageDTO(cri,adminService.bookGetTotal(cri)));
+		model.addAttribute("pageMaker", new PageDTO(cri,adminService.goodsGetTotal(cri)));
 		
 	}
 	
@@ -72,6 +73,22 @@ public class AdminController {
 		model.addAttribute("cateList", mapper.writeValueAsString(adminService.cateList()));
 		
 		System.out.println("josnTest......." + mapper.writeValueAsString(adminService.cateList()));		
+		
+	}
+	
+	/* 상품 상세 페이지 */
+	@GetMapping("/goodsDetail")
+	public void goodsGetInfo(int bookId, Criteria cri, Model model) throws JsonProcessingException {
+		
+		logger.info("goodsGetInfo()............" + bookId);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		model.addAttribute("cateList", mapper.writeValueAsString(adminService.cateList()));
+		
+		model.addAttribute("cri", cri);
+		
+		model.addAttribute("goodsInfo", adminService.goodsGetDetail(bookId));
 		
 	}
 	

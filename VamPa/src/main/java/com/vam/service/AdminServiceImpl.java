@@ -40,20 +40,27 @@ public class AdminServiceImpl implements AdminService {
 
 	/* 상품 리스트 */
 	@Override
-	public List<BookVO> bookList(Criteria cri) {
+	public List<BookVO> goodsGetList(Criteria cri) {
 		
 		log.info("(service)bookList......." + cri);
 		
-		return adminMapper.bookList(cri);
+		return adminMapper.goodsGetList(cri);
 	}
 
 	/* 상품 총 개수 */
 	@Override
-	public int bookGetTotal(Criteria cri) {
+	public int goodsGetTotal(Criteria cri) {
 		
 		log.info("(service)bookGetTotal......" + cri);
 		
-		return adminMapper.bookGetTotal(cri);
+		return adminMapper.goodsGetTotal(cri);
+	}
+
+	/* 상품 상세 정보 */
+	@Override
+	public BookVO goodsGetDetail(int bookId) {
+		log.info("(service)bookGetDetail......." + bookId);
+		return adminMapper.goodsGetDetail(bookId);
 	}
 
 	

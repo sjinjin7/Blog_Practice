@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.vam.model.BookVO;
 import com.vam.model.Criteria;
 
 import lombok.extern.log4j.Log4j;
@@ -64,7 +65,7 @@ public class AdminMapperTests {
 		Criteria cri = new Criteria();
 	
 		
-		List list = mapper.bookList(cri);
+		List list = mapper.goodsGetList(cri);
 		
 		System.out.println(list);
 		
@@ -73,17 +74,32 @@ public class AdminMapperTests {
 	
 	
 	/* 상품 총 갯수 */
+	/*
 	@Test
 	public void bookGetTotalTest() {
 		
 		Criteria cri = new Criteria();
 		cri.setType("C");
 		cri.setKeyword("201001");
-		int result = mapper.bookGetTotal(cri);
+		int result = mapper.goodsGetTotal(cri);
 		
 		
 		
 		System.out.println("총 갯수 결과 값 : " + result);
+		
+	}
+	*/
+	
+	/* 상품 상세 */
+	@Test
+	public void goodsGetDetailTest() {
+		
+		int bookId = 134;
+		
+		BookVO result = mapper.goodsGetDetail(bookId);
+		
+		System.out.println("상품 상페 결과 : " + result);
+		
 		
 	}
 	

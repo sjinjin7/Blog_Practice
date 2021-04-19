@@ -40,7 +40,8 @@
   	
   	</select>
 
-	<select id="bookList" resultType="com.vam.model.BookVO">
+	<!-- 상품 목록 데이터 -->
+	<select id="goodsGetList" resultType="com.vam.model.BookVO">
 	
 		<![CDATA[
 		    select * from(
@@ -59,13 +60,20 @@
 	        
 	</select>
 
-	<select id="bookGetTotal" resultType="int">
+	<!-- 상품 총 개수 -->
+	<select id="goodsGetTotal" resultType="int">
 		select count(*) from vam_book
 		where
 		<include refid="criteria"></include> 
 		bookId >0
 	</select>
 
-
+	<!-- 상품 상세 정보 -->
+	<select id="goodsGetDetail" resultType="com.vam.model.BookVO">
+	
+		select bookId, bookName, (select authorName from vam_author where authorId =vam_book.authorId) authorName, authorId, publeYear, publisher, cateCode, bookStock, bookDiscount, bookIntro, bookContents, regDate, updateDate 
+		from vam_book where bookId = #{bookId}
+	
+	</select>
 
   </mapper>

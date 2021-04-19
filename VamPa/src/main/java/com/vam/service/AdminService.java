@@ -15,8 +15,12 @@ public interface AdminService {
 	public List<CateVO> cateList();
 	
 	/* 상품 리스트 */
-	public List<BookVO> bookList(Criteria cri);
+	public List<BookVO> goodsGetList(Criteria cri);
 	
 	/* 상품 총 갯수 */
-	public int bookGetTotal(Criteria cri);
+	public int goodsGetTotal(Criteria cri);
+	
+	/* 상품 상세 정보 */
+	public BookVO goodsGetDetail(int bookId);
+	
 }

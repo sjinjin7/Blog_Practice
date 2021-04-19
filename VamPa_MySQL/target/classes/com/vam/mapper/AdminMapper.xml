@@ -60,5 +60,13 @@
 		
 		</select>
 		
+	<!-- 상품 상세 정보 -->
+	<select id="goodsGetDetail" resultType="com.vam.model.BookVO">
+	
+		select bookId, bookName, (select authorName from vam_author where authorId =vam_book.authorId) authorName, authorId, publeYear, publisher, cateCode, bookStock, bookDiscount, bookIntro, bookContents, regDate, updateDate 
+		from vam_book where bookId = #{bookId}
+	
+	</select>		
+		
 
   </mapper>
