@@ -152,5 +152,19 @@
 	
 </script>
 
+<script>
+
+	$(document).ready(function(){
+		
+		let modify_result = '${modify_result}';
+		
+		if(modify_result == 1){
+			alert("수정 완료");
+		}
+		
+	});
+	
+</script>
+
 </body>
 </html>

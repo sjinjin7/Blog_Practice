@@ -68,7 +68,7 @@
                     				<label>출판사</label>
                     			</div>
                     			<div class="form_section_content">
-                    				<input name="publisher" readonly="readonly" value="<c:out value="${goodsInfo.publisher}"/>" disabled>
+                    				<input name="publisher" value="<c:out value="${goodsInfo.publisher}"/>" disabled>
                     			</div>
                     		</div>             
                     		<div class="form_section">
@@ -93,8 +93,7 @@
                     					<select class="cate3" name="cateCode" disabled>
                     						<option value="none">선택</option>
                     					</select>
-                    				</div>  
-                    				<span class="ck_warn cateCode_warn">카테고리를 선택해주세요.</span>                  				                    				
+                    				</div>                  				                    				
                     			</div>
                     		</div>          
                     		<div class="form_section">
@@ -118,7 +117,7 @@
                     				<label>상품 할인율</label>
                     			</div>
                     			<div class="form_section_content">
-                    				<input id="discount_interface" maxlength="2" value="0" disabled>
+                    				<input id="discount_interface" maxlength="2" disabled>
                     			</div>
                     		</div>          		
                     		<div class="form_section">
@@ -139,16 +138,16 @@
                     		</div>
                    		
                    			<div class="btn_section">
-                   				<button id="cancelBtn" class="btn">취 소</button>
-	                    		<button id="enrollBtn" class="btn enroll_btn">등 록</button>
+                   				<button id="cancelBtn" class="btn">상품 목록</button>
+	                    		<button id="modifyBtn" class="btn enroll_btn">수정 </button>
 	                    	</div> 
                     </div>      
 
                 	
                 	<form id="moveForm" action="/admin/goodsManage" method="get" >
- 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+ 						<input type="hidden" name="pageNum" value="${cri.pageNum}">
+						<input type="hidden" name="amount" value="${cri.amount}">
+						<input type="hidden" name="keyword" value="${cri.keyword}">
                 	</form>
                 	
                 </div>
@@ -319,6 +318,21 @@
 		
 		
 	});
+	
+	/* 목록 이동 버튼 */
+	$("#cancelBtn").on("click", function(e){
+		e.preventDefault();
+		$("#moveForm").submit();	
+	});	
+	
+	/* 수정 페이지 이동 */
+	$("#modifyBtn").on("click", function(e){
+		e.preventDefault();
+		let addInput = '<input type="hidden" name="bookId" value="${goodsInfo.bookId}">';
+		$("#moveForm").append(addInput);
+		$("#moveForm").attr("action", "/admin/goodsModify");
+		$("#moveForm").submit();
+	});	
 	
 
 </script>

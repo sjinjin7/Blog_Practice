@@ -71,9 +71,18 @@
 	<!-- 상품 상세 정보 -->
 	<select id="goodsGetDetail" resultType="com.vam.model.BookVO">
 	
-		select bookId, bookName, (select authorName from vam_author where authorId =vam_book.authorId) authorName, authorId, publeYear, publisher, cateCode, bookStock, bookDiscount, bookIntro, bookContents, regDate, updateDate 
+		select bookId, bookName, (select authorName from vam_author where authorId =vam_book.authorId) authorName, authorId, publeYear, publisher, cateCode, bookPrice, bookStock, bookDiscount, bookIntro, bookContents, regDate, updateDate 
 		from vam_book where bookId = #{bookId}
 	
 	</select>
+
+	<!-- 상품 정보 수정 -->
+	<update id="goodsModify">
+		
+		update vam_book set bookName = #{bookName}, authorId = #{authorId}, publeYear = #{publeYear}, publisher = #{publisher}, cateCode = ${cateCode}, 
+		bookPrice = #{bookPrice}, bookStock = #{bookStock}, bookDiscount = #{bookDiscount}, bookIntro = #{bookIntro}, bookContents = #{bookContents}, updateDate = sysdate
+		where bookId = ${bookId}
+		
+	</update>
 
   </mapper>
