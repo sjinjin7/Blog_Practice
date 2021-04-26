@@ -87,6 +87,7 @@ public class AuthorMapperTests {
 	*/
 	
 	/* 작가 정보 수정 */
+	/*
 	@Test
 	public void authorModifyTest() {
 		
@@ -102,7 +103,22 @@ public class AuthorMapperTests {
 		log.info("result : " + result);
 		
 	}
+	*/
 	
+	/* 작가 정보 삭제 */
+	@Test
+	public void authorDeleteTest() {
+		
+		
+		int authorId = 44;
+		
+		int result = mapper.authorDelete(authorId);
+		
+		if(result == 1) {
+			System.out.println("삭제 성공");
+		}
+		
+	}
 	
 	
 	

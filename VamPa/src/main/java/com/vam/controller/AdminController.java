@@ -106,6 +106,21 @@ public class AdminController {
 		
 	}
 	
+	/* 상품 정보 삭제 */
+	@PostMapping("/goodsDelete")
+	public String goodsDeletePOST(int bookId, RedirectAttributes rttr) {
+		
+		logger.info("goodsDeletePOST..........");
+		
+		int result = adminService.goodsDelete(bookId);
+		
+		rttr.addFlashAttribute("delete_result", result);
+		
+		return "redirect:/admin/goodsManage";
+		
+	}
+	
+	
 	/* 작가 등록 페이지 접속 */
 	@RequestMapping(value = "authorEnroll", method = RequestMethod.GET)
 	public void authorEnrollGET() throws Exception{
@@ -172,6 +187,35 @@ public class AdminController {
 		
 		return "redirect:/admin/authorManage";
 	}
+	
+	/* 작가 정보 삭제 */
+	@PostMapping("/authorDelete")
+	public String authorDeletePOST(int authorId, RedirectAttributes rttr) {
+		
+		logger.info("authorDeletePOST..........");
+		
+		int result = 0;
+		
+		try {
+			
+			result = authorService.authorDelete(authorId);
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			result = 2;
+			rttr.addFlashAttribute("delete_result", result);
+			
+			return "redirect:/admin/authorManage";
+			
+		}
+		
+		
+		rttr.addFlashAttribute("delete_result", result);
+		
+		return "redirect:/admin/authorManage";
+		
+	}	
 	
 	/* 상품 등록 */
 	@PostMapping("/goodsEnroll")

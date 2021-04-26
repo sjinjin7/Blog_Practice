@@ -41,7 +41,7 @@ public class AuthorMapperTests {
 	
 	
 	/* 작가 목록 테스트 */
-	
+	/*
 	@Test
 	public void authorGetList() {
 		
@@ -57,7 +57,7 @@ public class AuthorMapperTests {
 		list.forEach(a -> log.info(list));
 		
 	}
-	
+	*/
 	
 	
 	/* 작가 수 테스트 */
@@ -98,16 +98,32 @@ public class AuthorMapperTests {
 		
 		AuthorVO author = new AuthorVO();
 		
-		author.setAuthorId(755);
-		author.setAuthorName("스프링 수정");
-		author.setNationId("01");
-		author.setAuthorIntro("스프링에서 소개 내용 수정");
+		author.setAuthorId(1550);
+		author.setAuthorName("작가이름 수정");
+		author.setNationId("02");
+		author.setAuthorIntro("작가 수개 내용 수정");
 		
 		int result = mapper.authorModify(author);
 		
-		log.info("result........." + result);
+		log.info("result : " + result);
+		
 	}
 	*/
+	
+	/* 작가 정보 삭제 */
+	@Test
+	public void authorDeleteTest() {
+		
+		
+		int authorId = 44;
+		
+		int result = mapper.authorDelete(authorId);
+		
+		if(result == 1) {
+			System.out.println("삭제 성공");
+		}
+		
+	}
 	
 	
 }

@@ -58,7 +58,7 @@ public class AdminMapperTests {
 	*/
 	
 	/* 상품 리스트 */
-	
+	/*
 	@Test
 	public void bookListTest() throws Exception{
 		
@@ -71,7 +71,7 @@ public class AdminMapperTests {
 		System.out.println(list);
 		
 	}
-	
+	*/
 	
 	
 	/* 상품 총 개수 */
@@ -109,14 +109,15 @@ public class AdminMapperTests {
 	*/
 	
 	/* 상품 정보 수정 */
+	/*
 	@Test
 	public void goodsModifyTest() {
 		
 		BookVO book = new BookVO();
 		
-		book.setBookId(49138);
+		book.setBookId(169);
 		book.setBookName("mapper 테스트");
-		book.setAuthorId(708);
+		book.setAuthorId(94);
 		book.setPubleYear("2021-03-18");
 		book.setPublisher("출판사");
 		book.setCateCode("102001");
@@ -127,6 +128,21 @@ public class AdminMapperTests {
 		book.setBookContents("책 목차 ");
 		
 		mapper.goodsModify(book);
+		
+	}
+	*/
+	
+	/* 상품 정보 삭제 */
+	@Test
+	public void goodsDeleteTest() {
+		
+		int bookId = 169;
+		
+		int result = mapper.goodsDelete(bookId);
+		
+		if(result == 1) {
+			System.out.println("삭제 성공");
+		}
 		
 	}
 	
