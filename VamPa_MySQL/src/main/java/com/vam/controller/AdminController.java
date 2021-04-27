@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -247,6 +249,17 @@ public class AdminController {
 		
 		/* 페이지 이동 인터페이스 데이터 */
 		model.addAttribute("pageMaker", new PageDTO(cri, authorService.authorGetTotal(cri)));		
+	}
+	
+	/* 첨부 파일 업로드 */
+	@PostMapping("/uploadAjaxAction")
+	@ResponseBody
+	public void uploadAjaxActionPOST(MultipartFile uploadFile) {
+		logger.info("uploadAjaxActionPOST.........");
+		logger.info("uploadFile : " + uploadFile.toString());
+		//logger.info("uploadFile : " + uploadFile[0].getOriginalFilename());
+		logger.info("uploadFile : " + uploadFile.getOriginalFilename());
+		
 	}
 	
 }
