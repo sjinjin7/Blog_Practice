@@ -275,7 +275,7 @@ public class AdminController {
 	/* 첨부 파일 업로드 */
 	@PostMapping("/uploadAjaxAction")
 	@ResponseBody
-	public void uploadAjaxActionPOST(MultipartFile uploadFile) {
+	public void uploadAjaxActionPOST(MultipartFile[] uploadFile) {
 		logger.info("uploadAjaxActionPOST.........");
 
 		List<AttachImageVO> list = new ArrayList();
@@ -289,7 +289,26 @@ public class AdminController {
 			uploadPath.mkdirs();
 		}
 		
-	}	
+		for(MultipartFile multipartFile : uploadFile) {
+			
+			String uploadFileName = multipartFile.getOriginalFilename();
+			logger.info("uploadFileName : " + uploadFileName);
+			
+			try {
+				
+				File saveFile = new File(uploadPath, uploadFileName);
+				multipartFile.transferTo(saveFile);
+				
+			}catch(Exception e) {
+				
+				e.printStackTrace();
+				
+			}
+			
+		}
+				
+		
+	}
 	
 	
 }
