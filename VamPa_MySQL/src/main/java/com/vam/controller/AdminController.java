@@ -1,5 +1,9 @@
 package com.vam.controller;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -17,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vam.model.AttachImageVO;
 import com.vam.model.AuthorVO;
 import com.vam.model.BookVO;
 import com.vam.model.Criteria;
@@ -36,6 +41,20 @@ public class AdminController {
 	
 	@Autowired
 	AdminService adminService;
+	
+	/* 날짜 폴더 만들기 */
+	
+	private String getFolder() {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date date = new Date();
+		
+		String str = sdf.format(date);
+		
+		return str.replace("-", File.separator);
+		
+	}	
 	
 	/* 관리자 메인페이지 이동 */
 	@RequestMapping(value = "main", method = RequestMethod.GET)
@@ -256,9 +275,18 @@ public class AdminController {
 	@ResponseBody
 	public void uploadAjaxActionPOST(MultipartFile uploadFile) {
 		logger.info("uploadAjaxActionPOST.........");
-		logger.info("uploadFile : " + uploadFile.toString());
-		//logger.info("uploadFile : " + uploadFile[0].getOriginalFilename());
-		logger.info("uploadFile : " + uploadFile.getOriginalFilename());
+
+		List<AttachImageVO> list = new ArrayList();
+		String uploadFolder = "C:\\upload";
+		
+		String uploadFolderPath = getFolder();
+		
+		File uploadPath = new File(uploadFolder, uploadFolderPath);
+		
+		if(uploadPath.exists() == false) {
+			uploadPath.mkdirs();
+		}
+				
 		
 	}
 	
