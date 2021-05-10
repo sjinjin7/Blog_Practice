@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -276,36 +277,61 @@ public class AdminController {
 	@PostMapping("/uploadAjaxAction")
 	@ResponseBody
 	public void uploadAjaxActionPOST(MultipartFile[] uploadFile) {
-		logger.info("uploadAjaxActionPOST.........");
-
+		
+		logger.info("uploadAjaxActionPOST..........");
 		List<AttachImageVO> list = new ArrayList();
 		String uploadFolder = "C:\\upload";
 		
-		String uploadFolderPath = getFolder();
+		/* 날짜 폴더 경로 */
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
-		File uploadPath = new File(uploadFolder, uploadFolderPath);
+		Date date = new Date();
+		
+		String str = sdf.format(date);
+		
+		String datePath = str.replace("-", File.separator);
+		
+		/* 폴더 생성 */
+		File uploadPath = new File(uploadFolder, datePath);
 		
 		if(uploadPath.exists() == false) {
 			uploadPath.mkdirs();
 		}
 		
+		// 향상된 for
 		for(MultipartFile multipartFile : uploadFile) {
 			
-			String uploadFileName = multipartFile.getOriginalFilename();
-			logger.info("uploadFileName : " + uploadFileName);
+			AttachImageVO attachDTO = new AttachImageVO();
 			
+			/* 파일 이름 */
+			String uploadFileName = multipartFile.getOriginalFilename();
+			attachDTO.setFileName(uploadFileName);
+			
+			
+			/* uuid 적용 파일 이름 */
+			String uuid = UUID.randomUUID().toString();
+			attachDTO.setUuid(uuid);
+			attachDTO.setUploadPath(datePath);
+			
+			uploadFileName = uuid + "_" + uploadFileName;
+			
+			/* 파일 위치, 파일 이름을 합친 File 객체 */
+			File saveFile = new File(uploadPath, uploadFileName);
+			
+			/* 파일 저장 */
 			try {
 				
-				File saveFile = new File(uploadPath, uploadFileName);
 				multipartFile.transferTo(saveFile);
 				
-			}catch(Exception e) {
+			} catch (Exception e) {
 				
 				e.printStackTrace();
 				
-			}
+			} 
 			
-		}
+			list.add(attachDTO);
+			
+		} //for
 				
 		
 	}
