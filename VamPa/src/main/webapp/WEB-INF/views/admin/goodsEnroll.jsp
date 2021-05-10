@@ -141,7 +141,7 @@
                     			<div class="form_section_title">
                     				<label>상품 이미지</label>
                     			</div>
-                    			<div class="form_section_content bct">
+                    			<div class="form_section_content">
 									<input type="file" id ="fileItem" name='uploadFile' style="height: 30px;">
                     			</div>
                     		</div>      
@@ -489,7 +489,11 @@ $("#enrollBtn").on("click",function(e){
 	    	contentType : false,
 	    	data : formData,
 	    	type : 'POST',
-	    	dataType : 'json'
+	    	dataType : 'json',
+	    	success: function(result){
+	    		console.log(result);
+	    		console.log(typeof result);
+	    	}
 		});
 		
 		
