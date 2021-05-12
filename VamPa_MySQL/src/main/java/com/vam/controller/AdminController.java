@@ -307,6 +307,9 @@ public class AdminController {
 			String uploadFileName = multipartFile.getOriginalFilename();
 			attachDTO.setFileName(uploadFileName);
 			
+			/* 이미지 타입 */
+			String imageType = uploadFileName.substring(uploadFileName.indexOf(".") + 1);
+			System.out.println(imageType);
 			
 			/* uuid 적용 파일 이름 */
 			String uuid = UUID.randomUUID().toString();
@@ -322,6 +325,42 @@ public class AdminController {
 			try {
 				
 				multipartFile.transferTo(saveFile);
+				
+				/* 썸네일 생성(ImageIO) */
+				/*
+				File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
+				
+				BufferedImage bo_image = ImageIO.read(saveFile);
+				BufferedImage bt_image = new BufferedImage(100, 100, BufferedImage.TYPE_3BYTE_BGR);
+				
+				Graphics2D graphic = bt_image.createGraphics();
+				
+				graphic.drawImage(bo_image, 0, 0, 100, 100, null);
+				
+				
+				
+				ImageIO.write(bt_image, "jpg", thumbnailFile);
+				*/
+				
+				/* 썸네일 생성(thumbnailator) */
+				/* 방법 1 */
+				/*
+				FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
+				
+				Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 300, 500);
+				
+				thumbnail.close();
+				*/
+				
+				/* 방법 2 */
+				/*
+				File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
+				
+				Thumbnails.of(saveFile)
+		        .size(160, 160)
+		        .toFile(thumbnailFile);
+				*/
+				
 				
 			} catch (Exception e) {
 				
