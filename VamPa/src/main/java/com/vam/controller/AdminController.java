@@ -1,12 +1,16 @@
 package com.vam.controller;
 
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+import javax.imageio.ImageIO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +36,6 @@ import com.vam.model.Criteria;
 import com.vam.model.PageDTO;
 import com.vam.service.AdminService;
 import com.vam.service.AuthorService;
-
-import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 @RequestMapping("/admin")
@@ -330,20 +332,26 @@ public class AdminController {
 				multipartFile.transferTo(saveFile);
 				
 				/* 썸네일 생성(ImageIO) */
-				/*
-				File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
+				File thumbnailFile = new File(uploadPath, "s_" + uploadFileName); 
 				
 				BufferedImage bo_image = ImageIO.read(saveFile);
-				BufferedImage bt_image = new BufferedImage(100, 100, BufferedImage.TYPE_3BYTE_BGR);
+
+					/* 비율 */
+					double ratio = 3;
+					/*넓이 높이*/
+					int width = (int) (bo_image.getWidth() / ratio);
+					int height = (int) (bo_image.getHeight() / ratio);				
 				
-				Graphics2D graphic = bt_image.createGraphics();
+				BufferedImage bt_image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+								
+				Graphics2D graphic = bt_image.createGraphics();				
 				
-				graphic.drawImage(bo_image, 0, 0, 100, 100, null);
+
 				
-				
-				
-				ImageIO.write(bt_image, "jpg", thumbnailFile);
-				*/
+				graphic.drawImage(bo_image, 0, 0,width,height, null);
+					
+				ImageIO.write(bt_image, "jpg", thumbnailFile);	
+			
 				
 				/* 썸네일 생성(thumbnailator) */
 				/* 방법 1 */
