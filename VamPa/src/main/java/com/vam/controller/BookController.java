@@ -1,8 +1,16 @@
 package com.vam.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +29,42 @@ public class BookController {
 	
 	/* image display */
 	@GetMapping("/display")
-	public void getFile(String fileName) {
+	public ResponseEntity<byte[]> getFile(String fileName) {
+		
+		logger.info("filename : " + fileName);
+		
+		File file = new File("c:\\upload\\" + fileName);
+		/*
+		 * "\" 특수문자 이기 때문에 \\을 해야 \슬래쉬로 인식을 함 mdn 이스케이프 문자
+		 */		
+		
+		logger.info("file : " + file);
+		
+		logger.info("file path : " + file.toPath());
+		
+		
+		
+		ResponseEntity<byte[]> result = null;
+		
+		try {
+			
+			HttpHeaders header = new HttpHeaders();
+
+			logger.info("Content-type : " + Files.probeContentType(file.toPath()));
+			
+			header.add("Content-Type", Files.probeContentType(file.toPath()));
+			/* 한글 경로 있을 경우를 대비하여 코딩 */
+			
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+			
+			
+		} catch(IOException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+		return result;
 		
 	}
 	
