@@ -477,9 +477,7 @@ $("#enrollBtn").on("click",function(e){
 		//console.log("files : " + files); => fileList타입
 		//console.log("files : " + files[0]); => file 타입
 		
-	    if(!checkExtension(files[0].name, files[0].size)){
-	    	return false;
-	    }
+
 		
 		formData.append("uploadFile", files[0]);
 		
@@ -493,6 +491,9 @@ $("#enrollBtn").on("click",function(e){
 	    	success: function(result){
 	    		console.log(result);
 	    		console.log(typeof result);
+	    	},
+	    	error : function(result){
+	    		console.log("이미지 파일 형식이 아닙니다");
 	    	}
 		});
 		

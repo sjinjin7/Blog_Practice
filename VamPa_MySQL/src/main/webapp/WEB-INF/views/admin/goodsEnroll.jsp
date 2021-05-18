@@ -493,6 +493,9 @@ $("#enrollBtn").on("click",function(e){
 	    	success: function(result){
 	    		console.log(result);
 	    		console.log(typeof result);
+	    	},
+	    	error : function(result){
+	    		console.log("이미지 파일 형식이 아닙니다");
 	    	}
 		});
 		

@@ -3,6 +3,8 @@ package com.vam.controller;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -282,6 +284,33 @@ public class AdminController {
 	public ResponseEntity<List<AttachImageVO>> uploadAjaxActionPOST(MultipartFile[] uploadFile) {
 		
 		logger.info("uploadAjaxActionPOST..........");
+		
+		/* 이미지 타입 체크 */
+		for(MultipartFile multiparFile : uploadFile) {
+			
+			File checkfile = new File(multiparFile.getOriginalFilename());
+			
+			String type = null;
+			
+			try {
+				
+				type = Files.probeContentType(checkfile.toPath());
+				System.out.println("mimetype : " + type);
+				
+				
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+				
+			}
+			
+			if(!type.startsWith("image")) {
+				List<AttachImageVO> list = null;
+				return new ResponseEntity<>(list,HttpStatus.BAD_REQUEST);
+			}
+			
+		}// for		
+		
 		List<AttachImageVO> list = new ArrayList();
 		String uploadFolder = "C:\\upload";
 		
