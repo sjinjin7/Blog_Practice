@@ -14,6 +14,36 @@
  <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<style type="text/css">
+	#result_card img{
+		max-width: 100%;
+	    height: auto;
+	    display: block;
+	    padding: 5px;
+	    margin-top: 10px;
+	    margin: auto;	
+	}
+	#result_card {
+		position: relative;
+	}
+	.imgDeleteBtn{
+	    position: absolute;
+	    top: 0;
+	    right: 5%;
+	    background-color: #ef7d7d;
+	    color: wheat;
+	    font-weight: 900;
+	    width: 30px;
+	    height: 30px;
+	    border-radius: 50%;
+	    line-height: 26px;
+	    text-align: center;
+	    border: none;
+	    display: block;
+	    cursor: pointer;	
+	}
+	
+</style>
 </head>
 </head>
 <body>
@@ -142,6 +172,16 @@
                     			</div>
                     			<div class="form_section_content bct">
 									<input type="file" id ="fileItem" name='uploadFile' style="height: 30px;">
+									<div id="uploadReslut">
+									
+									<!-- 
+										<div id="result_card">
+											<div class="imgDeleteBtn">x</div>
+											<img src="/resources/img/Logo.png">
+										</div>	
+									 -->	
+										<!-- button 디자인 : https://www.w3schools.com/css/css3_buttons.asp -->																		
+									</div>									
                     			</div>
                     		</div>
                     		                    		
@@ -493,6 +533,7 @@ $("#enrollBtn").on("click",function(e){
 	    	success: function(result){
 	    		console.log(result);
 	    		console.log(typeof result);
+	    		showUploadImage(result);
 	    	},
 	    	error : function(result){
 	    		console.log("이미지 파일 형식이 아닙니다");
@@ -522,6 +563,31 @@ $("#enrollBtn").on("click",function(e){
 	  }
 	  return true;
 	}	
+	
+	/* 업로드 이미지 출력 */
+	function showUploadImage(uploadResultArr){
+		
+		if(!uploadResultArr || uploadResultArr.length == 0){return;}
+		
+		let uploadReslut = $("#uploadReslut");
+		
+		let	obj = uploadResultArr[0];
+		
+		
+		let str = "";
+		
+		let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+		str += "<div id='result_card'";
+		str += "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
+		str += ">";
+		str += "<img src='/display?fileName=" + fileCallPath +"'>";
+		str += "<div class='imgDeleteBtn' data-file=''>x</div>";
+		str += "</div>";
+		
+		uploadReslut.html(str);
+		
+	}	
+	
 	
 </script> 				
 
