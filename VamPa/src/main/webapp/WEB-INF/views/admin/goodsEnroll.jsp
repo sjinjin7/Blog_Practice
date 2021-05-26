@@ -580,6 +580,9 @@ $("#enrollBtn").on("click",function(e){
 		str += ">";
 		str += "<img src='/display?fileName=" + fileCallPath +"'>";
 		str += "<div class='imgDeleteBtn' data-file=''>x</div>";
+		str += "<input type='hidden' name='attachList[0].fileName' value='"+ obj.fileName +"'>";
+		str += "<input type='hidden' name='attachList[0].uuid' value='"+ obj.uuid +"'>";
+		str += "<input type='hidden' name='attachList[0].uploadPath' value='"+ obj.uploadPath +"'>";		
 		str += "</div>";
 		
 		uploadReslut.html(str);
