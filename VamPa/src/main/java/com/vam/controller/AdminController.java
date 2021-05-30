@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -418,5 +420,41 @@ public class AdminController {
 		
 	}
 	
+	
+	/* 이미지 삭제 */
+	@PostMapping("/deleteFile")
+	public ResponseEntity<String> deleteFile(String fileName, String type){
+		
+		logger.info("deleteFile......." + fileName);
+		
+		File file = null;
+		
+		
+		try {
+			/* 썸네일 파일 제거*/
+			file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
+			
+			file.delete();
+			
+			/* 원본 파일 제거 */
+			String tnFileName = file.getAbsolutePath().replace("s_", "");
+			
+			logger.info("tnFileName : " + tnFileName);
+			
+			file = new File(tnFileName);
+			
+			file.delete();
+			
+		} catch (UnsupportedEncodingException e) {
+			
+			e.printStackTrace();
+			
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			
+		}
+		
+		return new ResponseEntity<>("deleted", HttpStatus.OK);
+		
+	} // deleteFile()
 	
 }
