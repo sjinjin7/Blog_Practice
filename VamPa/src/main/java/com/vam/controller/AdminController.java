@@ -423,7 +423,7 @@ public class AdminController {
 	
 	/* 이미지 삭제 */
 	@PostMapping("/deleteFile")
-	public ResponseEntity<String> deleteFile(String fileName, String type){
+	public ResponseEntity<String> deleteFile(String fileName){
 		
 		logger.info("deleteFile......." + fileName);
 		

@@ -12,7 +12,7 @@ public class AttachImageVO {
 	public String uuid;
 	
 	/* id */
-	public int id;
+	public int bookId;
 
 	public String getFileName() {
 		return fileName;
@@ -38,17 +38,20 @@ public class AttachImageVO {
 		this.uuid = uuid;
 	}
 
-	public int getId() {
-		return id;
+	public int getBookId() {
+		return bookId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
 	}
 
 	@Override
 	public String toString() {
-		return "AttachImageVO [fileName=" + fileName + ", uploadPath=" + uploadPath + ", uuid=" + uuid + ", id=" + id
-				+ "]";
+		return "AttachImageVO [fileName=" + fileName + ", uploadPath=" + uploadPath + ", uuid=" + uuid + ", bookId="
+				+ bookId + "]";
 	}
+
+
+	
 }
