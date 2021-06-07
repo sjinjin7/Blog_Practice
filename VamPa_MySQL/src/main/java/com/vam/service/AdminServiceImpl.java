@@ -31,6 +31,10 @@ public class AdminServiceImpl implements AdminService{
 			return;
 		}
 		
+		if(book.getBookId() == 0) {
+			book.setBookId(1);
+		}		
+		
 		book.getImageList().forEach(attach -> {
 			
 			attach.setBookId(book.getBookId());
