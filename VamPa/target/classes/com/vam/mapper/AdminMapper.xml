@@ -25,8 +25,14 @@
   	</trim>
   </sql>
 
-  	<!-- 작가 등록 -->
+  	<!-- 상품 등록 -->
   	<insert id="bookEnroll">
+  		<selectKey resultType="int" keyProperty="bookId" order="BEFORE">
+  		
+  			SELECT MAX(bookId)+1 FROM vam_book
+  		
+  		</selectKey>
+  	
   	
   		insert into vam_book(bookName, authorId, publeYear, publisher, cateCode, bookPrice, bookStock, bookDiscount, bookIntro, bookContents)
 		values(#{bookName},#{authorId}, #{publeYear},#{publisher},#{cateCode},#{bookPrice},#{bookStock},#{bookDiscount},#{bookIntro},#{bookContents})
@@ -45,7 +51,7 @@
 	
 		<![CDATA[
 		    select * from(
-		        select /*+INDEX_DESC(vam_book SYS_C007496)*/ rownum as rn, bookId, bookName,
+		        select /*+INDEX_DESC(vam_book SYS_C008227)*/ rownum as rn, bookId, bookName,
 		            (select authorName from vam_author where vam_book.authorId = vam_author.authorId) authorName,
 		            (select cateName from vam_bcate where vam_book.cateCode = vam_bcate.cateCode) cateName,bookStock,regDate
 		        from vam_book
@@ -91,5 +97,12 @@
 		delete from vam_book where bookId = #{bookId}
 	
 	</delete>
+	
+	<!-- 이미지 등록 -->
+	<insert id="imageEnroll">
+	
+		insert into vam_image(bookId, fileName, uploadPath, uuid) values (#{bookId}, #{fileName}, #{uploadPath}, #{uuid})
+	
+	</insert>
 
   </mapper>
