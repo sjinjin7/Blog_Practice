@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +16,38 @@
  <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<style type="text/css">
+	#result_card img{
+		max-width: 100%;
+	    height: auto;
+	    display: block;
+	    padding: 5px;
+	    margin-top: 10px;
+	    margin: auto;	
+	}
+	#result_card {
+		position: relative;
+	}
+	.imgDeleteBtn{
+	    position: absolute;
+	    top: 0;
+	    right: 5%;
+	    background-color: #ef7d7d;
+	    color: wheat;
+	    font-weight: 900;
+	    width: 30px;
+	    height: 30px;
+	    border-radius: 50%;
+	    line-height: 26px;
+	    text-align: center;
+	    border: none;
+	    display: block;
+	    cursor: pointer;	
+	}
+</style>
+
 </head>
-</head>
+
 <body>
 
 				<%@include file="../includes/admin/header.jsp" %>
@@ -135,6 +167,19 @@
                     				<span class="ck_warn bookContents_warn">책 목차를 입력해주세요.</span>
                     			</div>
                     		</div>
+                    		
+                    		<div class="form_section">
+                    			<div class="form_section_title">
+                    				<label>상품 이미지</label>
+                    			</div>
+                    			<div class="form_section_content">
+									<input type="file" id ="fileItem" name='uploadFile' style="height: 30px;">
+									<div id="uploadReslut">
+																		
+									</div>									
+                    			</div>
+                    		</div>                    		
+                    		                		
                     		<input type="hidden" name='bookId' value="${goodsInfo.bookId}">
                    		</form>
                    			<div class="btn_section">
@@ -465,6 +510,111 @@ $("#modifyBtn").on("click",function(e){
 		
 	});
 		
+	/* 이미지 삭제 버튼 */
+	$("#uploadReslut").on("click", ".imgDeleteBtn", function(e){
+		
+		deleteFile();
+		
+	});	
+	
+	
+	/* 이미지 태그 삭제 메서드 */
+	function deleteFile(){
+		$("#result_card").remove();
+	}
+	
+	
+	/* 이미지 업로드 */
+	$("input[type='file']").change(function(e){
+		
+		/* 이미지 존재시 삭제 */
+		if($(".imgDeleteBtn").length > 0){
+			deleteFile();
+		}		
+		
+		let formData = new FormData();
+		let inputFile = $("input[name='uploadFile']");
+	    let files = inputFile[0].files;
+	    
+		//fileList 객체 호출 방법
+		//$("input[name='uploadFile']")[0].files or $("input[name='uploadFile']")[0].files[0]
+		//document.getElementById("fileItem").files[0]
+		//console.log("files : " + files); => fileList타입
+		//console.log("files : " + files[0]); => file 타입
+		
+	    if(!checkExtension(files[0].name, files[0].size)){
+	    	return false;
+	    }
+		
+		formData.append("uploadFile", files[0]);
+		
+		$.ajax({
+			url: '/admin/uploadAjaxAction',
+	    	processData : false,
+	    	contentType : false,
+	    	data : formData,
+	    	type : 'POST',
+	    	dataType : 'json',
+	    	success: function(result){
+	    		console.log(result);
+	    		console.log(typeof result);
+	    		showUploadImage(result);
+	    	},
+	    	error : function(result){
+	    		console.log("이미지 파일 형식이 아닙니다");
+	    	}
+		});
+		
+		
+	});
+	
+	
+	
+	
+	/* var, method related with attachFile */
+	var regex = new RegExp("(.*?)\.(jpg|png)$");
+	var maxSize = 1048576; //1MB
+	
+	function checkExtension(fileName, fileSize){
+		
+	  if(fileSize >= maxSize){
+	    alert("파일 사이즈 초과");
+	    return false;
+	  }
+	  
+	  if(!regex.test(fileName)){
+	    alert("해당 종류의 파일은 업로드할 수 없습니다.");
+	    return false;
+	  }
+	  return true;
+	}	
+	
+	/* 업로드 이미지 출력 */
+	function showUploadImage(uploadResultArr){
+		
+		if(!uploadResultArr || uploadResultArr.length == 0){return;}
+		
+		let uploadReslut = $("#uploadReslut");
+		
+		let	obj = uploadResultArr[0];
+		
+		
+		let str = "";
+		
+		let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+		str += "<div id='result_card'";
+		str += "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
+		str += ">";
+		str += "<img src='/display?fileName=" + fileCallPath +"'>";
+		str += "<div class='imgDeleteBtn' data-file='" + fileCallPath + "'>x</div>";
+		str += "<input type='hidden' name='imageList[0].fileName' value='"+ obj.fileName +"'>";
+		str += "<input type='hidden' name='imageList[0].uuid' value='"+ obj.uuid +"'>";
+		str += "<input type='hidden' name='imageList[0].uploadPath' value='"+ obj.uploadPath +"'>";				
+		str += "</div>";
+		
+		uploadReslut.html(str);
+		
+	}		
 	
 </script> 			
 
@@ -620,6 +770,44 @@ $(document).ready(function(){
 	$("#discount_interface").val(discountRate);
 	
 	
+	
+	/* 이미지 정보 호출 */
+	let bookId = '<c:out value="${goodsInfo.bookId}"/>';
+	let uploadReslut = $("#uploadReslut");
+	
+	$.getJSON("/getAttachList", {bookId : bookId}, function(arr){
+		
+		console.log(arr);
+		
+		if(arr.length === 0){
+			
+			
+			let str = "";
+			str += "<div id='result_card'>";
+			str += "<img src='/resources/img/goodsNoImage.png'>";
+			str += "</div>";
+			
+			uploadReslut.html(str);				
+			return;
+		}
+		
+		let str = "";
+		let obj = arr[0];
+		
+		let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+		str += "<div id='result_card'";
+		str += "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
+		str += ">";
+		str += "<img src='/display?fileName=" + fileCallPath +"'>";
+		str += "<div class='imgDeleteBtn' data-file='" + fileCallPath + "'>x</div>";
+		str += "<input type='hidden' name='imageList[0].fileName' value='"+ obj.fileName +"'>";
+		str += "<input type='hidden' name='imageList[0].uuid' value='"+ obj.uuid +"'>";
+		str += "<input type='hidden' name='imageList[0].uploadPath' value='"+ obj.uploadPath +"'>";				
+		str += "</div>";
+		
+		uploadReslut.html(str);			
+		
+	});// GetJSON	
 
 	
 });
