@@ -36,4 +36,7 @@ public interface AdminMapper {
 	/* 이미지 전체 삭제 */
 	public void deleteImageAll(int bookId);	
 	
+	/* 배치 삭제 이미지 리스트 */ 
+	public List<AttachImageVO> getOldFiles();
+	
 }
