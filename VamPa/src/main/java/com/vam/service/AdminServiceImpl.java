@@ -111,11 +111,24 @@ public class AdminServiceImpl implements AdminService {
 
 	/* 상품 정보 삭제 */
 	@Override
+	@Transactional
 	public int goodsDelete(int bookId) {
 
 		log.info("goodsDelete..........");
 		
+		adminMapper.deleteImageAll(bookId);
+		
 		return adminMapper.goodsDelete(bookId);
+	}
+
+	/* 지정 상품 이미지 정보 얻기 */
+	@Override
+	public List<AttachImageVO> getAttachInfo(int bookId) {
+		
+		log.info("getAttachInfo........");
+		
+		return adminMapper.getAttachInfo(bookId);
 	}		
+	
 	
 }

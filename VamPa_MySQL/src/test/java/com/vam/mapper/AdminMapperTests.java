@@ -172,6 +172,7 @@ public class AdminMapperTests {
 	*/
 	
 	/* 이미지 삭제 */
+	/*
 	@Test
 	public void deleteImageAllTest() {
 		
@@ -179,6 +180,19 @@ public class AdminMapperTests {
 		
 		mapper.deleteImageAll(bookId);
 		
+		
+	}
+	*/	
+	
+	/* 지정 상품 이미지 정보 얻기 */
+	@Test
+	public void getAttachInfoTest() {
+		
+		int bookId = 49147;
+		
+		List<AttachImageVO> list = mapper.getAttachInfo(bookId);
+		
+		System.out.println("list : " + list);
 		
 	}	
 	
