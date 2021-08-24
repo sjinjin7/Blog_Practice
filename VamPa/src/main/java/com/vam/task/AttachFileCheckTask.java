@@ -39,7 +39,7 @@ public class AttachFileCheckTask {
 		
 	}	
 	
-	@Scheduled(cron="0 * * * * *")
+	//@Scheduled(cron="0 * * * * *")
 	public void checkFiles() throws Exception{
 		//System.out.println("File Check .......");
 		//System.out.println("==============================");

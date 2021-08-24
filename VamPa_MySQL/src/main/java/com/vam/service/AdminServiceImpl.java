@@ -116,6 +116,8 @@ public class AdminServiceImpl implements AdminService{
 
 		log.info("goodsDelete..........");
 		
+		adminMapper.deleteImageAll(bookId);	
+		
 		return adminMapper.goodsDelete(bookId);
 	}		
 	
@@ -123,9 +125,7 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<AttachImageVO> getAttachInfo(int bookId) {
 		
-		log.info("getAttachInfo........");
-		
-		adminMapper.deleteImageAll(bookId);		
+		log.info("getAttachInfo........");	
 		
 		return adminMapper.getAttachInfo(bookId);
 	}		

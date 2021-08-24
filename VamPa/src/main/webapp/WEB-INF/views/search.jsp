@@ -47,20 +47,13 @@
 				<a href="/main"><img src="resources/img/mLogo.png"></a>
 			</div>
 			<div class="search_area">
-                	<div class="search_wrap">
-                		<form id="searchForm" action="/search" method="get">
+				    <div class="search_wrap">
+                		<form id="searchForm" action="/admin/goodsManage" method="get">
                 			<div class="search_input">
-                				<select>
-                					<option selected="selected">책 제목</option>
-                					<option>작가</option>
-                				</select>
-                				<input type="text" name="keyword">
-                				<%-- 
                     			<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
                     			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
                     			<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
                     			<input type="hidden" name="type" value="G">
-                    			 --%>
                     			<button class='btn search_btn'>검 색</button>                				
                 			</div>
                 		</form>
@@ -91,6 +84,9 @@
 		</div>
 		<div class="content_area">
 			<h1>content area</h1>
+			<div>
+				${list}
+			</div>
 		</div>
 		<!-- Footer 영역 -->
 		<div class="footer_nav">

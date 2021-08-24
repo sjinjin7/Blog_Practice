@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.vam.mapper.BookMapper;
 import com.vam.model.AttachImageVO;
+import com.vam.model.BookVO;
+import com.vam.model.Criteria;
 
 import lombok.extern.log4j.Log4j;
 
@@ -24,6 +26,25 @@ public class BookServiceImpl implements BookService {
 		log.info("getAttachList()........");
 		
 		return bookMapper.getAttachList(bookId);
+		
+	}
+
+	/* 상품 검색 */
+	@Override
+	public List<BookVO> getGoodsList(Criteria cri) {
+		
+		log.info("getGoodsList().......");
+		
+		return bookMapper.getGoodsList(cri);
+	}
+
+	/* 사품 총 갯수 */
+	@Override
+	public int goodsGetTotal(Criteria cri) {
+		
+		log.info("goodsGetTotal().......");
+		
+		return bookMapper.goodsGetTotal(cri);
 		
 	}
 
