@@ -7,11 +7,30 @@
 	<!-- criteria(검색조건) -->
 	<sql id="criteria">
 
-		    <if test="keyword != null">
-		    
-				where (bookName like concat ('%', #{keyword}, '%'))
-			    
-		    </if>
+	  	<trim prefix="where (" suffix=")" prefixOverrides="AND">
+	  		<foreach item="type" collection="typeArr">
+	  			<trim prefix="AND">
+	  				<choose>
+	  					<when test="type == 'A'.toString()">
+	  						<trim prefixOverrides="or">
+			  					<foreach collection="authorArr" item="authorId">
+			  						<trim prefix="or">
+			  							a.authorId = #{authorId}
+			  						</trim>
+			  					</foreach>  						
+	  						</trim>
+	
+	  					</when>
+	  					<when test="type == 'C'.toString()">
+	  						a.cateCode like concat ('%', #{cateCode}, '%')
+	  					</when>  					
+	  					<when test="type == 'T'.toString()">
+	  						bookName like concat ('%', #{keyword}, '%')
+	  					</when>  					
+	  				</choose>
+	  			</trim>
+	  		</foreach>
+	  	</trim>
 	
 	</sql>
 
@@ -41,6 +60,13 @@
   		
 		<include refid="criteria"></include>
 		
-	</select>			
+	</select>		
+	
+	<!-- 작가 id 리스트 요청 -->
+	<select id="getAuthorIdList" resultType="String">
+	
+		select authorid from vam_author where authorname like concat ('%', #{keyword}, '%')
+	
+	</select>		
 	
   </mapper>
