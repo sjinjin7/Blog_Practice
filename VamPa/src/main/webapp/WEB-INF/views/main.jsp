@@ -55,12 +55,6 @@
                 					<option value="A">작가</option>
                 				</select>
                 				<input type="text" name="keyword">
-                				<%-- 
-                    			<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
-                    			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
-                    			<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
-                    			<input type="hidden" name="type" value="G">
-                    			 --%>
                     			<button class='btn search_btn'>검 색</button>                				
                 			</div>
                 		</form>
