@@ -80,7 +80,7 @@
 			</div>
 			<div class="clearfix"></div>			
 		</div>
-		<div class="content_area">
+		
 
 		<div class="content_area">
 			<!-- 게시물 x -->
