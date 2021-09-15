@@ -39,7 +39,7 @@ public class BookServiceImpl implements BookService {
 		String type = cri.getType();
 		String[] typeArr = type.split("");
 		String[] authorArr = bookMapper.getAuthorIdList(cri.getKeyword());
-		
+		List<BookVO> list = null;
 		
 		if(type.equals("A") || type.equals("AC") || type.equals("AT") || type.equals("ACT")) {
 			if(authorArr.length == 0) {
@@ -51,9 +51,21 @@ public class BookServiceImpl implements BookService {
 			if(t.equals("A")) {
 				cri.setAuthorArr(authorArr);
 			}
-		}		
+		}	
 		
-		return bookMapper.getGoodsList(cri);
+		list = bookMapper.getGoodsList(cri);
+		
+		list.forEach(book -> {
+			
+			int bookId = book.getBookId();
+			
+			List<AttachImageVO> imageList = bookMapper.getAttachList(bookId);
+			
+			book.setImageList(imageList);
+			
+		});		
+		
+		return list;
 	}
 
 	/* 사품 총 갯수 */
