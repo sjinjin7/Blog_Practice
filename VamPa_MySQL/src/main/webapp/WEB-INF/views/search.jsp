@@ -55,6 +55,7 @@
                 					<option value="A">작가</option>
                 				</select>
                 				<input type="text" name="keyword" value="<c:out value="${pageMaker.cri.keyword}"/>">
+                				<input type="hidden" name="cateCode" value="<c:out value="${pageMaker.cri.cateCode}"/>">
                     			<button class='btn search_btn'>검 색</button>                				
                 			</div>
                 		</form>
@@ -171,6 +172,7 @@
 					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 					<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 					<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+					<input type="hidden" name="cateCode" value="<c:out value="${pageMaker.cri.cateCode}"/>">
 					<input type="hidden" name="type" value="${pageMaker.cri.type}">
 				</form>	
 

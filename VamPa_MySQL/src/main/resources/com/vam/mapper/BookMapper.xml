@@ -69,4 +69,19 @@
 	
 	</select>		
 	
+	<select id="getCateCode1" resultType="com.vam.model.CateVO">
+	
+		<![CDATA[
+			select * from vam_bcate where cateCode > 100000 and cateCode < 200000
+		]]>
+	</select>
+	
+	<select id="getCateCode2" resultType="com.vam.model.CateVO">
+	
+		<![CDATA[
+			select * from vam_bcate where cateCode > 100000 and cateCode < 200000
+		]]>
+	
+	</select>
+	
   </mapper>

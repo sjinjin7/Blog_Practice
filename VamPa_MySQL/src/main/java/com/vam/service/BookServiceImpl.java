@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.vam.mapper.BookMapper;
 import com.vam.model.AttachImageVO;
 import com.vam.model.BookVO;
+import com.vam.model.CateVO;
 import com.vam.model.Criteria;
 
 import lombok.extern.log4j.Log4j;
@@ -38,20 +39,26 @@ public class BookServiceImpl implements BookService {
 		
 		String type = cri.getType();
 		String[] typeArr = type.split("");
-		String[] authorArr = bookMapper.getAuthorIdList(cri.getKeyword());
+		String[] authorArr;
 		List<BookVO> list = null;
 		
-		if(type.equals("A") || type.equals("AC") || type.equals("AT") || type.equals("ACT")) {
-			if(authorArr.length == 0) {
-				return new ArrayList();
+		if(!type.equals("C")) {
+			
+			authorArr= bookMapper.getAuthorIdList(cri.getKeyword());
+			
+			if(type.equals("A") || type.equals("AC") || type.equals("AT") || type.equals("ACT")) {
+				if(authorArr.length == 0) {
+					return new ArrayList();
+				}
 			}
+			
+			for(String t : typeArr) {
+				if(t.equals("A")) {
+					cri.setAuthorArr(authorArr);
+				}
+			}					
+			
 		}
-		
-		for(String t : typeArr) {
-			if(t.equals("A")) {
-				cri.setAuthorArr(authorArr);
-			}
-		}	
 		
 		list = bookMapper.getGoodsList(cri);
 		
@@ -76,6 +83,24 @@ public class BookServiceImpl implements BookService {
 		
 		return bookMapper.goodsGetTotal(cri);
 		
+	}
+
+	/* 국내 카테고리 리스트 */
+	@Override
+	public List<CateVO> getCateCode1() {
+		
+		log.info("getCateCode1().........");
+		
+		return bookMapper.getCateCode1();
+	}
+
+	/* 외국 카테고리 리스트 */
+	@Override
+	public List<CateVO> getCateCode2() {
+		
+		log.info("getCateCode2().........");
+		
+		return bookMapper.getCateCode2();
 	}	
 
 	

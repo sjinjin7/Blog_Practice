@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.vam.model.BookVO;
-import com.vam.model.Criteria;
+import com.vam.model.CateVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -72,7 +71,7 @@ public class BookMapperTests {
 	*/
 
 	/* 검색 (동적 쿼리 적용) - 작가*/
-	
+	/*
 	@Test 
 	public void getGoodsListTest1() {
 		Criteria cri = new Criteria();
@@ -89,6 +88,7 @@ public class BookMapperTests {
 		int total = mapper.goodsGetTotal(cri);
 		
 	}
+	*/
 	
 	
 	/* 검색 (동적 쿼리 적용) - 책제목*/
@@ -186,6 +186,16 @@ public class BookMapperTests {
 		List<BookVO> resultList = mapper.getGoodsList(cri);
 	}
 	*/	
+	
+	@Test
+	public void getCateCode1() {
+		
+		
+		List<CateVO> cateList = mapper.getCateCode1();
+		
+		System.out.println(cateList);
+		
+	}
 	
 	
 }

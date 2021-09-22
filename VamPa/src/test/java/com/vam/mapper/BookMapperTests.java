@@ -113,7 +113,7 @@ public class BookMapperTests {
 	
 	
 	/* 검색 (동적 쿼리 적용) - 카테고리*/
-	/*
+	
 	@Test 
 	public void getGoodsListTest3() {
 		Criteria cri = new Criteria();
@@ -130,7 +130,7 @@ public class BookMapperTests {
 		
 		List<BookVO> list = mapper.getGoodsList(cri);
 	}
-	*/
+	
 	
 	
 	/* 검색 (동적 쿼리 적용) - 카테고리 + 작가 */
@@ -157,7 +157,7 @@ public class BookMapperTests {
 	
 	
 	/* 검색 (동적 쿼리 적용) - 카테고리 + 책 제목 */
-	
+	/*
 	@Test 
 	public void getGoodsListTest5() {
 		Criteria cri = new Criteria();
@@ -175,7 +175,7 @@ public class BookMapperTests {
 		List<BookVO> list = mapper.getGoodsList(cri);	
 		
 	}
-	
+	*/
 	
 	/* 검색 (동적 쿼리 적용) */
 	/*
