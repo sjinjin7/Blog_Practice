@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.vam.mapper.BookMapper;
 import com.vam.model.AttachImageVO;
 import com.vam.model.BookVO;
+import com.vam.model.CateFilterDTO;
 import com.vam.model.CateVO;
 import com.vam.model.Criteria;
 
@@ -101,6 +102,40 @@ public class BookServiceImpl implements BookService {
 		log.info("getCateCode2().........");
 		
 		return bookMapper.getCateCode2();
+	}
+
+	@Override
+	public List<CateFilterDTO> getCateInfoList(Criteria cri) {
+		
+		List<CateFilterDTO> filterInfoList = new ArrayList<CateFilterDTO>();
+		
+		String type = cri.getType();
+		String[] typeArr = type.split("");
+		String[] authorArr;
+		
+		for(String s : typeArr) {
+			
+			if(s.equals("A")) {
+				authorArr= bookMapper.getAuthorIdList(cri.getKeyword());
+				
+				
+				for(String t : typeArr) {
+					if(t.equals("A")) {
+						cri.setAuthorArr(authorArr);
+					}
+				}					
+			}
+		}
+		
+		String[] cateList = bookMapper.getCateList(cri);
+		
+		for(String cateCode : cateList) {
+			cri.setCateCode(cateCode);
+			CateFilterDTO filterInfo = bookMapper.getCateInfo(cri);
+			filterInfoList.add(filterInfo);
+		}
+		
+		return filterInfoList;
 	}	
 
 	

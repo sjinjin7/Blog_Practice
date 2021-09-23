@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.vam.model.CateVO;
+import com.vam.model.BookVO;
+import com.vam.model.Criteria;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -157,25 +158,27 @@ public class BookMapperTests {
 	
 	
 	/* 검색 (동적 쿼리 적용) - 카테고리 + 책 제목 */
-	/*
+	
 	@Test 
 	public void getGoodsListTest5() {
 		Criteria cri = new Criteria();
 		String type = "CT";
-		String keyword = "수정";
+		String keyword = "";
 		String catecode = "102001";
 		
 		cri.setType(type);
 		cri.setKeyword(keyword);
 		cri.setAuthorArr(mapper.getAuthorIdList(keyword));
 		cri.setCateCode(catecode);
+		cri.setPageNum(3);
+		cri.setAmount(10);
 		
 		System.out.println("cri : " + cri);		
 		
 		List<BookVO> list = mapper.getGoodsList(cri);	
 		
 	}
-	*/
+	
 	
 	
 	/* 검색 (동적 쿼리 적용) */
@@ -187,6 +190,8 @@ public class BookMapperTests {
 	}
 	*/	
 	
+	/* 메인페이지 네비 정보 */
+	/*
 	@Test
 	public void getCateCode1() {
 		
@@ -196,6 +201,96 @@ public class BookMapperTests {
 		System.out.println(cateList);
 		
 	}
+	*/
 	
+	/* 카테고리 리스트(책제목) */
+	/*
+	@Test
+	public void getCateFilterInfoTest1() {
+		
+		Criteria cri = new Criteria();
+		String type = "CT";
+		String keyword = "수정";
+		String catecode = "102001";
+		
+		cri.setType(type);
+		cri.setKeyword(keyword);
+		cri.setAuthorArr(mapper.getAuthorIdList(keyword));
+		cri.setCateCode(catecode);
+		
+		mapper.getCateList(cri);
+		
+		System.out.println("cri : " + cri);
+	}
+	*/
 	
+	/* 카테고리 리스트(작가) */
+	/*
+	@Test
+	public void getCateFilterInfoTest2() {
+		
+		Criteria cri = new Criteria();
+		String type = "AC";
+		String keyword = "유홍준";
+		//String keyword = "머스크";
+		String catecode = "102001";
+		
+		cri.setType(type);
+		cri.setKeyword(keyword);
+		cri.setAuthorArr(mapper.getAuthorIdList(keyword));
+		cri.setCateCode(catecode);
+		
+		int[] cateList = mapper.getCateList(cri);
+		
+		System.out.println("cri : " + cri);
+		System.out.println("cateList : " + cateList);
+	}
+	*/
+	
+	/* 카테고리 정보 */
+	/*
+	@Test
+	public void getCateInfoTest1() {
+		
+		
+		Criteria cri = new Criteria();
+		String type = "CT";
+		String keyword = "수정";
+		String catecode = "102001";
+		
+		cri.setType(type);
+		cri.setKeyword(keyword);
+		cri.setAuthorArr(mapper.getAuthorIdList(keyword));
+		cri.setCateCode(catecode);
+		
+		CateFilterDTO info = mapper.getCateInfo(cri);
+		
+		System.out.println("cri : " + cri);
+		System.out.println("info : " + info);
+		
+	}
+	*/
+	/*
+	@Test
+	public void getCateInfoTest1() {
+		
+		
+		Criteria cri = new Criteria();
+		String type = "AC";
+		String keyword = "유홍준";
+		//String keyword = "머스크";
+		String catecode = "102001";
+		
+		cri.setType(type);
+		cri.setKeyword(keyword);
+		cri.setAuthorArr(mapper.getAuthorIdList(keyword));
+		cri.setCateCode(catecode);
+		
+		CateFilterDTO info = mapper.getCateInfo(cri);
+		
+		System.out.println("cri : " + cri);
+		System.out.println("info : " + info);
+		
+	}
+	*/
 }

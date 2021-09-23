@@ -84,4 +84,68 @@
 	
 	</select>
 	
+	<select id="getCateList" resultType="String">
+	
+		select distinct cateCode from vam_book where 
+		<foreach item="type" collection="typeArr">		
+  				<choose>
+  					<when test="type == 'A'.toString()">
+  						<trim prefixOverrides="or">
+		  					<foreach collection="authorArr" item="authorId">
+		  						<trim prefix="or">
+		  							authorId = #{authorId}
+		  						</trim>
+		  					</foreach>  						
+  						</trim>
+  					</when>
+  					<when test="type == 'T'.toString()">
+  						bookName like concat ('%', #{keyword}, '%')
+  					</when>  					
+  				</choose>
+  		</foreach>
+	
+	</select>
+	
+	<select id="getCateInfo" resultType="com.vam.model.CateFilterDTO">
+	
+		select DISTINCT count(*) cateCount, a.cateCode, b.tier, b.cateName, b.cateParent from vam_book a left join vam_bcate b on a.cateCode = b.cateCode 
+		
+		where 
+
+		<foreach item="type" collection="typeArr">		
+  				<choose>
+  					<when test="type == 'A'.toString()">
+  					
+  						<trim prefix="(" suffix=")" prefixOverrides="or">
+  						
+		  					<foreach collection="authorArr" item="authorId">
+		  					
+		  						<trim prefix="or">
+		  						
+		  							authorId = #{authorId}
+		  							
+		  						</trim>
+		  						
+		  					</foreach>
+		  					  						
+  						</trim>
+  						
+  						and a.cateCode = #{cateCode}
+  						
+  					</when>
+  					
+  					<when test="type == 'T'.toString()">
+  					
+  						bookName like concat ('%', #{keyword}, '%') and a.cateCode = #{cateCode}
+  						 
+  					</when>
+  					  					
+  				</choose>
+  		</foreach>
+	
+	</select>
+	
+	
+	
+	
   </mapper>
