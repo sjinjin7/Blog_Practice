@@ -129,11 +129,15 @@ public class BookServiceImpl implements BookService {
 		
 		String[] cateList = bookMapper.getCateList(cri);
 		
+		String tempCateCode = cri.getCateCode();		
+		
 		for(String cateCode : cateList) {
 			cri.setCateCode(cateCode);
 			CateFilterDTO filterInfo = bookMapper.getCateInfo(cri);
 			filterInfoList.add(filterInfo);
 		}
+		
+		cri.setCateCode(tempCateCode);		
 		
 		return filterInfoList;
 	}	
