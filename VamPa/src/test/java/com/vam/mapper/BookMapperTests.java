@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.vam.model.BookVO;
+import com.vam.model.CateFilterDTO;
 import com.vam.model.Criteria;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -113,7 +114,7 @@ public class BookMapperTests {
 	
 	
 	/* 검색 (동적 쿼리 적용) - 카테고리*/
-	
+	/*
 	@Test 
 	public void getGoodsListTest3() {
 		Criteria cri = new Criteria();
@@ -130,7 +131,7 @@ public class BookMapperTests {
 		
 		List<BookVO> list = mapper.getGoodsList(cri);
 	}
-	
+	*/
 	
 	
 	/* 검색 (동적 쿼리 적용) - 카테고리 + 작가 */
@@ -185,5 +186,53 @@ public class BookMapperTests {
 		List<BookVO> resultList = mapper.getGoodsList(cri);
 	}
 	*/	
+	
+	/* 카테고리 정보 */
+	/*
+	@Test
+	public void getCateInfoTest1() {
+		
+		
+		Criteria cri = new Criteria();
+		String type = "CT";
+		String keyword = "test";
+		String catecode = "103003";
+		
+		cri.setType(type);
+		cri.setKeyword(keyword);
+		cri.setAuthorArr(mapper.getAuthorIdList(keyword));
+		cri.setCateCode(catecode);
+		
+		CateFilterDTO info = mapper.getCateInfo(cri);
+		
+		System.out.println("cri : " + cri);
+		System.out.println("info : " + info);
+		
+	}
+	*/
+	
+	
+	@Test
+	public void getCateInfoTest1() {
+		
+		
+		Criteria cri = new Criteria();
+		String type = "AC";
+		String keyword = "김난도";
+		//String keyword = "머스크";
+		String catecode = "103002";
+		
+		cri.setType(type);
+		cri.setKeyword(keyword);
+		cri.setAuthorArr(mapper.getAuthorIdList(keyword));
+		cri.setCateCode(catecode);
+		
+		CateFilterDTO info = mapper.getCateInfo(cri);
+		
+		System.out.println("cri : " + cri);
+		System.out.println("info : " + info);
+		
+	}
+		
 	
 }
