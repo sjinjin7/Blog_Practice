@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vam.mapper.AdminMapper;
 import com.vam.mapper.BookMapper;
 import com.vam.model.AttachImageVO;
 import com.vam.model.BookVO;
@@ -21,6 +22,9 @@ public class BookServiceImpl implements BookService {
 
 	@Autowired
 	private BookMapper bookMapper;
+	
+	@Autowired
+	private AdminMapper adminMapper;	
 	
 	/* 이미지 데이터 반환 */
 	@Override
@@ -142,6 +146,14 @@ public class BookServiceImpl implements BookService {
 		return filterInfoList;
 	}	
 
-	
+	@Override
+	public BookVO getGoodsInfo(int bookId) {
+		
+		BookVO goodsInfo = bookMapper.getGoodsInfo(bookId);
+		goodsInfo.setImageList(adminMapper.getAttachInfo(bookId));
+		
+		
+		return goodsInfo;
+	}	
 	
 }
