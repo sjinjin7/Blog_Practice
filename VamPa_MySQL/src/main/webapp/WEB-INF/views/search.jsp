@@ -28,7 +28,7 @@
     clear: both;
     display: table;
 }  	
-.filter_button_wrap button:not(:last-child) {
+.filter_button_wrap button:not(:first-child) {
     border-right: none;
 } 
 .filter_button:hover {

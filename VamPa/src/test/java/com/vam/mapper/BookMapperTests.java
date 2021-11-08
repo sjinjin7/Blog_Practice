@@ -211,7 +211,7 @@ public class BookMapperTests {
 	}
 	*/
 	
-	
+	/*
 	@Test
 	public void getCateInfoTest1() {
 		
@@ -233,6 +233,20 @@ public class BookMapperTests {
 		System.out.println("info : " + info);
 		
 	}
+	*/
+	
+	/* 상품 정보 */
+	@Test
+	public void getGoodsInfo() {
+		
+		BookVO goodsInfo = mapper.getGoodsInfo(26);
+		System.out.println("===========================");
+		System.out.println(goodsInfo);
+		System.out.println("===========================");
+		
+	}
+	
+	
 		
 	
 }
