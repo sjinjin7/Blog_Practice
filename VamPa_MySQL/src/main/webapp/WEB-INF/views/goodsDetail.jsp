@@ -8,72 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Welcome BookMall</title>
-<link rel="stylesheet" href="../resources/css/search.css">
+<link rel="stylesheet" href="../resources/css/goodsDetail.css">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
-  
-  <style>
-  	.filter_button{
-  		background-color: #04AA6D;
-  		border: 1px solid green;
-  		color: white;
-  		padding: 10px 24px;
-  		cursor: pointer;
-  		float: left;
-  	} 
-.filter_button_wrap:after {
-    content: "";
-    clear: both;
-    display: table;
-}  	
-.filter_button_wrap button:not(:last-child) {
-    border-right: none;
-} 
-.filter_button:hover {
-    background-color: #3e8e41;
-}
-
-.search_filter {
-    width: 85%;
-    margin: auto;
-	margin-top: 30px;
-    margin-bottom: 50px;    
-} 
-.filter_button_wrap {
-    width: 100%;
-}
-
-.filter_button_wrap button {
-    width: 50%;
-} 
-.filter_active{
-	background-color: #045d3c;
-}
-.filter_content{
-	padding:20px 50px 20px 50px;
-	border: 1px solid gray;
-}
-
-.filter_content a:not(:first-child){
-	margin-left: 10px;
-}
-.filter_a{
-	display: block;
-}
-
-.filter_b{
-	display: none;
-}
-
- 
- 
-  	
-  	
-  
-  </style>  
-  
 </head>
 <body>
 
@@ -105,7 +44,7 @@
 		<div class="top_area">
 			<!-- 로고영역 -->
 			<div class="logo_area">
-				<a href="/main"><img src="resources/img/mLogo.png"></a>
+				<a href="/main"><img src="/resources/img/mLogo.png"></a>
 			</div>
 			<div class="search_area">
                 	<div class="search_wrap">
@@ -144,8 +83,77 @@
 		
 
 		<div class="content_area">
-
-			${goodsInfo}
+			<div class="line">
+			</div>			
+			<div class="content_top">
+				<div class="ct_left_area">
+					<div class="image_wrap" data-bookid="${goodsInfo.imageList[0].bookId}" data-path="${goodsInfo.imageList[0].uploadPath}" data-uuid="${goodsInfo.imageList[0].uuid}" data-filename="${goodsInfo.imageList[0].fileName}">
+						<img>
+					</div>				
+				</div>
+				<div class="ct_right_area">
+					<div class="title">
+						<h1>
+							${goodsInfo.bookName}
+						</h1>
+					</div>
+					<div class="line">
+					</div>
+					<div class="author">
+						 <span>
+						 	${goodsInfo.authorName} 지음
+						 </span>
+						 <span>|</span>
+						 <span>
+						 	${goodsInfo.publisher}
+						 </span>
+						 <span>|</span>
+						 <span class="publeyear">
+						 	${goodsInfo.publeYear}
+						 </span>
+					</div>
+					<div class="line">
+					</div>	
+					<div class="price">
+						<div class="sale_price">정가 : <fmt:formatNumber value="${goodsInfo.bookPrice}" pattern="#,### 원" /></div>
+						<div class="discount_price">
+							판매가 : <span class="discount_price_number"><fmt:formatNumber value="${goodsInfo.bookPrice - (goodsInfo.bookPrice*goodsInfo.bookDiscount)}" pattern="#,### 원" /></span> 
+							[<fmt:formatNumber value="${goodsInfo.bookDiscount*100}" pattern="###" />% 
+							<fmt:formatNumber value="${goodsInfo.bookPrice*goodsInfo.bookDiscount}" pattern="#,### 원" /> 할인]</div>							
+					</div>			
+					<div class="line">
+					</div>	
+					<div class="button">						
+						<div class="button_quantity">
+							주문수량
+							<input type="text" value="1">
+							<span>
+								<button>+</button>
+								<button>-</button>
+							</span>
+						</div>
+						<div class="button_set">
+							<a class="btn_cart">장바구니 담기</a>
+							<a class="btn_buy">바로구매</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="line">
+			</div>				
+			<div class="content_middle">
+				<div class="book_intro">
+					${goodsInfo.bookIntro}
+				</div>
+				<div class="book_content">
+					${goodsInfo.bookContents }
+				</div>
+			</div>
+			<div class="line">
+			</div>				
+			<div class="content_bottom">
+				리뷰
+			</div>
 
 
 		</div>
@@ -171,7 +179,7 @@
 			<div class="footer_container">
 				
 				<div class="footer_left">
-					<img src="resources/img/Logo.png">
+					<img src="/resources/img/Logo.png">
 				</div>
 				<div class="footer_right">
 					(주) VamBook    대표이사 : OOO
@@ -189,6 +197,38 @@
 	</div>
 </div>
 
+<script>
+// 검색 타입 selected
+$(document).ready(function(){
+	
+	/* 이미지 삽입 */
+	const bobj = $(".image_wrap");
+	
+	if(bobj.data("bookid")){
+		const uploadPath = bobj.data("path");
+		const uuid = bobj.data("uuid");
+		const fileName = bobj.data("filename");
+		
+		const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
+		
+		bobj.find("img").attr('src', '/display?fileName=' + fileCallPath);
+	} else {
+		bobj.find("img").attr('src', '/resources/img/goodsNoImage.png');
+	}	
+	
+	
+	/* publeyear */
+	const year = "${goodsInfo.publeYear}";
+	
+	let tempYear = year.substr(0,10);
+	
+	let yearArray = tempYear.split("-")
+	let publeYear = yearArray[0] + "년 " + yearArray[1] + "월 " + yearArray[2] + "일";
+	
+	$(".publeyear").html(publeYear);
+	
+});	
+</script>
 
 </body>
 </html>
