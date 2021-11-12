@@ -198,7 +198,6 @@
 </div>
 
 <script>
-// 검색 타입 selected
 $(document).ready(function(){
 	
 	/* 이미지 삽입 */
