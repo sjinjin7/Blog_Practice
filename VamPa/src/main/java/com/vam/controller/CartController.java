@@ -15,7 +15,10 @@ import com.vam.model.CartDTO;
 import com.vam.model.MemberVO;
 import com.vam.service.CartService;
 
+import lombok.extern.log4j.Log4j;
+
 @Controller
+@Log4j
 public class CartController {
 	
 	@Autowired
@@ -39,19 +42,22 @@ public class CartController {
 	 */
 	@PostMapping("/cart/add")
 	@ResponseBody
-	public int addCartPOST(CartDTO cart, HttpServletRequest request) {
+	public String addCartPOST(CartDTO cart, HttpServletRequest request) {
+		
+		log.info("addCartPOSt().........." + cart);
+		
 		// 로그인 체크
 		HttpSession session = request.getSession();
 		MemberVO mvo = (MemberVO)session.getAttribute("member");
 		if(mvo == null) {
-			return 5;
+			return 5 + "";
 		}
 		
 		// 카트 등록
 		
 		int result = cartService.addCart(cart);
 		
-		return result;
+		return result + "";
 	}
 
 }
