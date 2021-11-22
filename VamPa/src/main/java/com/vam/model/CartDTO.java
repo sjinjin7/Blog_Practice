@@ -22,6 +22,10 @@ public class CartDTO {
     private int salePrice;
     
     private int totalPrice;
+    
+    private int point;
+    
+    private int totaPoint;
 
 	public int getCartId() {
 		return cartId;
@@ -94,19 +98,29 @@ public class CartDTO {
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+	
+	public int getPoint() {
+		return point;
+	}
+
+	public int getTotaPoint() {
+		return totaPoint;
+	}	
     
 	public void initSaleTotal() {
 		this.salePrice = (int) (this.bookPrice * (1-this.bookDiscount));
 		this.totalPrice = this.salePrice*this.bookCount;
+		this.point = (int)(Math.floor(this.salePrice*0.05));
+		this.totalPrice =this.point * this.bookCount;
 	}
+
 
 	@Override
 	public String toString() {
 		return "CartDTO [cartId=" + cartId + ", memberId=" + memberId + ", bookId=" + bookId + ", bookCount="
 				+ bookCount + ", bookName=" + bookName + ", bookPrice=" + bookPrice + ", bookDiscount=" + bookDiscount
-				+ ", salePrice=" + salePrice + ", totalPrice=" + totalPrice + "]";
-	}
-	
-	
+				+ ", salePrice=" + salePrice + ", totalPrice=" + totalPrice + ", point=" + point + ", totaPoint="
+				+ totaPoint + "]";
+	}	
 	
 }

@@ -299,7 +299,7 @@
 								<td class="td_width_4 price_td">
 									<del>정가 : <fmt:formatNumber value="${ci.bookPrice}" pattern="#,### 원" /></del><br>
 									판매가 : <span class="red_color"><fmt:formatNumber value="${ci.salePrice}" pattern="#,### 원" /></span><br>
-									마일리지 : <span class="green_color"><fmt:formatNumber value="${ci.salePrice * 0.05}" pattern="#,###" /></span>
+									마일리지 : <span class="green_color"><fmt:formatNumber value="${ci.point}" pattern="#,###" /></span>
 								</td>
 								<td class="td_width_4 table_text_align_center">
 									<div class="table_text_align_center quantity_div">
