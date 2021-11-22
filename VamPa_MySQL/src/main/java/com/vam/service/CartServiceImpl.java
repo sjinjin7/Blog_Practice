@@ -1,20 +1,26 @@
 package com.vam.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.vam.mapper.CartMapper;
 import com.vam.model.CartDTO;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
 
 @Service
 @RequiredArgsConstructor
+@Log4j
 public class CartServiceImpl implements CartService{
 	
 	private final CartMapper cartMapper;
 	
 	@Override
 	public int addCart(CartDTO cart) {
+		
+		log.info("addCart().........");
 		
 		// 장바구니 데이터 체크
 		CartDTO checkCart = cartMapper.checkCart(cart);
@@ -31,5 +37,21 @@ public class CartServiceImpl implements CartService{
 		}
 		
 	}
+	
+	/* 장바구니 정보 리스트 */
+	@Override
+	public List<CartDTO> getCartList(String memberId) {
+			
+		log.info("getCartList().........");
+		
+		List<CartDTO> cart = cartMapper.getCart(memberId);
+		
+		for(CartDTO dto : cart) {
+			dto.initSaleTotal();
+		}
+		
+		return cart;
+	}	
+	
 
 }
