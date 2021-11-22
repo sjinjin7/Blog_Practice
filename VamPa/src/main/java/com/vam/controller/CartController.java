@@ -27,7 +27,9 @@ public class CartController {
 	/* 장바구니 페이지 이동 */
 	@GetMapping("/cart/{memberId}")
 	public String cartPageGET(@PathVariable("memberId") String memberId, Model model) {
-		model.addAttribute("member", memberId);
+		System.out.println(cartService.getCartList(memberId));
+		model.addAttribute("cartInfo", cartService.getCartList(memberId));
+		
 		return "/cart";
 	}	
 	
