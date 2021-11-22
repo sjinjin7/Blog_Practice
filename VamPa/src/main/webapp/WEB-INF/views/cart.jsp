@@ -180,7 +180,7 @@
 		.total_wrap td{
 			width : 50%;
 		}
-		.totalPrice_span{
+		.finalTotalPrice_span{
 			color: #854A72;
 			font-size: 17px;
 			font-weight: bold;
@@ -194,6 +194,19 @@
 		    border: 1px dotted #d1c7c7;
 		    margin: 5px 0 5px 0;		
 		}
+		.input_size_20{
+			width:20px;
+			height:20px;
+		}
+		.all_check_input{
+			margin: 18px 0 18px 18px;
+		}
+		.all_chcek_span{
+			padding-left: 8px;
+	    	font-size: 20px;
+	    	font-weight: bold;		
+		}
+
  </style>
 </head>
 <body>
@@ -272,6 +285,10 @@
 			<!-- 장바구니 가격 합계 -->
 			<!-- cartInfo -->
 			<div class="content_totalCount_section">
+				<!-- 체크박스 전체 여부 -->
+				<div class="all_check_input_div">
+					<input type="checkbox" class="all_check_input input_size_20" checked="checked"><span class="all_chcek_span">전체선택</span>
+				</div>
 				
 				<table class="subject_table">
 					<caption>표 제목 부분</caption>
@@ -293,7 +310,15 @@
 					<tbody>
 						<c:forEach items="${cartInfo}" var="ci">
 							<tr>
-								<td class="td_width_1"></td>
+								<td class="td_width_1 table_text_align_center cart_info_td" > 
+									<input type="checkbox" class="indibidual_cart_checkbox input_size_20" checked="checked">
+									<input type="hidden" class="individual_bookPrice_input" value="${ci.bookPrice}">
+									<input type="hidden" class="individual_salePrice_input" value="${ci.salePrice}">
+									<input type="hidden" class="individual_bookCount_input" value="${ci.bookCount}">
+									<input type="hidden" class="individual_totalPrice_input" value="${ci.salePrice * ci.bookCount}">
+									<input type="hidden" class="individual_point_input" value="${ci.point}">
+									<input type="hidden" class="individual_totalPoint_input" value="${ci.totalPoint}">
+								</td>
 								<td class="td_width_2"></td>
 								<td class="td_width_3">${ci.bookName}</td>
 								<td class="td_width_4 price_td">
@@ -329,11 +354,19 @@
 								<table>
 									<tr>
 										<td>총 상품 가격</td>
-										<td>1111원</td>
+										<td>
+											<span class="totalPrice_span">70000</span> 원
+										</td>
 									</tr>
 									<tr>
+										<td>배송비</td>
+										<td>
+											<span class="delivery_price">3000</span>원
+										</td>
+									</tr>									
+									<tr>
 										<td>총 주문 상품수</td>
-										<td>10개</td>
+										<td><span class="totalKind_span"></span>종 <span class="totalCount_span"></span>권</td>
 									</tr>
 								</table>
 							</td>
@@ -358,7 +391,7 @@
 												<strong>총 결제 예상 금액</strong>
 											</td>
 											<td>
-												<span class="totalPrice_span">70000</span> 원
+												<span class="finalTotalPrice_span">70000</span> 원
 											</td>
 										</tr>
 									</tbody>
@@ -452,9 +485,95 @@ $(document).ready(function(){
 		bobj.find("img").attr('src', '/resources/img/goodsNoImage.png');
 	}	
 	
+	/* totalInfo(가격, 권수, 종류, 포인트) 셋팅 */
+	setTotalInfo($(".cart_info_td"));
+	
+
+	
 });	
 
+/* 체크여부에따른 종합 정보 변화 */
+$(".indibidual_cart_checkbox").on("change", function(){
+	/* totalInfo(가격, 권수, 종류, 포인트) 셋팅 */
+	setTotalInfo($(".cart_info_td"));
+});
 
+/* 체크박스 전체 선택 */
+$(".all_check_input").on("click", function(){
+
+	/* 체크박스 체크/해제 */
+	if($(".all_check_input").prop("checked")){
+		$(".indibidual_cart_checkbox").attr("checked", true);
+	} else{
+		$(".indibidual_cart_checkbox").attr("checked", false);
+	}
+	
+	/* 종합정보 세팅 */
+	setTotalInfo($(".cart_info_td"));
+	
+});
+
+
+
+
+
+
+
+
+
+/* 총 주문 정보 세팅(배송비, 총 가격, 마일리지, 물품 수, 종류) */
+function setTotalInfo(cartObj){
+	
+	let totalPrice = 0;				// 총 가격
+	let totalCount = 0;				// 총 갯수
+	let totalKind = 0;				// 총 종류
+	let totalPoint = 0;				// 총 마일리지
+	let deliveryPrice = 0;		// 배송비
+	let finalTotalPrice = 0; 		// 최종 가격(총 가격 + 배송비)
+
+	
+	cartObj.each(function(index, element){
+		
+		if($(element).find(".indibidual_cart_checkbox").is(":checked") === true){	//체크여부
+			// 총 가격
+			totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
+			// 총 갯수
+			totalCount += parseInt($(element).find(".individual_bookCount_input").val());
+			// 총 종류
+			totalKind += 1;
+			// 총 마일리지
+			totalPoint += parseInt($(element).find(".individual_totalPoint_input").val());			
+		}
+
+	});
+	
+	
+	/* 배송비 결정 */
+	if(totalPrice >= 30000){
+		deliveryPrice = 0;
+	} else if(totalPrice == 0){
+		deliveryPrice = 0;
+	} else {
+		deliveryPrice = 3000;	
+	}
+	
+		finalTotalPrice = totalPrice + deliveryPrice;
+	
+	/* ※ 세자리 컴마 Javscript Number 객체의 toLocaleString() */
+	
+	// 총 가격
+	$(".totalPrice_span").text(totalPrice.toLocaleString());
+	// 총 갯수
+	$(".totalCount_span").text(totalCount);
+	// 총 종류
+	$(".totalKind_span").text(totalKind);
+	// 총 마일리지
+	$(".totalPoint_span").text(totalPoint.toLocaleString());
+	// 배송비
+	$(".delivery_price").text(deliveryPrice);	
+	// 최종 가격(총 가격 + 배송비)
+	$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());		
+}
 	
 </script>
 
