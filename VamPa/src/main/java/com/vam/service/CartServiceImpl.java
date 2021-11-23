@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.vam.mapper.BookMapper;
 import com.vam.mapper.CartMapper;
+import com.vam.model.AttachImageVO;
 import com.vam.model.CartDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,8 @@ import lombok.extern.log4j.Log4j;
 public class CartServiceImpl implements CartService{
 
 	private final CartMapper cartMapper;
+	
+	private final BookMapper bookMapper;
 	
 	@Override
 	public int addCart(CartDTO cart) {
@@ -47,7 +51,14 @@ public class CartServiceImpl implements CartService{
 		List<CartDTO> cart = cartMapper.getCart(memberId);
 		
 		for(CartDTO dto : cart) {
+			/* 종합 정보 초기화 */
 			dto.initSaleTotal();
+			/* 이미지 정보 얻기 */
+			int bookId = dto.getBookId();
+			
+			List<AttachImageVO> imageList = bookMapper.getAttachList(bookId);
+			
+			dto.setImageList(imageList);
 		}
 		
 		return cart;

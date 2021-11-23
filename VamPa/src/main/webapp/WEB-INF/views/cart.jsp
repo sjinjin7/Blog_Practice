@@ -206,6 +206,18 @@
 	    	font-size: 20px;
 	    	font-weight: bold;		
 		}
+		
+		/* 이미지 */
+		.image_wrap{
+			width: 100%;
+			height: 100%;
+		}
+		.image_wrap img{
+		    max-width: 85%;
+		    height: auto;
+		    display: block;		
+		}
+		
 
  </style>
 </head>
@@ -319,7 +331,12 @@
 									<input type="hidden" class="individual_point_input" value="${ci.point}">
 									<input type="hidden" class="individual_totalPoint_input" value="${ci.totalPoint}">
 								</td>
-								<td class="td_width_2"></td>
+								<!-- 상품 이미지 -->
+								<td class="td_width_2">
+									<div class="image_wrap" data-bookid="${ci.imageList[0].bookId}" data-path="${ci.imageList[0].uploadPath}" data-uuid="${ci.imageList[0].uuid}" data-filename="${ci.imageList[0].fileName}">
+										<img>
+									</div>									
+								</td>
 								<td class="td_width_3">${ci.bookName}</td>
 								<td class="td_width_4 price_td">
 									<del>정가 : <fmt:formatNumber value="${ci.bookPrice}" pattern="#,### 원" /></del><br>
@@ -488,7 +505,24 @@ $(document).ready(function(){
 	/* totalInfo(가격, 권수, 종류, 포인트) 셋팅 */
 	setTotalInfo($(".cart_info_td"));
 	
-
+	/* 이미지 삽입 */
+	$(".image_wrap").each(function(i, obj){
+		
+		const bobj = $(obj);
+		
+		if(bobj.data("bookid")){
+			const uploadPath = bobj.data("path");
+			const uuid = bobj.data("uuid");
+			const fileName = bobj.data("filename");
+			
+			const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
+			
+			$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
+		} else {
+			$(this).find("img").attr('src', '/resources/img/goodsNoImage.png');
+		}
+		
+	});
 	
 });	
 
