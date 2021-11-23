@@ -64,6 +64,12 @@ public class CartServiceImpl implements CartService{
 		return cart;
 	}
 
+	@Override
+	public int modifyCount(CartDTO cart) {
+		
+		return cartMapper.modifyCount(cart);
+	}
+
 	
 	
 }
