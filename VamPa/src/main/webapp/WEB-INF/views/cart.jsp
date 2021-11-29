@@ -330,6 +330,7 @@
 									<input type="hidden" class="individual_totalPrice_input" value="${ci.salePrice * ci.bookCount}">
 									<input type="hidden" class="individual_point_input" value="${ci.point}">
 									<input type="hidden" class="individual_totalPoint_input" value="${ci.totalPoint}">
+									<input type="hidden" class="individual_bookId_input" value="${ci.bookId}">
 								</td>
 								<!-- 상품 이미지 -->
 								<td class="td_width_2">
@@ -435,7 +436,7 @@
 			</div>
 			<!-- 구매 버튼 영역 -->
 			<div class="content_btn_section">
-				<a>주문하기</a>
+				<a class="order_btn">주문하기</a>
 			</div>
 			
 
@@ -449,6 +450,10 @@
 			<form action="/cart/delete" method="post" class="quantity_delete_form">
 				<input type="hidden" name="cartId" class="delete_cartId">
 				<input type="hidden" name="memberId" value="${cartInfo[0].memberId}">
+			</form>			
+			<!-- 주문 form -->
+			<form action="/order/${member.memberId}" method="get" class="order_form">
+
 			</form>			
 
 
@@ -572,7 +577,7 @@ function setTotalInfo(cartObj){
 	let totalCount = 0;				// 총 갯수
 	let totalKind = 0;				// 총 종류
 	let totalPoint = 0;				// 총 마일리지
-	let deliveryPrice = 0;		// 배송비
+	let deliveryPrice = 0;			// 배송비
 	let finalTotalPrice = 0; 		// 최종 가격(총 가격 + 배송비)
 
 	
@@ -647,6 +652,27 @@ $(".delete_btn").on("click", function(e){
 	const cartId = $(this).data("cartid");
 	$(".delete_cartId").val(cartId);
 	$(".quantity_delete_form").submit();
+});
+	
+
+/* 주문 페이지 이동 */	
+$(".order_btn").on("click", function(){
+	let orderNumber = 0;
+	let form_contents ='';
+	$(".cart_info_td").each(function(index, element){
+		
+		
+		if($(element).find(".indibidual_cart_checkbox").is(":checked") === true){	//체크여부
+			let bookId = $(element).find(".individual_bookId_input").val();
+			let bookCount = $(element).find(".individual_bookCount_input").val();
+			let bookId_input = "<input name='orders[" + index + "].bookId' type='hidden' value='" + bookId + "'>";
+			form_contents += bookId_input;
+			let bookCount_input = "<input name='orders[" + index + "].bookCount' type='hidden' value='" + bookCount + "'>";
+			form_contents += bookCount_input;
+		}
+	});
+	$(".order_form").html(form_contents);
+	$(".order_form").submit();
 });
 	
 </script>
