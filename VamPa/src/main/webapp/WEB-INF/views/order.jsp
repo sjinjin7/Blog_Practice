@@ -8,5 +8,7 @@
 </head>
 <body>
 	<h1>주문 페이지</h1>
+	<div>${orderList}</div>
+	<div>${memberInfo}</div>
 </body>
 </html>

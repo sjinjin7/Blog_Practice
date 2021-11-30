@@ -3,6 +3,7 @@ package com.vam.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,22 +11,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.vam.model.MemberVO;
 import com.vam.model.OrderRequestWrapper;
+import com.vam.service.MemberService;
+import com.vam.service.OrderService;
 
 @Controller
 public class OrderController {
 
+	@Autowired
+	private OrderService orderService;
+	
+	@Autowired
+	private MemberService memberService;
+	
+	
 	@GetMapping("/order/{memberId}")
-	public String orderPgaeGET(@PathVariable("memberId") String memberId, OrderRequestWrapper orw, Model model, HttpServletRequest request) {
+	public String orderPgaeGET(@PathVariable("memberId") String memberId, OrderRequestWrapper orw, Model model) {
 		
-		//단축키 shift alt l
-		HttpSession session = request.getSession();
+		System.out.println("memberId : " + memberId);
+		System.out.println("orders : " + orw.getOrders());
 		
-		MemberVO mv = (MemberVO)session.getAttribute("member");
-		
-		String id = mv.getMemberId();
-		
-		model.addAttribute("orderList", 0);
-		model.addAttribute("memberInfo", 0);
+		model.addAttribute("orderList", orderService.getGoodsInfo(orw.getOrders()));
+		model.addAttribute("memberInfo", memberService.getMemberInfo(memberId));
 		
 		
 		return "/order";

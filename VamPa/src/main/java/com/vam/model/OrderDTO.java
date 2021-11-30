@@ -121,9 +121,10 @@ public class OrderDTO {
 
 	@Override
 	public String toString() {
-		return "CartDTO [memberId=" + memberId + ", bookId=" + bookId + ", bookCount="
-				+ bookCount + ", bookName=" + bookName + ", bookPrice=" + bookPrice + ", bookDiscount=" + bookDiscount
-				+ ", salePrice=" + salePrice + ", totalPrice=" + totalPrice + ", point=" + point + ", totalPoint="
-				+ totalPoint + ", imageList=" + imageList + "]";
+		return "OrderDTO [memberId=" + memberId + ", bookId=" + bookId + ", bookCount=" + bookCount + ", bookName="
+				+ bookName + ", bookPrice=" + bookPrice + ", bookDiscount=" + bookDiscount + ", salePrice=" + salePrice
+				+ ", totalPrice=" + totalPrice + ", point=" + point + ", totalPoint=" + totalPoint + ", imageList="
+				+ imageList + "]";
 	}
+	
 }
