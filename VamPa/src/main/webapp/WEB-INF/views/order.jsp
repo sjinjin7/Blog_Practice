@@ -70,6 +70,7 @@
     //background-color: yellow;
     min-height: 700px;
     padding-right: 350px;
+    position: relative;
  }
  table{
  	border-collapse: collapse;
@@ -201,6 +202,64 @@ height: 110px;
     text-align: left;
     color: #333333;
     padding: 8px 15px;
+}
+/* 주문 종합 정보 */
+.total_info_div{
+	position:absolute;
+	top: 0;
+	right : 0;
+	width : 300px;
+	border : 1px solid #333;
+	border-top-width:2px;	
+	
+}
+.total_info_price_div{
+	width: 90%;
+    margin: auto;
+	position: relative;
+}
+.total_info_div ul{
+	list-style: none;
+}
+.total_info_div li{
+	text-align: right;
+	margin-top:10px;
+}
+.price_span_label{
+	float: left;
+}
+.price_total_li{
+	border-top: 1px solid #ddd;
+	padding-top: 20px;
+}
+.strong_red{
+	color: red;
+}
+.total_price_red{
+	font-size: 25px;
+}
+.total_price_label{
+	margin-top: 5px;
+}
+.point_li{
+    padding: 15px;
+    border-top: 1px solid #ddd;
+    margin: 10px -15px 0;
+}
+.total_info_btn_div{
+	border-top: 1px solid #ddd;
+    text-align: center;
+    padding: 15px 20px;
+}
+.order_btn{
+    display: inline-block;
+    font-size: 21px;
+    line-height: 50px;
+    width: 200px;
+    height: 50px;
+    background-color: #365fdd;
+    color: #fff;
+    font-weight: bold;
 }
 
  </style>
@@ -404,6 +463,42 @@ height: 110px;
 					</table>
 				</div>
 				<!-- 주문 최종 정보 -->
+				<div class="total_info_div">
+					<!-- 가격 종합 정보 -->
+					<div class="total_info_price_div">
+						<ul>
+							<li>
+								<span class="price_span_label">상품 금액</span>
+								<span>100000원</span>
+							</li>
+							<li>
+								<span class="price_span_label">배송비</span>
+								<span>100000원</span>
+							</li>
+																					<li>
+								<span class="price_span_label">할인금액</span>
+								<span>100000원</span>
+							</li>
+							<li class="price_total_li">
+								<strong class="price_span_label total_price_label">최종 결제 금액</strong>
+								<strong class="strong_red">
+									<span class="total_price_red">
+										1500000원
+									</span>
+								</strong>
+							</li>
+							<li class="point_li">
+								<span class="price_span_label">적립예정 포인트</span>
+								<span>7960원</span>
+							</li>
+						</ul>
+					</div>
+					<!-- 버튼 영역 -->
+					<div class="total_info_btn_div">
+						<a class="order_btn">결제하기</a>
+					</div>
+				</div>
+				
 			</div>
 			
 
