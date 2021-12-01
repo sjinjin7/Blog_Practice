@@ -24,6 +24,7 @@ public class OrderServiceImpl implements OrderService{
 		for(OrderRequestDTO ord : orders) {
 			OrderDTO goodsInfo = orderMapper.getGoodsInfo(ord.getBookId());
 			goodsInfo.setBookCount(ord.getBookCount());
+			goodsInfo.initSaleTotal();
 			result.add(goodsInfo);
 		}
 		

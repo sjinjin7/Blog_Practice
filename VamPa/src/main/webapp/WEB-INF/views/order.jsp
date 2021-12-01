@@ -71,6 +71,9 @@
     min-height: 700px;
     padding-right: 350px;
  }
+ table{
+ 	border-collapse: collapse;
+ }
  
  /* 사용자 정보  */
  .memberInfo_table{
@@ -131,7 +134,38 @@
 		.addressInfo_input_div_2 input{
 			padding: 6px 5px;
 		}
-		
+
+/* 주문상품 정보 */
+.orderGoods_div{
+	margin-top:30px;
+}
+
+.goods_subject_table{
+	font-size: 14px;
+    line-height: 20px;
+    width: 100%;
+    text-align: center; 
+}
+.goods_subject_table th{
+	text-align: center;
+    color: #333;
+    border-bottom: 1px solid #e7e7e7;
+    border-top: 2px solid #3084d9;
+    background: #f4f9fd;
+    padding: 2px 0;	 
+}
+.goods_table{
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.goods_table tr{
+height: 110px;
+}
+.goods_table_price_td{
+	text-align: center;
+}
+
 
  </style>
 </head>
@@ -275,8 +309,46 @@
 				</div>
 				<!-- 주문상품 -->
 				<div class="orderGoods_div">
-					<table>
-						<caption></caption>
+					<!-- 상품 종류 -->
+					<div class="goods_kind_div">
+						주문상품<span class="goods_kind_div_kind"></span>종 <span class="goods_kind_div_count"></span>개
+					</div>
+					<!-- 상품 테이블 -->
+					<table class="goods_subject_table">
+						<colgroup>
+							<col width="15%">
+							<col width="45%">
+							<col width="40%">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>이미지</th>
+								<th>상품 정보</th>
+								<th>판매가</th>
+							</tr>
+						</tbody>
+					</table>
+					<table class="goods_table">
+						<colgroup>
+							<col width="15%">
+							<col width="45%">
+							<col width="40%">
+						</colgroup>					
+						<tbody>
+							<c:forEach items="${orderList}" var="ol">
+								<tr>
+									<td></td>
+									<td>${ol.bookName}</td>
+									<td class="goods_table_price_td">
+										${ol.salePrice}원 | 수량 ${ol.bookCount}개
+										<br>${ol.totalPrice}원
+										<br>[${ol.totalPoint}원P]
+										
+									</td>
+								</tr>							
+							</c:forEach>
+
+						</tbody>
 					</table>
 				</div>				
 				<!-- 포인트 사용 -->
