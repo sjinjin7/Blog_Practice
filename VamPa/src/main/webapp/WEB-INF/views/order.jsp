@@ -139,7 +139,11 @@
 .orderGoods_div{
 	margin-top:30px;
 }
-
+.goods_kind_div{
+	font-size: 25px;
+    line-height: 35px;
+    font-weight: bold;
+}
 .goods_subject_table{
 	font-size: 14px;
     line-height: 20px;
@@ -157,6 +161,7 @@
 .goods_table{
 	font-size: 14px;
 	line-height: 20px;
+	border-bottom: 1px solid #e7e7e7;
 }
 
 .goods_table tr{
@@ -165,7 +170,38 @@ height: 110px;
 .goods_table_price_td{
 	text-align: center;
 }
-
+/* 포인트 영역 */
+.point_div{
+	margin-top: 30px;
+}
+.point_div_subject{
+	font-size: 25px;
+    line-height: 35px;
+    font-weight: bold;
+}
+.point_table{
+	border-color: #ddd;
+    border-spacing: 0;
+    border-top: 1px solid #363636;
+    border-bottom: 1px solid #b6b6b6;
+}
+.point_table th{
+	border-color: #ddd;
+    vertical-align: top;
+    text-align: center;
+    color: #333333;
+    background: #fbfbfb;
+    text-indent: 0;
+    padding: 12px 5px 12px 20px;
+    font-size: 15px;
+    line-height: 20px;
+}
+.point_table_td{
+	border-color: #ddd;
+    text-align: left;
+    color: #333333;
+    padding: 8px 15px;
+}
 
  </style>
 </head>
@@ -352,6 +388,21 @@ height: 110px;
 					</table>
 				</div>				
 				<!-- 포인트 사용 -->
+				<div class="point_div">
+					<div class="point_div_subject">포인트 사용</div>
+					<table class="point_table">
+						<colgroup>
+							<col width="25%">
+							<col width="*">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>포인트 사용</th>
+								<td>${memberInfo.point}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 				<!-- 주문 최종 정보 -->
 			</div>
 			
