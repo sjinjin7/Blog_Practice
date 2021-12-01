@@ -67,7 +67,7 @@
  
  /* ===== */
  .content_main{
-    background-color: yellow;
+    //background-color: yellow;
     min-height: 700px;
     padding-right: 350px;
  }
@@ -83,11 +83,54 @@
  	padding : 12px;
  	text-align: left;
  }
- /* 주문 상품 정보 */
- .orderGoods_div{
- 	margin-top: 15px;
+ /* 사용자 주소 정보 */
+ .addressInfo_div{
+ 	margin-top: 30px;
  }
+ .addressInfo_input_div_wrap{
+ 	border-bottom: 1px solid #f3f3f3;
+ 	height: 225px;
+ }
+.address_btn {
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 50%;
+}
 
+.address_btn:hover{
+	background-color: #777;
+}
+.addressInfo_button_div::after{
+	content:'';
+	display:block;
+	clear:both;
+}
+		.addressInfo_input_div{
+			padding:12px;
+			text-align: left;
+			display: none;
+			line-height: 40px;
+		}
+		.addressInfo_input_div th{
+			border-color: transparent;
+		    background-color: transparent;		
+		}
+		.addressInfo_input_div th{
+			padding : 12px 5px 12px 20px;
+			vertical-align: top;
+		}
+		.addressInfo_input_div td{
+			padding : 8px 12px;
+		}		
+		.addressInfo_input_div_2 input{
+			padding: 6px 5px;
+		}
 		
 
  </style>
@@ -176,11 +219,64 @@
 					</table>
 				</div>
 				<!-- 배송 정보 -->
-
+				<div class="addressInfo_div">
+					<div class="addressInfo_button_div">
+						<button class="address_btn address_btn_1" onclick="showAdress('1')" style="background-color: #3c3838;">상용자 정보 주소록</button>
+						<button class="address_btn address_btn_2" onclick="showAdress('2')">직접 입력</button>
+					</div>
+					<div class="addressInfo_input_div_wrap">
+						<div class="addressInfo_input_div addressInfo_input_div_1" style="display: block">
+							<table>
+								<colgroup>
+									<col width="25%">
+									<col width="*">
+								</colgroup>
+								<tbody>
+									<tr>
+										<th>이름</th>
+										<td>
+											${memberInfo.memberName}
+										</td>
+									</tr>
+									<tr>
+										<th>주소</th>
+										<td>
+											${memberInfo.memberAddr1} ${memberInfo.memberAddr2}<br>${memberInfo.memberAddr3}
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="addressInfo_input_div addressInfo_input_div_2">
+							<table>
+								<colgroup>
+									<col width="25%">
+									<col width="*">
+								</colgroup>
+								<tbody>
+									<tr>
+										<th>이름</th>
+										<td>
+											<input>
+										</td>
+									</tr>
+									<tr>
+										<th>주소</th>
+										<td>
+											<input><br>
+											<input><br>
+											<input>
+										</td>
+									</tr>
+								</tbody>
+							</table>						
+						</div>
+					</div>
+				</div>
 				<!-- 주문상품 -->
 				<div class="orderGoods_div">
 					<table>
-						<caption>주문 상품 정보</caption>
+						<caption></caption>
 					</table>
 				</div>				
 				<!-- 포인트 사용 -->
@@ -232,6 +328,23 @@
 
 <script>
 
+
+
+/* 주소입력란 버튼 동작(숨김, 등장) */
+function showAdress(className){
+	/* 컨텐츠 동작 */
+		/* 모두 숨기기 */
+			$(".addressInfo_input_div").css('display', 'none');
+		/* 컨텐츠 보이기 */
+			$(".addressInfo_input_div_" + className).css('display', 'block');
+	/* 버튼 색상 변경 */
+		/* 모든 색상 동일 */
+			$(".address_btn").css('backgroundColor', '#555');
+		/* 지정 색상 변경 */
+			$(".address_btn_"+className).css('backgroundColor', '#3c3838');
+			
+			
+}
 	
 </script>
 
