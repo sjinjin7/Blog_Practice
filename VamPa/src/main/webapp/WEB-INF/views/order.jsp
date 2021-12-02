@@ -272,6 +272,16 @@ height: 110px;
     color: #fff;
     font-weight: bold;
 }
+		/* 이미지 */
+		.image_wrap{
+			width: 100%;
+			height: 100%;
+		}
+		.image_wrap img{
+		    max-width: 85%;
+		    height: auto;
+		    display: block;		
+		}
 
  </style>
  <!-- 다음주소 -->
@@ -445,7 +455,11 @@ height: 110px;
 						<tbody>
 							<c:forEach items="${orderList}" var="ol">
 								<tr>
-									<td></td>
+									<td>
+										<div class="image_wrap" data-bookid="${ol.imageList[0].bookId}" data-path="${ol.imageList[0].uploadPath}" data-uuid="${ol.imageList[0].uuid}" data-filename="${ol.imageList[0].fileName}">
+											<img>
+										</div>
+									</td>
 									<td>${ol.bookName}</td>
 									<td class="goods_table_price_td">
 										${ol.salePrice}원 | 수량 ${ol.bookCount}개
@@ -559,6 +573,29 @@ height: 110px;
 
 <script>
 
+$(document).ready(function(){
+	
+	/* 이미지 삽입 */
+	$(".image_wrap").each(function(i, obj){
+		
+		const bobj = $(obj);
+		
+		if(bobj.data("bookid")){
+			const uploadPath = bobj.data("path");
+			const uuid = bobj.data("uuid");
+			const fileName = bobj.data("filename");
+			
+			const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
+			
+			$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
+		} else {
+			$(this).find("img").attr('src', '/resources/img/goodsNoImage.png');
+		}
+		
+	});	
+	
+	
+});
 
 
 /* 주소입력란 버튼 동작(숨김, 등장) */
