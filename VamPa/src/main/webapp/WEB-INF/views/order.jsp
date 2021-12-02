@@ -214,6 +214,18 @@ height: 110px;
     color: #333333;
     padding: 8px 15px;
 }
+.order_point_input_btn{
+	vertical-align: middle;
+    display: inline-block;
+    border: 1px solid #aaa;
+    width: 60px;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    color: #555;
+    cursor: pointer;
+    font-size: 12px;
+}
 /* 주문 종합 정보 */
 .total_info_div{
 	position:absolute;
@@ -282,6 +294,8 @@ height: 110px;
 		    height: auto;
 		    display: block;		
 		}
+		
+		
 
  </style>
  <!-- 다음주소 -->
@@ -484,7 +498,12 @@ height: 110px;
 						<tbody>
 							<tr>
 								<th>포인트 사용</th>
-								<td>${memberInfo.point}</td>
+								<td>
+									${memberInfo.point} <input class="order_point_input" value="0">원 
+									<a class="order_point_input_btn order_point_input_btn_N" data-state="N">모두사용</a>
+									<a class="order_point_input_btn order_point_input_btn_Y" data-state="Y" style="display: none;">사용취소</a>
+									
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -613,6 +632,47 @@ function showAdress(className){
 			
 			
 }
+
+/* 포인트 입력 */
+//0 이상 & 최대 포인트 수 이하
+$(".order_point_input").on("propertychange change keyup paste input", function(){
+	const maxPoint = parseInt('${memberInfo.point}');
+	let inputValue = parseInt($(this).val());
+	if(inputValue < 0){
+		$(this).val(0);
+	} else if(inputValue > maxPoint){
+		$(this).val(maxPoint);
+	}
+});
+
+
+/* 포인트 모두사용 취소 버튼 
+ * Y: 모두사용 상태 / N : 모두 취소 상태
+ */
+$(".order_point_input_btn").on("click", function(){
+	const maxPoint = parseInt('${memberInfo.point}');
+	
+	let state = $(this).data("state");
+	
+	if(state == 'N'){
+		console.log("n동작");
+		/* 모두사용 */
+		//값 변경
+		$(".order_point_input").val(maxPoint);
+		//글 변경
+		$(".order_point_input_btn_Y").css("display", "inline-block");
+		$(".order_point_input_btn_N").css("display", "none");
+	} else if(state == 'Y'){
+		console.log("y동작");
+		/* 취소 */
+		//값 변경
+		$(".order_point_input").val(0);
+		//글 변경
+		$(".order_point_input_btn_Y").css("display", "none");
+		$(".order_point_input_btn_N").css("display", "inline-block");		
+	}	
+});
+
 
 /* 다음 주소 연동 */
 function execution_daum_address(){
