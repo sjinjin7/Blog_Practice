@@ -8,11 +8,11 @@ public class OrderRequestDTO {
     
     private int orderItemId;
     
-    private int orderId;
+    private String orderId;
     
     private int bookPrice;
     
-    private int bookDiscount;
+    private double bookDiscount;
     
     private int savePoint;
     
@@ -47,11 +47,11 @@ public class OrderRequestDTO {
 		this.orderItemId = orderItemId;
 	}
 
-	public int getOrderId() {
+	public String getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(int orderId) {
+	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
 
@@ -63,11 +63,11 @@ public class OrderRequestDTO {
 		this.bookPrice = bookPrice;
 	}
 
-	public int getBookDiscount() {
+	public double getBookDiscount() {
 		return bookDiscount;
 	}
 
-	public void setBookDiscount(int bookDiscount) {
+	public void setBookDiscount(double bookDiscount) {
 		this.bookDiscount = bookDiscount;
 	}
 
