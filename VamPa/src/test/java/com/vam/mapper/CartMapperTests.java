@@ -104,4 +104,17 @@ public class CartMapperTests {
 	
 	}
 	*/
+	
+	@Test
+	public void deleteOrderCart() {
+		String memberId = "admin";
+		int bookId = 23;
+		
+		CartDTO dto = new CartDTO();
+		dto.setMemberId(memberId);
+		dto.setBookId(bookId);
+		
+		mapper.deleteOrderCart(dto);
+		
+	}
 }

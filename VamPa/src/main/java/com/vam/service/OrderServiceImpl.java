@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vam.mapper.BookMapper;
+import com.vam.mapper.CartMapper;
 import com.vam.mapper.MemberMapper;
 import com.vam.mapper.OrderMapper;
 import com.vam.model.AttachImageVO;
 import com.vam.model.BookVO;
+import com.vam.model.CartDTO;
 import com.vam.model.MemberVO;
 import com.vam.model.OrderDTO;
 import com.vam.model.OrderRequestDTO;
@@ -30,6 +32,9 @@ public class OrderServiceImpl implements OrderService{
 	
 	@Autowired
 	private MemberMapper memberMapper;
+	
+	@Autowired
+	private CartMapper cartMapper;
 
 	@Override
 	public List<OrderDTO> getGoodsInfo(List<OrderRequestDTO> orders) {
@@ -108,6 +113,14 @@ public class OrderServiceImpl implements OrderService{
 					orderMapper.deductStock(book);
 				}
 				
+		//장바구니 제거
+			for(OrderRequestDTO ord : orw.getOrders()) {
+				CartDTO dto = new CartDTO();
+				dto.setMemberId(orw.getMemberId());
+				dto.setBookId(ord.getBookId());
+				
+				cartMapper.deleteOrderCart(dto);
+			}
 		
 	}
 	
