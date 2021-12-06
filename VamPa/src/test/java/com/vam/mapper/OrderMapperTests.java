@@ -1,13 +1,16 @@
 package com.vam.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.vam.model.BookVO;
-import com.vam.model.MemberVO;
+import com.vam.model.OrderRequestDTO;
+import com.vam.model.OrderRequestWrapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -27,7 +30,7 @@ public class OrderMapperTests {
 	*/
 	
 	/* enrollOrder 테스트 */
-	/*
+	
 	@Test
 	public void enrollOrderTest() {
 		
@@ -46,7 +49,7 @@ public class OrderMapperTests {
 		
 		orw.setOrders(orders);
 		
-		orw.setOrderId("2021_test");
+		orw.setOrderId("2021_test1");
 		orw.setAddressee("test");
 		orw.setMemberId("admin");
 		orw.setMemberAddr1("test");
@@ -61,7 +64,7 @@ public class OrderMapperTests {
 		
 		
 	}
-	*/
+	
 	
 	/*
 	@Test
@@ -97,7 +100,7 @@ public class OrderMapperTests {
 	}
 	*/
 	
-	
+	/*
 	@Test
 	public void deductStockTest() {
 		BookVO book = new BookVO();
@@ -107,6 +110,6 @@ public class OrderMapperTests {
 		
 		mapper.deductStock(book);
 	}
-	
+	*/
 	
 }

@@ -11,6 +11,9 @@ public interface OrderMapper {
 	/* 주문 상품 정보 */	
 	public OrderDTO getGoodsInfo(int bookId);
 	
+	/* 주문 상품 정보 */	
+	public OrderRequestDTO getOrderInfo(int bookId);
+	
 	/* 주문 테이블 등록 */
 	public int enrollOrder(OrderRequestWrapper orw);
 	
