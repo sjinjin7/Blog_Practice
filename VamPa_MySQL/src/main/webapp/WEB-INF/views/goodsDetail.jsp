@@ -123,8 +123,9 @@
 						</div>
 						<div>
 							적립 포인트 : <span class="point_span"></span>원
-						</div>							
-					</div>			
+						</div>														
+					</div>
+	
 					<div class="line">
 					</div>	
 					<div class="button">						
@@ -159,6 +160,11 @@
 				리뷰
 			</div>
 
+			<!-- 주문 form -->
+			<form action="/order/${member.memberId}" method="get" class="order_form">
+				<input type="hidden" name="orders[0].bookId" value="${goodsInfo.bookId}">
+				<input type="hidden" name="orders[0].bookCount" value="">
+			</form>			
 
 		</div>
 		<!-- Footer 영역 -->
@@ -202,6 +208,7 @@
 </div>
 
 <script>
+// 검색 타입 selected
 $(document).ready(function(){
 	
 	/* 이미지 삽입 */
@@ -234,55 +241,62 @@ $(document).ready(function(){
 	let salePrice = "${goodsInfo.bookPrice - (goodsInfo.bookPrice*goodsInfo.bookDiscount)}"
 	let point = salePrice*0.05;
 	point = Math.floor(point);
-	$(".point_span").text(point);
+	$(".point_span").text(point);	
+	
 	
 });	
 
-// 수량 버튼 조작
-let quantity = $(".quantity_input").val();
-$(".plus_btn").on("click", function(){
-	$(".quantity_input").val(++quantity);
-});
-$(".minus_btn").on("click", function(){
-	if(quantity > 1){
-		$(".quantity_input").val(--quantity);	
-	}
-});	
-
-// 장바구니 추가 버튼
-	const data = {
-			memberId : '${member.memberId}',
-			bookId : '${goodsInfo.bookId}',
-			bookCount : ''
-	}
-
-	
-$(".btn_cart").on("click", function(e){
-	data.bookCount = $(".quantity_input").val();
-	$.ajax({
-		url: '/cart/add',
-		type: 'POST',
-		data: data,
-		success: function(result){
-			cartAlert(result);
+	// 수량 버튼 조작
+	let quantity = $(".quantity_input").val();
+	$(".plus_btn").on("click", function(){
+		$(".quantity_input").val(++quantity);
+	});
+	$(".minus_btn").on("click", function(){
+		if(quantity > 1){
+			$(".quantity_input").val(--quantity);	
 		}
-	})
-});
-
-function cartAlert(result){
-	if(result == '0'){
-		alert("장바구니에 추가를 하지 못하였습니다.");
-	} else if(result == '1'){
-		alert("장바구니에 추가되었습니다.");
-	} else if(result == '2'){
-		alert("장바구니에 이미 추가되어져 있습니다.");
-	} else if(result == '5'){
-		alert("로그인이 필요합니다.");	
+	});	
+	
+	// 장바구니 추가 버튼
+		const data = {
+				memberId : '${member.memberId}',
+				bookId : '${goodsInfo.bookId}',
+				bookCount : ''
+		}
+	
+		
+	$(".btn_cart").on("click", function(e){
+		data.bookCount = $(".quantity_input").val();
+		$.ajax({
+			url: '/cart/add',
+			type: 'POST',
+			data: data,
+			success: function(result){
+				cartAlert(result);
+			}
+		})
+	});
+	
+	function cartAlert(result){
+		if(result == '0'){
+			alert("장바구니에 추가를 하지 못하였습니다.");
+		} else if(result == '1'){
+			alert("장바구니에 추가되었습니다.");
+		} else if(result == '2'){
+			alert("장바구니에 이미 추가되어져 있습니다.");
+		} else if(result == '5'){
+			alert("로그인이 필요합니다.");	
+		}
 	}
-}
-
-
-
+	
+	
+	/* 바로구매 버튼 */
+	$(".btn_buy").on("click", function(){
+		let bookCount = $(".quantity_input").val();
+		$(".order_form").find("input[name='orders[0].bookCount']").val(bookCount);
+		$(".order_form").submit();
+	});
+	
 </script>
 
 </body>
