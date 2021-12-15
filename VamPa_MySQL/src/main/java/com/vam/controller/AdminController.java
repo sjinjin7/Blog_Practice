@@ -479,4 +479,11 @@ public class AdminController {
 	} // deleteFile()	
 	
 	
+	/* 주문 현황 페이지 */
+	@GetMapping("/orderList")
+	public String orderListGET() {
+		
+		return "/admin/orderList";
+	}
+	
 }

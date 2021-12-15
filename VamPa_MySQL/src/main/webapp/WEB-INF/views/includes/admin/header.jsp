@@ -20,7 +20,7 @@
                 <!-- 네비영역 -->
                 <div class="admin_navi_wrap">
 	              <ul>
-	                  <li >
+	                  <li>
 	                      <a class="admin_list_01" href="/admin/goodsEnroll">상품 등록</a>
 	                  </li>
 	                  <li>
@@ -34,6 +34,12 @@
 	                  </lI>
 	                  <lI>
 	                      <a class="admin_list_05">회원 관리</a>                            
-	                  </lI>                                                                                             
+	                  </lI>
+	                  <li>
+	                      <a class="admin_list_06" href="/admin/orderList">주문 현황</a>                            
+	                  </li>
 	              </ul>
                 </div>
+             </div>
+          </div>
+        </div>
