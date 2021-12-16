@@ -145,5 +145,16 @@
 		where rn > (#{pageNum} -1) * #{amount}
 		]]>
 	</select>	
+	
+	<!-- 상품 총 개수 -->
+	<select id="getOrderTotal" resultType="int">
+	
+		select count(*) from vam_order
+		
+	    <if test="keyword != null">
+	    	where memberId = #{keyword}
+	    </if>
+	
+	</select>		
 
   </mapper>

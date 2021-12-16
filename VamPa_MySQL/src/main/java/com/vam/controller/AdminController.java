@@ -38,6 +38,7 @@ import com.vam.model.AttachImageVO;
 import com.vam.model.AuthorVO;
 import com.vam.model.BookVO;
 import com.vam.model.Criteria;
+import com.vam.model.OrderRequestWrapper;
 import com.vam.model.PageDTO;
 import com.vam.service.AdminService;
 import com.vam.service.AuthorService;
@@ -481,7 +482,17 @@ public class AdminController {
 	
 	/* 주문 현황 페이지 */
 	@GetMapping("/orderList")
-	public String orderListGET() {
+	public String orderListGET(Criteria cri, Model model) {
+		
+		List<OrderRequestWrapper> list = adminService.getOrderList(cri);
+		
+		if(!list.isEmpty()) {
+			model.addAttribute("list", list);
+			model.addAttribute("pageMaker", new PageDTO(cri, adminService.getOrderTotal(cri)));
+		} else {
+			model.addAttribute("listCheck", "empty");
+		}
+		
 		
 		return "/admin/orderList";
 	}
