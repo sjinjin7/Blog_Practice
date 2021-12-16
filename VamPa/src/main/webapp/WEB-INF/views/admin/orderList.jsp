@@ -23,6 +23,13 @@
                 		<!-- 게시물 O -->
                 		<c:if test="${listCheck != 'empty'}">
 	                    	<table class="order_table">
+	                    	<colgroup>
+	                    		<col width="21%">
+	                    		<col width="20%">
+	                    		<col width="20%">
+	                    		<col width="20%">
+	                    		<col width="19%%">
+	                    	</colgroup>
 	                    		<thead>
 	                    			<tr>
 	                    				<td class="th_column_1">주문 번호</td>
@@ -40,7 +47,7 @@
 	                    			<td><c:out value="${list.orderState}"/></td>
 	                    			<td>
 	                    				<c:if test="${list.orderState == '배송준비' }">
-	                    					<button>테스트</button>
+	                    					<button class="delete_btn" data-orderid="${list.orderId}">취소</button>
 	                    				</c:if>
 	                    			</td>
 	                    		</tr>
@@ -50,7 +57,7 @@
                 		<!-- 게시물 x -->
                 		<c:if test="${listCheck == 'empty'}">
                 			<div class="table_empty">
-                				등록된 작가가 없습니다.
+                				주문 현황이 없습니다.
                 			</div>
                 		</c:if>                    
 
@@ -103,7 +110,12 @@
 						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 					</form>
-                    	
+                    <form id="deleteFrom" action="/admin/orderCancle" method="post">
+                    	<input type="hidden" name="orderId">
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+                    </form>	
                 </div>
 				<%@include file="../includes/admin/footer.jsp" %>
 <script>
@@ -146,7 +158,14 @@ $(document).ready(function(){
 		
 	});
 	
-
+	$(".delete_btn").on("click", function(e){
+		e.preventDefault();
+		//console.log('동작');
+		let id = $(this).data("orderid");
+		//console.log(data);
+		$("#deleteFrom").find("input[name='orderId']").val(id);
+		$("#deleteFrom").submit();
+	});
 
 </script>
 

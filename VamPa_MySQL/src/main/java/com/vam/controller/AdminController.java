@@ -38,6 +38,7 @@ import com.vam.model.AttachImageVO;
 import com.vam.model.AuthorVO;
 import com.vam.model.BookVO;
 import com.vam.model.Criteria;
+import com.vam.model.OrderDeleteDTO;
 import com.vam.model.OrderRequestWrapper;
 import com.vam.model.PageDTO;
 import com.vam.service.AdminService;
@@ -496,5 +497,14 @@ public class AdminController {
 		
 		return "/admin/orderList";
 	}
+	
+	/* 주문삭제 */
+	@PostMapping("/orderCancle")
+	public String orderCanclePOST(OrderDeleteDTO dto) {
+		
+		adminService.orderCancle(dto.getOrderId());
+		
+		return "redirect:/admin/orderList?keyword=" + dto.getKeyword() + "&amount=" + dto.getAmount() + "&pageNum=" + dto.getPageNum();
+	}	
 	
 }

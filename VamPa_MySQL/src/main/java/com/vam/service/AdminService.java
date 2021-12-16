@@ -40,4 +40,7 @@ public interface AdminService {
 	/* 주문 총 갯수 */
 	public int getOrderTotal(Criteria cri);	
 	
+	/* 주문 취소 */
+	public int orderCancle(String orderId);		
+	
 }

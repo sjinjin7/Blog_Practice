@@ -141,6 +141,12 @@ public class AdminServiceImpl implements AdminService {
 	public int getOrderTotal(Criteria cri) {
 		
 		return adminMapper.getOrderTotal(cri);
+	}
+
+	@Override
+	public int orderCancle(String orderId) {
+		
+		return adminMapper.orderCancle(orderId);
 	}			
 	
 	

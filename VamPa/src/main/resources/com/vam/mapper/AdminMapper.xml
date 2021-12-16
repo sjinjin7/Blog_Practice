@@ -155,6 +155,11 @@
 	    	where memberId like '%'||#{keyword}||'%'
 	    </if>
 	
-	</select>		
+	</select>	
+	
+	<!-- 주문취소 -->
+	<update id="orderCancle">
+		update vam_order set orderState = '주문취소' where orderId = #{orderId}
+	</update>
 
   </mapper>
