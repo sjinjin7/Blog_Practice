@@ -1,14 +1,12 @@
 package com.vam.mapper;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.vam.model.AttachImageVO;
+import com.vam.model.Criteria;
 
 import lombok.extern.log4j.Log4j;
 
@@ -180,6 +178,7 @@ public class AdminMapperTests {
 	*/
 	
 	/* 지정 상품 이미지 정보 얻기 */
+	/*
 	@Test
 	public void getAttachInfoTest() {
 		
@@ -188,6 +187,20 @@ public class AdminMapperTests {
 		List<AttachImageVO> list = mapper.getAttachInfo(bookId);
 		
 		System.out.println("list : " + list);
+		
+	}*/
+	
+	
+	/* 주문 리스트 */
+	@Test
+	public void getOrderListTest() {
+		
+		String keyword = "admin";
+		Criteria cri = new Criteria();
+		cri.setKeyword(keyword);
+		
+		mapper.getOrderList(cri);
+		
 		
 	}
 	

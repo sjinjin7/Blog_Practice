@@ -118,5 +118,18 @@
 	
 	</select>		
 		
+	<!-- 주문 리스트 -->
+	<select id="getOrderList" resultType="com.vam.model.OrderRequestWrapper">
+		
+			select orderId, memberId, orderstate, orderdate
+		    from vam_order 
+		    <if test="keyword != null">
+		    	where memberId = #{keyword}
+		    </if>
+		    order by orderdate desc
+		    limit #{skip}, #{amount}		
+		
+	</select>
+	
 
   </mapper>

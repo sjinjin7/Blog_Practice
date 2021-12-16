@@ -126,4 +126,24 @@
 	
 	</select>
 
+	<!-- 주문 리스트 -->
+	<select id="getOrderList" resultType="com.vam.model.OrderRequestWrapper">
+		<![CDATA[
+		select * 
+		from(
+		    select rownum rn, orderId, memberId, orderstate, orderdate
+		    from vam_order
+		    where rownum <= #{pageNum} * #{amount} 
+		]]>    
+		<if test="keyword != null">
+			and memberId = #{keyword}
+		</if>
+		<![CDATA[
+		    
+		    order by orderdate desc
+		    )
+		where rn > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>	
+
   </mapper>

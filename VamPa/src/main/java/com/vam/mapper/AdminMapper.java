@@ -6,6 +6,7 @@ import com.vam.model.AttachImageVO;
 import com.vam.model.BookVO;
 import com.vam.model.CateVO;
 import com.vam.model.Criteria;
+import com.vam.model.OrderRequestWrapper;
 
 public interface AdminMapper {
 
@@ -41,5 +42,8 @@ public interface AdminMapper {
 	
 	/* 지정 상품 이미지 정보 얻기 */
 	public List<AttachImageVO> getAttachInfo(int bookId);
+	
+	/* 주문 상품 리스트 */
+	public List<OrderRequestWrapper> getOrderList(Criteria cri);	
 	
 }
