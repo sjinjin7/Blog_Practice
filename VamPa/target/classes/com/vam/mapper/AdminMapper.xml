@@ -136,7 +136,7 @@
 		    where rownum <= #{pageNum} * #{amount} 
 		]]>    
 		<if test="keyword != null">
-			and memberId = #{keyword}
+			and memberId like '%'||#{keyword}||'%'
 		</if>
 		<![CDATA[
 		    
@@ -152,7 +152,7 @@
 		select count(*) from vam_order
 		
 	    <if test="keyword != null">
-	    	where memberId = #{keyword}
+	    	where memberId like '%'||#{keyword}||'%'
 	    </if>
 	
 	</select>		

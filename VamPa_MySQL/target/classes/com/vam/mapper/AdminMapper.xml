@@ -124,7 +124,7 @@
 			select orderId, memberId, orderstate, orderdate
 		    from vam_order 
 		    <if test="keyword != null">
-		    	where memberId = #{keyword}
+		    	where memberId like concat('%',#{keyword}, '%')
 		    </if>
 		    order by orderdate desc
 		    limit #{skip}, #{amount}		
@@ -137,7 +137,7 @@
 		select count(*) from vam_order
 		
 	    <if test="keyword != null">
-	    	where memberId = #{keyword}
+	    	where memberId like concat('%',#{keyword}, '%')
 	    </if>
 	
 	</select>	

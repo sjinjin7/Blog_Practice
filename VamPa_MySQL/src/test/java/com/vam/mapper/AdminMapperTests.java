@@ -203,7 +203,7 @@ public class AdminMapperTests {
 	@Test
 	public void getOrderListTest() {
 		
-		String keyword = "admin";
+		String keyword = "";
 		
 		Criteria cri = new Criteria();
 		cri.setKeyword(keyword);

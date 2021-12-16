@@ -483,9 +483,9 @@ public class AdminController {
 	/* 주문 현황 페이지 */
 	@GetMapping("/orderList")
 	public String orderListGET(Criteria cri, Model model) {
-		
+		System.out.println("cri : " + cri);
 		List<OrderRequestWrapper> list = adminService.getOrderList(cri);
-		
+		System.out.println("list = " +list);
 		if(!list.isEmpty()) {
 			model.addAttribute("list", list);
 			model.addAttribute("pageMaker", new PageDTO(cri, adminService.getOrderTotal(cri)));

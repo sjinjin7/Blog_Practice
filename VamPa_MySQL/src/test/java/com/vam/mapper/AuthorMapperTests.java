@@ -41,15 +41,17 @@ public class AuthorMapperTests {
 	
 	
 	/* 작가 목록 테스트 */
-	/*
+	
 	@Test
 	public void authorGetList() {
 		
 		Criteria cri = new Criteria();
 		
 		cri.setAmount(10);
-		cri.setPageNum(3);
+		cri.setPageNum(1);
 		log.info("cri............." + cri);
+		String keywrod = "";
+		cri.setKeyword(keywrod);
 		
 		List<AuthorVO> list = mapper.authorGetList(cri);
 		log.info("list.........." + list);
@@ -57,7 +59,7 @@ public class AuthorMapperTests {
 		list.forEach(a -> log.info(list));
 		
 	}
-	*/
+	
 	
 	
 	/* 작가 수 테스트 */
@@ -111,6 +113,7 @@ public class AuthorMapperTests {
 	*/
 	
 	/* 작가 정보 삭제 */
+	/*
 	@Test
 	public void authorDeleteTest() {
 		
@@ -124,6 +127,6 @@ public class AuthorMapperTests {
 		}
 		
 	}
-	
+	*/
 	
 }
