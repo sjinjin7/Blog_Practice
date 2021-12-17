@@ -25,6 +25,9 @@ public class Criteria {
 	/* 카테고리 코드 */
 	private String cateCode;	
 	
+	/* bookId(댓글) */
+	private int bookId;
+	
 	/* Criteria 기본 생성자 */
 	public Criteria() {
 		this(1, 10);
@@ -100,13 +103,23 @@ public class Criteria {
 	public void setCateCode(String cateCode) {
 		this.cateCode = cateCode;
 	}
+	
+	
+
+	public int getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
+	}
 
 	@Override
 	public String toString() {
 		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", skip=" + skip + ", type=" + type
-				+ ", keyword=" + keyword + ", authorArr=" + Arrays.toString(authorArr) + ", cateCode=" + cateCode + "]";
+				+ ", keyword=" + keyword + ", authorArr=" + Arrays.toString(authorArr) + ", cateCode=" + cateCode
+				+ ", bookId=" + bookId + "]";
 	}
-	
 	
 	
 }

@@ -1,12 +1,16 @@
 package com.vam.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.vam.model.Criteria;
 import com.vam.model.ReplyDTO;
+import com.vam.model.UpdateReplyDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -15,19 +19,21 @@ public class ReplyMapperTests {
 	@Autowired
 	private ReplyMapper mapper;
 	
-	/*댓글 등록 테스트*/
+
+	
+	/* 댓글 리스트 */
 	@Test
-	public void enrollReplsyTest() {
+	public void getReplyListTest() {
 		
-		/* 댓글 세팅 */
-		ReplyDTO dto = new ReplyDTO();
-		dto.setMemberId("admin");
-		dto.setBookId(1);
-		dto.setContent("테스트 입니다.");
-		dto.setRating(1.5);
+		Criteria cri = new Criteria();
+		cri.setBookId(1);
 		
-		mapper.enrollReply(dto);
+		List<ReplyDTO> replyList = mapper.getReplyList(cri);
+		
+		System.out.println("result = " + replyList);
 		
 	}
+	
+
 	
 }
