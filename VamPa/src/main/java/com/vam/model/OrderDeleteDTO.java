@@ -2,6 +2,8 @@ package com.vam.model;
 
 public class OrderDeleteDTO {
 
+	private String memberId;
+	
 	private String orderId;
 	
 	private String keyword;
@@ -9,6 +11,16 @@ public class OrderDeleteDTO {
 	private int amount;
 	
 	private int pageNum;
+
+	
+	
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 
 	public String getOrderId() {
 		return orderId;
@@ -44,9 +56,11 @@ public class OrderDeleteDTO {
 
 	@Override
 	public String toString() {
-		return "OrderDeleteDTO [orderId=" + orderId + ", keyword=" + keyword + ", amount=" + amount + ", pageNum="
-				+ pageNum + "]";
+		return "OrderDeleteDTO [memberId=" + memberId + ", orderId=" + orderId + ", keyword=" + keyword + ", amount="
+				+ amount + ", pageNum=" + pageNum + "]";
 	}
+
+
 	
 	
 	

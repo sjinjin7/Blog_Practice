@@ -505,7 +505,7 @@ public class AdminController {
 	@PostMapping("/orderCancle")
 	public String orderCanclePOST(OrderDeleteDTO dto) {
 		
-		adminService.orderCancle(dto.getOrderId());
+		adminService.orderCancle(dto);
 		
 		return "redirect:/admin/orderList?keyword=" + dto.getKeyword() + "&amount=" + dto.getAmount() + "&pageNum=" + dto.getPageNum();
 	}

@@ -52,4 +52,20 @@
 	
 	</update>
 	
+	<!-- 주문 상품 정보(주문취소) -->
+	<select id="getOrderItemInfo" resultType="com.vam.model.OrderRequestDTO">
+	
+		select * from vam_orderItem
+		where orderId = #{orderId}
+	
+	</select>
+	
+	<!-- 주문 정보(주문 취소) -->
+	<select id="getOrder" resultType="com.vam.model.OrderRequestWrapper">
+	
+		select * from vam_order
+		where orderId = #{orderId}
+	
+	</select>	
+	
   </mapper>

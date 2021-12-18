@@ -19,97 +19,25 @@ public class OrderMapperTests {
 	@Autowired
 	private OrderMapper mapper; 
 	
-	/*
-	@Test
-	public void getGoodsInfoTest() {
-		
-		OrderDTO goodsInfo = mapper.getGoodsInfo(61);
-		
-		System.out.println(goodsInfo);
-	}
-	*/
+
 	
-	/* enrollOrder 테스트 */
-	
+	/* 주문 상품 정보(주문취소) */
 	@Test
-	public void enrollOrderTest() {
+	public void getOrderItemInfoTest() {
 		
-		OrderRequestWrapper orw = new OrderRequestWrapper();
-		List<OrderRequestDTO> orders = new ArrayList();
+		String orderId = "admin_2021120651";
 		
-		OrderRequestDTO ord = new OrderRequestDTO();
-		
-		ord.setBookId(61);
-		ord.setBookCount(5);
-		ord.setBookPrice(70000);
-		ord.setBookDiscount(0.1);
-		ord.initSaleTotal();
-		
-		
-		
-		orw.setOrders(orders);
-		
-		orw.setOrderId("2021_test1");
-		orw.setAddressee("test");
-		orw.setMemberId("admin");
-		orw.setMemberAddr1("test");
-		orw.setMemberAddr2("test");
-		orw.setMemberAddr3("test");
-		orw.setOrderState("배송중비");
-		orw.getOrderPriceInfo();
-		orw.setUsePoint(1000);
-		System.out.println(orw.getOrderId());
-		mapper.enrollOrder(orw);
-		System.out.println(orw.getOrderId());
-		
-		
+		System.out.println("result : " + mapper.getOrderItemInfo(orderId));
 	}
 	
-	
-	/*
+	/* 주문 정보(주문 취소) */
 	@Test
-	public void enrollOrderItemTest() {
+	public void getOrderInfoTest() {
+
+		String orderId = "admin_2021120651";
 		
-		OrderRequestDTO ord = new OrderRequestDTO();
-		
-		ord.setOrderId("2021_test");
-		ord.setBookId(61);
-		ord.setBookCount(5);
-		ord.setBookPrice(70000);
-		ord.setBookDiscount(0.1);
-				
-		ord.initSaleTotal();
-		
-		System.out.println(ord);
-		
-		System.out.println(ord.getOrderItemId());
-		mapper.enrollOrderItem(ord);
-		System.out.println(ord.getOrderItemId());
+		System.out.println("result : " + mapper.getOrder(orderId));
 		
 	}
-	*/
-	
-	/*
-	@Test
-	public void deductMoneyTest() {
-		MemberVO member = new MemberVO();
-		member.setMemberId("admin");
-		member.setMoney(500000);
-		member.setPoint(10000);
-		mapper.deductMoney(member);
-	}
-	*/
-	
-	/*
-	@Test
-	public void deductStockTest() {
-		BookVO book = new BookVO();
-		
-		book.setBookId(61);
-		book.setBookStock(77);
-		
-		mapper.deductStock(book);
-	}
-	*/
 	
 }

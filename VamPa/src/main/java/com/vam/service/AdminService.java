@@ -6,6 +6,7 @@ import com.vam.model.AttachImageVO;
 import com.vam.model.BookVO;
 import com.vam.model.CateVO;
 import com.vam.model.Criteria;
+import com.vam.model.OrderDeleteDTO;
 import com.vam.model.OrderRequestWrapper;
 
 public interface AdminService {
@@ -41,7 +42,7 @@ public interface AdminService {
 	public int getOrderTotal(Criteria cri);	
 	
 	/* 주문 취소 */
-	public int orderCancle(String orderId);	
+	public void orderCancle(OrderDeleteDTO dto);	
 
 	
 }
