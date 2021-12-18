@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vam.model.Criteria;
+import com.vam.model.PageDTO;
 import com.vam.model.ReplyCheckDTO;
 import com.vam.model.ReplyDTO;
 import com.vam.model.ReplyPageDTO;
@@ -43,7 +44,12 @@ public class ReplyController {
 	public ReplyPageDTO replyListPOST(Criteria cri) {
 		return replyService.replyList(cri);
 	}
+	
 	/* 댓글 수정 */
+	@PostMapping("/modify")
+	public void replyModifyPOST(ReplyDTO dto) {
+		replyService.updateReply(dto);
+	}
 	
 	/* 댓글 삭제 */
 	

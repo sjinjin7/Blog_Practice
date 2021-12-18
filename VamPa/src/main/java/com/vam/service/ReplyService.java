@@ -15,5 +15,8 @@ public interface ReplyService {
 	
 	/* 댓글 페이징 */
 	public ReplyPageDTO replyList(Criteria cri);
+
+	/* 댓글 수정 */
+	public int updateReply(ReplyDTO dto);
 	
 }
