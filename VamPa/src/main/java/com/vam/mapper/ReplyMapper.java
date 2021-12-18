@@ -33,4 +33,7 @@ public interface ReplyMapper {
 	/* 댓글 아이디 존재 체크 */
 	public Integer checkReply(ReplyCheckDTO dto);
 	
+	/* 댓글 한개 정보 */
+	public ReplyDTO getReply(ReplyDTO dto);
+	
 }

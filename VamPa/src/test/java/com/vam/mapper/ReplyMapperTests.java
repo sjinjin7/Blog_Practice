@@ -55,6 +55,19 @@ public class ReplyMapperTests {
 				
 		
 	}
+	
+	@Test
+	public void getReplyTest() {
+		
+		ReplyDTO dto = new ReplyDTO();
+		dto.setMemberId("admin");
+		dto.setBookId(3);
+		
+		ReplyDTO result = mapper.getReply(dto);
+		System.out.println(result);
+		
+	}
+	
 
 	
 }

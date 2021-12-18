@@ -72,5 +72,12 @@
 		where memberId = #{memberId} and bookId = #{bookId}
 	
 	</select>
+	
+	<select id="getReply" resultType="com.vam.model.ReplyDTO">
+	
+		select * from vam_reply
+		where memberId = #{memberId} and bookId = #{bookId}
+		
+	</select>
 
   </mapper>
