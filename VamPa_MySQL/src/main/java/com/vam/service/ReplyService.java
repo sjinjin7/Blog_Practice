@@ -1,7 +1,9 @@
 package com.vam.service;
 
+import com.vam.model.Criteria;
 import com.vam.model.ReplyCheckDTO;
 import com.vam.model.ReplyDTO;
+import com.vam.model.ReplyPageDTO;
 
 public interface ReplyService {
 	
@@ -9,6 +11,9 @@ public interface ReplyService {
 	public Integer checkReply(ReplyCheckDTO dto);	
 
 	/* 댓글 등록 */
-	public int enrollReply(ReplyDTO dto);		
+	public int enrollReply(ReplyDTO dto);	
+	
+	/* 댓글 페이징 */
+	public ReplyPageDTO replyList(Criteria cri);	
 	
 }

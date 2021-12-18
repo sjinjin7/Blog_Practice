@@ -1,12 +1,15 @@
 package com.vam.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vam.model.Criteria;
 import com.vam.model.ReplyCheckDTO;
 import com.vam.model.ReplyDTO;
+import com.vam.model.ReplyPageDTO;
 import com.vam.service.ReplyService;
 
 @RestController
@@ -34,6 +37,17 @@ public class ReplyController {
 	public void enrollReplyPOST(ReplyDTO dto) {
 		replyService.enrollReply(dto);
 	}
+	
+	/* 댓글 페이징 */
+	@PostMapping(value="/list", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ReplyPageDTO replyListPOST(Criteria cri) {
+		return replyService.replyList(cri);
+	}
+	/* 댓글 수정 */
+	
+	/* 댓글 삭제 */
+	
+	
 	
 
 }
