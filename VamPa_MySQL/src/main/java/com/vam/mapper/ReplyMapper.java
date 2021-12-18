@@ -3,6 +3,7 @@ package com.vam.mapper;
 import java.util.List;
 
 import com.vam.model.Criteria;
+import com.vam.model.ReplyCheckDTO;
 import com.vam.model.ReplyDTO;
 import com.vam.model.UpdateReplyDTO;
 
@@ -28,5 +29,8 @@ public interface ReplyMapper {
 	
 	/* 평점 평균 반영하기 */
 	public int updateRating(UpdateReplyDTO dto);	
+	
+	/* 댓글 아이디 존재 체크 */
+	public Integer checkReply(ReplyCheckDTO dto);	
 	
 }

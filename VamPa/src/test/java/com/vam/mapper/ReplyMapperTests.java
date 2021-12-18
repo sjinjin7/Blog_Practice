@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.vam.model.Criteria;
+import com.vam.model.ReplyCheckDTO;
 import com.vam.model.ReplyDTO;
 import com.vam.model.UpdateReplyDTO;
 
@@ -34,6 +35,26 @@ public class ReplyMapperTests {
 		
 	}
 	
+	
+	@Test
+	public void checkReplyTest() {
+		
+		ReplyCheckDTO dto = new ReplyCheckDTO();
+		dto.setBookId(8);
+		dto.setMemberId("admin");
+		
+		Integer result = mapper.checkReply(dto);
+		
+		
+		if(result == null) {
+			System.out.println("null임");
+		}
+		System.out.println("================================");
+		System.out.println("result : " + result);
+		System.out.println("================================");
+				
+		
+	}
 
 	
 }

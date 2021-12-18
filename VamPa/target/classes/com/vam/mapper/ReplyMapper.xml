@@ -65,5 +65,12 @@
 		where bookId = #{bookId}
 	
 	</update>
+	
+	<select id="checkReply" resultType="integer">
+	
+		select replyId from vam_reply 
+		where memberId = #{memberId} and bookId = #{bookId}
+	
+	</select>
 
   </mapper>
