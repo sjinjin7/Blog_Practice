@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.vam.mapper.ReplyMapper;
 import com.vam.model.ReplyCheckDTO;
+import com.vam.model.ReplyDTO;
 
 @Service
 public class ReplyServiceImpl implements ReplyService{
@@ -17,6 +18,13 @@ public class ReplyServiceImpl implements ReplyService{
 	public Integer checkReply(ReplyCheckDTO dto) {
 		
 		return replyMapper.checkReply(dto);
+	}
+
+	/* 댓글등록 */
+	@Override
+	public int enrollReply(ReplyDTO dto) {
+		
+		return replyMapper.enrollReply(dto);
 	}
 	
 	
