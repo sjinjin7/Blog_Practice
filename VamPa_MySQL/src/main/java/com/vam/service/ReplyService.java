@@ -19,4 +19,7 @@ public interface ReplyService {
 	/* 댓글 수정 */
 	public int updateReply(ReplyDTO dto);	
 	
+	/* 댓글 삭제 */
+	public int deleteReply(int replyId);		
+	
 }
