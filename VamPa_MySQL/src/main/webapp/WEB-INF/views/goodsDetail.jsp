@@ -13,6 +13,25 @@
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
+  <style type="text/css">
+  /* 리뷰쓰기 버튼 */
+  .reply_button_wrap{
+  	padding : 10px;
+  }
+  .reply_button_wrap button{
+	background-color: #365fdd;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 5px 12px;
+    cursor: pointer;  
+  }
+  .reply_button_wrap button:hover{
+  	background-color: #1347e7;
+  }
+  
+  
+  </style>
 </head>
 <body>
 
@@ -156,10 +175,12 @@
 			</div>
 			<div class="line">
 			</div>				
-			<div class="content_bottom">
-				<div class="reply_button_wrap">
-					<button>리뷰 쓰기</button>
-				</div>
+			<div class="content_bottom">				
+				<c:if test="${member != null}">
+					<div class="reply_button_wrap">
+						<button>리뷰 쓰기</button>
+					</div>
+				</c:if>
 			</div>
 
 			<!-- 주문 form -->
@@ -322,7 +343,7 @@ $(document).ready(function(){
 				} else if(result === '0'){
 					let popUrl = "/replyEnroll/" + memberId + "?bookId=" + bookId;
 					console.log(popUrl);
-					let popOption = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
+					let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
 					
 					window.open(popUrl,"리뷰 쓰기",popOption);					
 				}
