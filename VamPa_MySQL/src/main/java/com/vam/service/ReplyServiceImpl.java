@@ -18,18 +18,25 @@ public class ReplyServiceImpl implements ReplyService{
 	
 	/* 댓글 존재 체크 */
 	@Override
-	public Integer checkReply(ReplyCheckDTO dto) {
+	public String checkReply(ReplyCheckDTO dto) {
 		
-		return replyMapper.checkReply(dto);
-	}	
-	
+		Integer result = replyMapper.checkReply(dto);
+		
+		if(result == null) {
+			return "0";
+		} else {
+			return "1";
+		}
+		
+	}
+
 	/* 댓글등록 */
 	@Override
 	public int enrollReply(ReplyDTO dto) {
 		
 		return replyMapper.enrollReply(dto);
-	}	
-	
+	}
+
 	@Override
 	public ReplyPageDTO replyList(Criteria cri) {
 		ReplyPageDTO dto = new ReplyPageDTO();
@@ -38,24 +45,24 @@ public class ReplyServiceImpl implements ReplyService{
 		dto.setPageInfo(new PageDTO(cri, replyMapper.getReplyTotal(cri.getBookId())));
 		
 		return dto;
-	}	
-	
+	}
+
 	@Override
 	public int updateReply(ReplyDTO dto) {
 		
 		return replyMapper.updateReply(dto);
-	}	
-	
+	}
+
 	@Override
 	public int deleteReply(int replyId) {
 		
 		return replyMapper.deleteReply(replyId);
-	}	
-	
+	}
+
 	@Override
 	public ReplyDTO getReply(ReplyDTO dto) {
 		
 		return replyMapper.getReply(dto);
-	}	
+	}
 	
 }

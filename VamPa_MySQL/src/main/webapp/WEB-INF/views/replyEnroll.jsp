@@ -70,9 +70,9 @@
 		});
 		
 		/* 취소 버튼 */
-		$(".cancel_btn").on("click", function(e)){
+		$(".cancel_btn").on("click", function(e){
 			window.close();
-		}
+		});
 	
 	</script>
 </body>

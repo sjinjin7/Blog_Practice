@@ -18,9 +18,16 @@ public class ReplyServiceImpl implements ReplyService{
 	
 	/* 댓글 존재 체크 */
 	@Override
-	public Integer checkReply(ReplyCheckDTO dto) {
+	public String checkReply(ReplyCheckDTO dto) {
 		
-		return replyMapper.checkReply(dto);
+		Integer result = replyMapper.checkReply(dto);
+		
+		if(result == null) {
+			return "0";
+		} else {
+			return "1";
+		}
+		
 	}
 
 	/* 댓글등록 */

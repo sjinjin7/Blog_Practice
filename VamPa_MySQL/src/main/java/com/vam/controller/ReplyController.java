@@ -12,25 +12,24 @@ import com.vam.model.ReplyDTO;
 import com.vam.model.ReplyPageDTO;
 import com.vam.service.ReplyService;
 
+import lombok.extern.log4j.Log4j;
+
 @RestController
 @RequestMapping("/reply")
+@Log4j
 public class ReplyController {
 
 	@Autowired
 	private ReplyService replyService;
 	
+	/* 댓글 체크 */
+	/* memberId, bookId 파라미터 */
+	/* 존재 : 1 / 존재x : 0 */
 	@PostMapping("/check")
-	public String checkReplyPOST(ReplyCheckDTO dto) {
-		
-		Integer result = replyService.checkReply(dto);
-		
-		if(result == null) {
-			return "0";
-		} else {
-			return "1";
-		}
-		
-	}	
+	public String replyCheckPOST(ReplyCheckDTO dto) {
+		log.info("replyCheckPOST.........." + dto);
+		return replyService.checkReply(dto);
+	}
 	
 	/* 댓글 등록 */
 	@PostMapping("/enroll")
