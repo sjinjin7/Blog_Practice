@@ -36,6 +36,7 @@ public class ReplyController {
 	/* 댓글 등록 */
 	@PostMapping("/enroll")
 	public void enrollReplyPOST(ReplyDTO dto) {
+		System.out.println("/reply/enrol.........");
 		replyService.enrollReply(dto);
 	}
 	

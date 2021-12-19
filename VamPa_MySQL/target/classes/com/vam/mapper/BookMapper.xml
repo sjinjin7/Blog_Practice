@@ -153,7 +153,15 @@
 			left outer join vam_bcate c on a.catecode = c.catecode
 			where bookid = ${bookId}	
 	
-	</select>	
+	</select>
+	
+	<select id="getBookIdName" resultType="com.vam.model.BookVO">
+	
+		select bookId, bookName from vam_book 
+		where bookId = #{bookId}
+	
+	
+	</select>		
 	
 	
   </mapper>
