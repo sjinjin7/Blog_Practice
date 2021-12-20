@@ -257,7 +257,8 @@ a{
   	.content_bottom{
 		width: 100%;
 		min-height: 400px;
-	    background-color: #e7dbdb;  	
+/*   		margin : 9px 0 0 0;
+  		border-top : 1px solid #000;	 */    
   	}  	
 
 

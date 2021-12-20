@@ -2,6 +2,7 @@ package com.vam.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +41,7 @@ public class ReplyController {
 	}
 	
 	/* 댓글 페이징 */
-	@PostMapping(value="/list", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value="/list", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ReplyPageDTO replyListPOST(Criteria cri) {
 		return replyService.replyList(cri);
 	}
