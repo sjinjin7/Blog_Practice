@@ -111,6 +111,33 @@
     margin-bottom: 20px; 
   }
   
+  /* 리뷰 수정 삭제 버튼 */
+  .update_reply_btn{
+ 	font-weight: bold;
+    background-color: #b7b399;
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 5px 0 30px;
+    border-radius: 6px;
+    color: white; 
+    cursor: pointer;
+  }
+  .delete_reply_btn{
+ 	font-weight: bold;
+    background-color: #e7578f;
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 6px;
+    color: white; 
+  	cursor: pointer;
+  }
+  
   
   </style>
 </head>
@@ -270,13 +297,14 @@
 					
 				</div>
 				<ul class="reply_content_ul">
-				<!-- 
+<!-- 				
 					<li>
 						<div class="comment_wrap">
 							<div class="reply_top">
 								<span class="id_span">sjinjin7</span>
 								<span class="date_span">2021-10-11</span>
 								<span class="rating_span">평점 : <span class="rating_value_span">4</span>점</span>
+								<a class="update_reply_btn">수정</a><a class="delete_reply_btn">삭제</a>
 							</div>
 							<div class="reply_bottom">
 								<div class="reply_bottom_txt">
@@ -285,7 +313,7 @@
 							</div>
 						</div>
 					</li>
- 				-->
+ 				 -->
 				</ul>
 				<div class="repy_pageInfo_div">
 				<!-- 
@@ -527,7 +555,7 @@ $(document).ready(function(){
 
 			const list = obj.list;
 			const pf = obj.pageInfo;
-			
+			const userId = '${member.memberId}';
 			/* list */
 			let reply_list = '';
 			$(list).each(function(i,obj){
@@ -540,6 +568,9 @@ $(document).ready(function(){
 				reply_list += '<span class="date_span">'+ obj.regDate +'</span>';
 				/* 평점 */
 				reply_list += '<span class="rating_span">평점 : <span class="rating_value_span">'+ obj.rating +'</span>점</span>';
+				if(obj.memberId === userId){
+					reply_list += '<a class="update_reply_btn">수정</a><a class="delete_reply_btn">삭제</a>';
+				}
 				reply_list += '</div>'; //<div class="reply_top">
 				reply_list += '<div class="reply_bottom">';
 				reply_list += '<div class="reply_bottom_txt">'+ obj.content +'</div>';
