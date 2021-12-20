@@ -47,7 +47,7 @@ public class ReplyController {
 	}
 	
 	/* 댓글 수정 */
-	@PostMapping("/modify")
+	@PostMapping("/update")
 	public void replyModifyPOST(ReplyDTO dto) {
 		replyService.updateReply(dto);
 	}

@@ -544,6 +544,32 @@ $(document).ready(function(){
 			});				
 			
 	 });	
+		
+	/* 리뷰 수정 후 리뷰 리스트 초기화 */
+	let replyListInit = function(){
+		$.getJSON("/reply/list", cri , function(obj){
+			
+			makeReplyContent(obj);
+			
+		});		
+	}
+		
+	/* 리뷰 수정 버튼 */
+	
+	 $(document).on('click', '.update_reply_btn', function(e){
+			e.preventDefault();
+			let replyId = $(this).attr("href");
+			//console.log(replyId);
+			
+			let popUrl = "/replyUpdate?replyId=" + replyId + "&bookId=" + '${goodsInfo.bookId}' + "&memberId=" + '${member.memberId}';
+			console.log(popUrl);
+			let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
+			
+			window.open(popUrl,"리뷰 수정",popOption);			
+			
+			
+	 });		
+	/* 리뷰 삭제 버튼 */
 	
 	
 	/* 리뷰 태그 만들기 */
@@ -569,7 +595,7 @@ $(document).ready(function(){
 				/* 평점 */
 				reply_list += '<span class="rating_span">평점 : <span class="rating_value_span">'+ obj.rating +'</span>점</span>';
 				if(obj.memberId === userId){
-					reply_list += '<a class="update_reply_btn">수정</a><a class="delete_reply_btn">삭제</a>';
+					reply_list += '<a class="update_reply_btn" href="'+ obj.replyId +'">수정</a><a class="delete_reply_btn" href="'+ obj.replyId +'">삭제</a>';
 				}
 				reply_list += '</div>'; //<div class="reply_top">
 				reply_list += '<div class="reply_bottom">';

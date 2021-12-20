@@ -64,6 +64,12 @@ public class ReplyServiceImpl implements ReplyService{
 		
 		return replyMapper.getReply(dto);
 	}
+
+	@Override
+	public ReplyDTO getUpdateReply(int replyId) {
+		
+		return replyMapper.getUpdateReply(replyId);
+	}
 	
 	
 
