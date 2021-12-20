@@ -9,6 +9,7 @@ import com.vam.model.PageDTO;
 import com.vam.model.ReplyCheckDTO;
 import com.vam.model.ReplyDTO;
 import com.vam.model.ReplyPageDTO;
+import com.vam.model.UpdateReplyDTO;
 
 @Service
 public class ReplyServiceImpl implements ReplyService{
@@ -34,7 +35,11 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	public int enrollReply(ReplyDTO dto) {
 		
-		return replyMapper.enrollReply(dto);
+		int result = replyMapper.enrollReply(dto); 
+		
+		setRating(dto.getBookId());
+		
+		return result;
 	}
 
 	@Override
@@ -50,13 +55,21 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	public int updateReply(ReplyDTO dto) {
 		
-		return replyMapper.updateReply(dto);
+		int result = replyMapper.updateReply(dto); 
+		
+		setRating(dto.getBookId());
+		
+		return result;
 	}
 
 	@Override
-	public int deleteReply(int replyId) {
+	public int deleteReply(ReplyDTO dto) {
 		
-		return replyMapper.deleteReply(replyId);
+		int result = replyMapper.deleteReply(dto.getReplyId()); 
+		
+		setRating(dto.getBookId());
+		
+		return result;
 	}
 
 	@Override
@@ -64,11 +77,23 @@ public class ReplyServiceImpl implements ReplyService{
 		
 		return replyMapper.getReply(dto);
 	}
-	
+
 	@Override
 	public ReplyDTO getUpdateReply(int replyId) {
 		
 		return replyMapper.getUpdateReply(replyId);
-	}	
+	}
+	
+	
+	public void setRating(int bookId) {
+		Double ratingAvg = replyMapper.getRatingAverage(bookId);
+		if(ratingAvg == null) {
+			ratingAvg = 0.0;
+		}
+		UpdateReplyDTO urd = new UpdateReplyDTO();
+		urd.setBookId(bookId);
+		urd.setRatingAvg(ratingAvg);
+		replyMapper.updateRating(urd);
+	}
 	
 }

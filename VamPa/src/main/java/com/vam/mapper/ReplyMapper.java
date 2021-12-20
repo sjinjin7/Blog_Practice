@@ -25,7 +25,7 @@ public interface ReplyMapper {
 	public int getReplyTotal(int bookId);
 	
 	/* 평점 평균 구하기 */
-	public double getRatingAverage(int bookId);
+	public Double getRatingAverage(int bookId);
 	
 	/* 평점 평균 반영하기 */
 	public int updateRating(UpdateReplyDTO dto);

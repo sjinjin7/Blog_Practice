@@ -154,6 +154,7 @@
 				success : function(result){
 					console.log('성공');
 					/* 페이징 초기화 */
+					$(opener.location).attr("href", "javascript:replyListInit();");
 					window.close();
 				}
 				

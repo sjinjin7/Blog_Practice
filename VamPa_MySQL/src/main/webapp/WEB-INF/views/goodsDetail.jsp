@@ -576,13 +576,14 @@ $(document).ready(function(){
 			
 			$.ajax({
 				data : {
-					replyId : replyId
+					replyId : replyId,
+					bookId : '${goodsInfo.bookId}'
 				},
 				url : '/reply/delete',
 				type : 'POST',
 				success : function(result){
-					alert('삭제가 완료되엇습니다.');
 					replyListInit();
+					alert('삭제가 완료되엇습니다.');
 				}
 			});
 			
@@ -590,11 +591,14 @@ $(document).ready(function(){
 	
 	/* 리뷰 태그 만들기 */
 	function makeReplyContent(obj){
-		
+		console.log(obj);
 		if(obj.list.length === 0){
 			$(".reply_not_div").html('<span>리뷰가 없습니다.</span>');
+			$(".reply_content_ul").html('');
+			$(".pageMaker").html('');
 		} else{
-
+			$(".reply_not_div").html('');
+			
 			const list = obj.list;
 			const pf = obj.pageInfo;
 			const userId = '${member.memberId}';
