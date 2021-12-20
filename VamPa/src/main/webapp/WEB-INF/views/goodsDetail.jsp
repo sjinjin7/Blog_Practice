@@ -570,7 +570,23 @@ $(document).ready(function(){
 			
 	 });		
 	/* 리뷰 삭제 버튼 */
-	
+	 $(document).on('click', '.delete_reply_btn', function(e){
+			e.preventDefault();
+			let replyId = $(this).attr("href");
+			
+			$.ajax({
+				data : {
+					replyId : replyId
+				},
+				url : '/reply/delete',
+				type : 'POST',
+				success : function(result){
+					alert('삭제가 완료되엇습니다.');
+					replyListInit();
+				}
+			});
+			
+	 });	
 	
 	/* 리뷰 태그 만들기 */
 	function makeReplyContent(obj){
